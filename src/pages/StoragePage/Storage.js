@@ -1,6 +1,6 @@
 function Storage(){
     return (
-        <div></div>
+        <div>storage</div>
     )
 }
 

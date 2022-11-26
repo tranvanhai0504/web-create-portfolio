@@ -1,6 +1,6 @@
 function MainScreenWork(){
     return (
-        <div></div>
+        <div>main work</div>
     )
 }
 

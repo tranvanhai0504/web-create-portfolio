@@ -1,0 +1,14 @@
+.miniModal{
+    background-color: var(--grey);
+    border-radius: 100%;
+    color: #fff;
+    position: absolute;
+    font-size: 13px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    top: 5px;
+    right: -19px;
+    font-weight: bold;
+}

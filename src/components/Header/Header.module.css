@@ -1,0 +1,72 @@
+.header{
+    height: 5%;
+    padding: 20px 120px;
+    display:flex;
+    flex-direction: row;
+}
+
+.logo{
+    width: 5% !important;
+}
+
+.logoImg{
+    width: 100% !important;
+}
+
+.directBtns{
+    width: 78%;
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    padding-left:60px;
+}
+
+.btnNavBar{
+    color: #000;
+    font-weight: 600;
+}
+
+.btnNavBar:hover{
+    background-image: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textSlide infinite 0.7s;
+}
+
+.btnHeader{
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.actived{
+    background-image: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btnStart{
+    padding: 0 35px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 500;
+}
+
+@keyframes textSlide{
+    from{
+        background-image: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    }
+
+    to{
+        background-image: linear-gradient(90deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    }
+}
+

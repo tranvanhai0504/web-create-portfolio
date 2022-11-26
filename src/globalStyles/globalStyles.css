@@ -1,0 +1,19 @@
+body{
+    margin: unset;
+}
+
+html{
+    font-family: arial,sans-serif;
+}
+
+:root{
+    --primary-color: #793AFC;
+    --grey: #ADADAD;
+    --liner-tail: #B722FD;
+}
+
+a{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
