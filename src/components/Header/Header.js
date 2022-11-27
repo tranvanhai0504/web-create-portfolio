@@ -32,7 +32,7 @@ function Header() {
                             {btn.name}
                         </span>
                     </NavLink>
-                    {btn.name == 'Storage' && <MiniModal/>}
+                    {btn.name === 'Storage' && <MiniModal/>}
                     </div>)
                 })}
             </div>
