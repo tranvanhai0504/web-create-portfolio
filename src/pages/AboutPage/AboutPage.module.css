@@ -1,0 +1,96 @@
+.AboutContainer{
+    margin: 5vh 5vh 0vh 5vh;
+    height: 76vh;
+    border-radius: 20px;
+    background-image: linear-gradient(10deg,rgba(0,194,255),rgba(82,112,215,84.07%),rgba(190,3,161,0.63));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.card{
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px 0px 0px 0px;
+    width: 276px;
+    height: 350px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    box-shadow: 10px 6px 9px rgba(0, 0, 0, 0.2);
+
+}
+.profilecontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.profileimg{
+    background-image: linear-gradient(to right top, #58eeee, #00f3d6, #00f4ad, #00f373, #5eee0b);
+    z-index: -1;
+    margin-top: -25%;
+    width: 95px;
+    height: 95px;
+    border-radius: 55px;
+
+}
+.profileimg2{
+    background-image: linear-gradient(to right bottom, #58eeee, #00f3d6, #00f4ad, #00f373, #5eee0b);
+    z-index: -1;
+    margin-top: -25%;
+    width: 95px;
+    height: 95px;
+    border-radius: 55px;
+
+}
+.profileimg3{
+    background-image: linear-gradient(to left top, #58eeee, #00f3d6, #00f4ad, #00f373, #5eee0b);
+    z-index: -1;
+    margin-top: -25%;
+    width: 95px;
+    height: 95px;
+    border-radius: 55px;
+
+}
+.img{
+    margin-top:4.3px;
+    background-color: rgba(255, 255, 255,1);
+    width: 87px;
+    height: 87px;
+    border-radius: 55px;
+}
+.name{
+    padding: 20px 0px 10px 0px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+.content{
+    padding: 0px 30px 12px 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+.about{
+    padding: 34px 0px 20px 0px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.contactBtn{
+    margin-top: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 3em;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0.8em 2em;
+
+}
+.contactBtn:hover{
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    color: white;
+}
