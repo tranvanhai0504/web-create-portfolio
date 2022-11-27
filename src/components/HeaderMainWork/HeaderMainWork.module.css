@@ -1,0 +1,29 @@
+.headerWorkSpace{
+    height: 4%;
+    padding: 5px 60px 5px 60px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 2px 1px 5px rgb(201, 201, 201);
+}
+
+.logo{
+    width: 3% !important;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.logo:hover{
+    background-color: var(--grey-secondary);
+}
+
+.logoImg{
+    width: 100% !important;
+}
+
+.btnList{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 5px 0;
+}

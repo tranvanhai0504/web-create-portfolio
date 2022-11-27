@@ -5,7 +5,6 @@ import AboutPage from "../AboutPage/About";
 import StoragePage from "../StoragePage/Storage";
 import TemplatesPage from "../TemplatesPage/Templates";
 
-
 function MainPage(){
     return (
         <div className="MainPage">

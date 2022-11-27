@@ -1,6 +1,10 @@
+import HeaderMainWork from "../../components/HeaderMainWork/HeaderMainWork"
+
 function MainScreenWork(){
     return (
-        <div>main work</div>
+        <div>
+            <HeaderMainWork/>
+        </div>
     )
 }
 
