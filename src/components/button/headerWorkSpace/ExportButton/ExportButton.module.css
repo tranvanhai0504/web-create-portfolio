@@ -1,4 +1,15 @@
 .exportButton{
+    position: relative;
     height:100%;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 500;
 }
+
+.exportButton:hover{
+    opacity: 0.9;
+}
+  

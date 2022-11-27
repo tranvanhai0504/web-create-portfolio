@@ -1,8 +1,9 @@
 import styles from './ExportButton.module.css'
+import clsx from 'clsx'
 
 function ExportButton(){
     return (
-        <button className={styles.exportButton}>Export File</button>
+        <button className={clsx(styles.exportButton)}>Export File</button>
     )
 }
 

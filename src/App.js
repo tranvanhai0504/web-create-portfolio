@@ -30,7 +30,7 @@ function App() {
   const value = useContext(GlobalContext)
 
   return (
-    <div className="App">
+    <div className="App" style={{width: '100%', height: '100%'}}>
       <RouterProvider router={router}></RouterProvider>
     </div>
   );
