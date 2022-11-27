@@ -1,12 +1,15 @@
 .headerWorkSpace{
-    height: 4%;
-    padding: 5px 60px 5px 60px;
+    position:fixed;
+    height: 7.5%;
+    width: 100vw;
+    padding: 5px 0;
     display: flex;
     flex-direction: row;
     box-shadow: 2px 1px 5px rgb(201, 201, 201);
 }
 
 .logo{
+    margin: 0 60px;
     width: 45px !important;
     padding: 5px;
     border-radius: 5px;
@@ -25,5 +28,5 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding: 5px 0;
+    padding: 5px 60px 5px 0;
 }

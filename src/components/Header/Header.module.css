@@ -1,11 +1,14 @@
 .header{
-    height: 5%;
-    padding: 20px 120px;
+    position: fixed;
+    height: 7%;
+    width: 100vw;
+    padding: 20px 0;    
     display:flex;
     flex-direction: row;
 }
 
 .logo{
+    margin-left: 120px;
     width: 5% !important;
 }
 
@@ -14,7 +17,6 @@
 }
 
 .directBtns{
-    width: 78%;
     display: flex;
     flex-direction: row;
     font-size: 25px;
@@ -47,6 +49,13 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.btnFuncList{
+    width: 100%;
+    display: flex;
+    padding-right: 120px;
+    justify-content: flex-end;
 }
 
 .btnStart{

@@ -12,7 +12,7 @@ function Header() {
 
     const [btnActived, setBtnActived] = useState(listButtonHeader[0].name);
 
-    function handleBtnClick(e){
+    function handleBtnClick(e) {
         setBtnActived(e.target.getAttribute('data-key'))
     }
     return (
@@ -32,11 +32,13 @@ function Header() {
                             {btn.name}
                         </span>
                     </NavLink>
-                    {btn.name === 'Storage' && <MiniModal/>}
+                        {btn.name === 'Storage' && <MiniModal />}
                     </div>)
                 })}
             </div>
-            <NavLink to="/work" className={clsx(styles.btnStart)}>Get Started</NavLink>
+            <div className={styles.btnFuncList}>
+                <NavLink to="/work" className={clsx(styles.btnStart)}>Get Started</NavLink>
+            </div>
         </div>
     )
 }

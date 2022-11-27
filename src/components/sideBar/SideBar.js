@@ -1,8 +1,9 @@
 import { memo } from 'react'
+import styles from './SideBar.module.css'
 
 function SideBar(){
     return (
-        <div>
+        <div className={styles.sidebar}>
             
         </div>
     )
