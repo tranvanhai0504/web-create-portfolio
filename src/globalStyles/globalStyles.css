@@ -1,16 +1,37 @@
 body{
     margin: unset;
+    height: 100vh;
 }
 
 html{
     font-family: arial,sans-serif;
 }
 
-:root{
+
+#light{
     --primary-color: #793AFC;
-    --grey: #ADADAD;
+    --text-color: #000;
+    --mini-modal-background: grey;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
+    --primary-background: #fff;
+    --primary-btn-gradient: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    --gradient-x: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    --gradient-y: linear-gradient(90deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+         
+}
+
+#dark {
+    --primary-color: #793AFC;
+    --text-color: #fff;
+    --mini-modal-background: #005bed;
+    --liner-tail: #B722FD;
+    --grey-secondary: #dadada;
+    --primary-background: linear-gradient(165deg, #1A134A, #140c4ec9);
+    --primary-btn-gradient: linear-gradient(90.58deg, #64ddff 2.21%, rgba(105, 253, 91, 0.73) 113.64%);
+    --gradient-x: linear-gradient(0, #64ddff 2.21%, rgba(105, 253, 91, 0.73) 113.64%);
+    --gradient-y: linear-gradient(90deg, #64ddff 2.21%, rgba(105, 253, 91, 0.73) 113.64%);
+    background-image: linear-gradient(347deg, #030018 2.21%, #1b1454);
 }
 
 a{
@@ -18,3 +39,5 @@ a{
     text-decoration: none;
     text-align: center;
 }
+
+

@@ -1,5 +1,5 @@
 .miniModal{
-    background-color: var(--grey);
+    background-color: var(--mini-modal-background);
     border-radius: 100%;
     color: #fff;
     position: absolute;

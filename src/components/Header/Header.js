@@ -4,11 +4,15 @@ import clsx from 'clsx'
 import styles from './Header.module.css'
 import logo from '../../assets/logo.png'
 import MiniModal from './MiniModal/MiniModal'
+import { GlobalContext } from "../../globalState/GlobalState";
+import { useContext } from 'react'
+
 
 const listButtonHeader = [{ name: 'Home', href: "/pages/home" }, { name: 'Storage', href: "/pages/storage" }, { name: 'About', href: "/pages/about" }]
 
 
 function Header() {
+    const value = useContext(GlobalContext)
 
     const [btnActived, setBtnActived] = useState(listButtonHeader[0].name);
 
@@ -39,6 +43,7 @@ function Header() {
             <div className={styles.btnFuncList}>
                 <NavLink to="/work" className={clsx(styles.btnStart)}>Get Started</NavLink>
             </div>
+            <button onClick={e=>value.toggleTheme()}>changemode</button>
         </div>
     )
 }

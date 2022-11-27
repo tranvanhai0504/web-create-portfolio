@@ -23,13 +23,14 @@
     padding-left:60px;
 }
 
+
 .btnNavBar{
-    color: #000;
+    color: var(--text-color);
     font-weight: 600;
 }
 
 .btnNavBar:hover{
-    background-image: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    background-image: var(--primary-btn-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -45,7 +46,7 @@
 }
 
 .actived{
-    background-image: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    background-image: var(--primary-btn-gradient);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -71,11 +72,11 @@
 
 @keyframes textSlide{
     from{
-        background-image: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+        background-image: var(--gradient-x);
     }
 
     to{
-        background-image: linear-gradient(90deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+        background-image: var(--gradient-y);
     }
 }
 
