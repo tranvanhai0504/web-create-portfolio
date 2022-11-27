@@ -35,6 +35,24 @@
     border-radius: 55px;
 
 }
+.profileimg2{
+    background-image: linear-gradient(to right bottom, #58eeee, #00f3d6, #00f4ad, #00f373, #5eee0b);
+    z-index: -1;
+    margin-top: -25%;
+    width: 95px;
+    height: 95px;
+    border-radius: 55px;
+
+}
+.profileimg3{
+    background-image: linear-gradient(to left top, #58eeee, #00f3d6, #00f4ad, #00f373, #5eee0b);
+    z-index: -1;
+    margin-top: -25%;
+    width: 95px;
+    height: 95px;
+    border-radius: 55px;
+
+}
 .img{
     margin-top:4.3px;
     background-color: rgba(255, 255, 255,1);
