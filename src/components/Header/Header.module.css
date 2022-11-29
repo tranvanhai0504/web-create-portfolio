@@ -71,6 +71,11 @@
     font-weight: 500;
 }
 
+
+
+
+
+
 @keyframes textSlide{
     from{
         background-image: var(--gradient-x);
