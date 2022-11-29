@@ -5,4 +5,7 @@
     background-color: rgb(239, 238, 238);
     z-index: 0;
     box-shadow: 0px 0px 7px #ccc inset;
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-around;
 }

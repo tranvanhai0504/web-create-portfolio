@@ -1,6 +1,6 @@
 function DetailObject(){
     return (
-        <div></div>
+        <div>detail</div>
     )
 }
 

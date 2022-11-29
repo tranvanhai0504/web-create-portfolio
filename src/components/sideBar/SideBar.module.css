@@ -3,7 +3,7 @@
     right: 0;
     top: 9%;
     height:100%;
-    width: 19%;
+    width: 20.5%;
     background-color: #fff; 
     /* overflow-y: scroll; */
 }
@@ -17,6 +17,7 @@
 }
 
 .btnHeaderSideBar{
+    text-align: center;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -31,4 +32,9 @@
 
 .btnHeaderSideBar.actived{
     color: red;
+}
+
+.sideBarContent{
+    overflow-y: scroll;
+    width: 100%;
 }

@@ -1,6 +1,6 @@
 function OptionPage(){
     return (
-        <div></div>
+        <div>page</div>
     )
 }
 

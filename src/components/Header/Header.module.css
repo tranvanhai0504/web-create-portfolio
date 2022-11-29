@@ -9,7 +9,7 @@
 
 .logo{
     margin-left: 120px;
-    width: 5% !important;
+    width: 6% !important;
 }
 
 .logoImg{
@@ -19,12 +19,13 @@
 .directBtns{
     display: flex;
     flex-direction: row;
-    font-size: 25px;
+    font-size: 23px;
     padding-left:60px;
 }
 
 
 .btnNavBar{
+    white-space: nowrap;
     color: var(--text-color);
     font-weight: 600;
 }

@@ -2,6 +2,9 @@ import { memo } from 'react'
 import { useState } from 'react'
 import clsx from 'clsx'
 import styles from './SideBar.module.css'
+import DetailObject from './DetailObject/DetailObject'
+import OptionPage from './OptionPage/OptionPage'
+import TemplateOption from './TempalesOption/TemplateOption'
 
 const btns = [
     {
@@ -40,6 +43,12 @@ function SideBar() {
                         </div>
                     )
                 })}
+            </div>
+            <div className={styles.sideBarContent}>
+                {activedBtn === 1 && <DetailObject/>}
+                {activedBtn === 2 && <OptionPage/>}
+                {activedBtn === 3 && <TemplateOption/>}
+
             </div>
         </div>
     )
