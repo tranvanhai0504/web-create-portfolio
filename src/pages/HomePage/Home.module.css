@@ -9,7 +9,7 @@
     flex-grow: 6;
 }
 .HomePageCard{
-    padding-top: 42px;
+    padding-top: 64px;
     flex-grow: 4;
 }
 .Bigcard{
@@ -75,7 +75,7 @@
 }
 #section1{
     color: var(--text-color);
-    padding-top: 56px;
+    padding-top: 100px;
     display: inline-block;
     font-size: 50px;
     line-height: auto;
