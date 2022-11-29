@@ -1,5 +1,6 @@
 import Styles from './Home.module.css'
 import card from '../../assets/cardimg.png'
+import { useTranslation } from 'react-i18next'
 import card2 from '../../assets/cardimg2.png'
 import { NavLink } from 'react-router-dom'
 function Smallcard({data})
@@ -57,8 +58,8 @@ function Content(){
         </div>
     )
 }
-
 function Home(){
+    const { t, i18n } = useTranslation();
     return (
         <div className={Styles.homePage}>
             <Content></Content>
@@ -66,5 +67,6 @@ function Home(){
         </div>
     )
 }
+
 
 export default Home
