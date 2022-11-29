@@ -31,7 +31,7 @@ function Card({ card }) {
         <div className={styles.card}>
             <div className={styles.profilecontainer}>
                 <div className={card.id}>
-                    <img src={card.img} className={styles.img}></img>
+                    <img src={card.img} className={styles.img} alt=""></img>
                 </div>
             </div>
             <div className={styles.name}>
@@ -39,10 +39,10 @@ function Card({ card }) {
             </div>
             <div className={styles.content}>Developer</div>
             <div className={styles.about}>About me</div>
-            <div className={styles.content}>
+            <div className={styles.Aboutcontent}>
                 {card.describe}
             </div>
-            <a href={card.linkcontact} className={styles.contactBtn}>
+            <a target="_blank" rel="noopener noreferrer" href={card.linkcontact} className={styles.contactBtn}>
                 Contact me
             </a>
         </div>
@@ -51,8 +51,8 @@ function Card({ card }) {
 function About() {
     return (
         <div className={styles.AboutContainer}>
-            {cards.map((card) => {
-                return <Card card={card}></Card>
+            {cards.map((card,index) => {
+                return <Card key={index} card={card}></Card>
             })}
         </div>
     )
