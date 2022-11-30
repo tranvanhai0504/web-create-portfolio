@@ -1,5 +1,6 @@
 import styles from './CreatorSpace.module.css'
 import { useState, useEffect } from 'react'
+import clsx from 'clsx'
 
 const style = {
     height: '20%',
@@ -7,26 +8,25 @@ const style = {
     position: 'absolute',
     top: '0',
     left: '0',
-    backgroundColor: 'green',
-    border: 'none'
+    backgroundColor: 'green'
 }
 
 function CreatorSpace() {
     const [isTarget, setIsTarget] = useState(false)
-    const [testStyle, setTestStyle] = useState(style)
 
     function handleClick(e){
-        setIsTarget(true)
+        console.log('click' + isTarget);
+        setIsTarget(!isTarget)
     }
 
-    useEffect(() => {
-        // isTarget ? setTestStyle( prev => {Ơ}) : setTestStyle
-        isTarget ? style.border = 'solid 2px blue' : style.border = 'unset';
-    }, [isTarget])
+    // useEffect(() => {
+    //     // isTarget ? setTestStyle( prev => {Ơ}) : setTestStyle
+    //     // isTarget ? style.border = 'solid 2px blue' : style.border = 'unset';
+    // }, [isTarget])
 
   return (
     <div className={styles.creatorSpace}>
-        <div onClick={handleClick} draggable={true} style={style}></div>
+        <div onClick={handleClick} className={clsx(isTarget && styles.targeted)} draggable={isTarget} style={style}></div>
     </div>
   )
 }

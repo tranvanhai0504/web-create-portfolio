@@ -1,12 +1,10 @@
 .switch {
     align-self: center;
-    margin-left: 296px;
     position: relative;
-    display: inline-block;
-    border-radius: 30px;
-    width: 36px;
-    height: 17px;
-    border-radius: 24px;
+    display: inline-block;  
+    width: 60px;
+    height: 30px;
+    border-radius: 15px;
     background-image: var(--primary-btn-gradient);
 }
 
@@ -14,7 +12,6 @@ input {
     opacity: 0;
     width: 0;
     height: 0;
-
 }
 
 .slider {
@@ -28,37 +25,42 @@ input {
     background-image: var(--primary-btn-gradient);
 }
 
-.slider:before {
-    content: "";
+.sliderSwitch{
     position: absolute;
-    height: 14px;
-    width: 14px;
-    right: 2px;
+    height: 27px;
+    width: 27px;
+    right: 3px;
     bottom: 2px;
-    border-radius: 50%;
-    background-color: rgba(252, 252, 252, 0.249);
-    /* border: solid 2px rgba(226, 230, 224, 1); */
+    border-radius: 100%;
+    background-color: #fff;
     box-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
     transition: .4s;
     z-index: 2;
 }
 
-.lightBtn{
+.sliderSwitch.switchDark{
+    background-color: rgb(8, 0, 40);
+    transform: translateX(-27px);
+}
+
+.modeLabel{
+    width: 100%;
+    height: 100%;
     position: absolute;
-    right: 3px;
-    bottom: 0;
-    font-size: 12px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-left: 6px;
+}
+
+.lightBtn{
+    font-weight: bold;
+    /* color: #fff; */
 }
 
 .dark {
-    position: absolute;
-    left: 3px;
-    bottom: 0;
-    font-size: 12px;
-}
-
-
-input:checked + .slider:before{
-    transform: translateX(-18px);
+    color: #fff;
 }
 

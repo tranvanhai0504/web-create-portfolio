@@ -8,6 +8,7 @@ import MiniModal from './MiniModal/MiniModal'
 import { GlobalContext } from "../../globalState/GlobalState";
 import { useContext } from 'react'
 import { FiSun, FiMoon } from "react-icons/fi";
+import { ImSun } from "react-icons/im";
 
 const listButtonHeader = [{ name: 'Home', href: "/pages/home" }, { name: 'Storage', href: "/pages/storage" }, { name: 'About', href: "/pages/about" }]
 
@@ -40,22 +41,23 @@ function Header() {
                         {btn.name === 'Storage' && <MiniModal />}
                     </div>)
                 })}
-            <label className="switch">
-                <input 
-                    onChange={()=>value.toggleTheme()}
-                    type='checkbox'
-                    checked={value.checked}
-                
-                />
-                
-                <span className="slider">
-                    <span className='lightBtn modeBtn'><FiSun /></span>
-                    <span className='dark modeBtn'><FiMoon /></span>
-                </span>
-            </label>
             </div>
-            <div className={styles.btnFuncList}>
-                <NavLink to="/work" className={clsx(styles.btnStart)}>Get Started</NavLink>
+            <div className={clsx(styles.btnFuncList)}>
+                <label className={clsx("switch", styles.btnFunc)}>
+                    <input
+                        onChange={() => value.toggleTheme()}
+                        type='checkbox'
+                        checked={value.checked}
+
+                    />
+                    <span className="slider">
+                        <div className={clsx(value.checked && "switchDark", "sliderSwitch")}>
+                            {!value.checked && <span className='lightBtn modeLabel'><ImSun /></span>}
+                            {value.checked && <span className='dark modeLabel'><FiMoon /></span>}
+                        </div>
+                    </span>
+                </label>
+                <NavLink to="/work" className={clsx(styles.btnStart, styles.btnFunc)}>Get Started</NavLink>
             </div>
         </div>
     )

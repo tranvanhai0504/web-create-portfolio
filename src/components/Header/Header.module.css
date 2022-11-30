@@ -60,6 +60,10 @@
     justify-content: flex-end;
 }
 
+.btnFunc{
+    margin-left: 20px;
+}
+
 .btnStart{
     padding: 0 35px;
     background-color: var(--primary-color);
@@ -70,11 +74,6 @@
     justify-content: center;
     font-weight: 500;
 }
-
-
-
-
-
 
 @keyframes textSlide{
     from{
