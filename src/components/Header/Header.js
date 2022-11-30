@@ -9,6 +9,7 @@ import { GlobalContext } from "../../globalState/GlobalState";
 import { useContext } from 'react'
 import { FiSun, FiMoon } from "react-icons/fi";
 import { ImSun } from "react-icons/im";
+import { useTranslation } from 'react-i18next';
 
 const listButtonHeader = [{ name: 'Home', href: "/pages/home" }, { name: 'Storage', href: "/pages/storage" }, { name: 'About', href: "/pages/about" }]
 
@@ -17,6 +18,8 @@ function Header() {
     const value = useContext(GlobalContext)
 
     const [btnActived, setBtnActived] = useState(listButtonHeader[0].name);
+
+    const { t, i18n } = useTranslation();
 
     function handleBtnClick(e) {
         setBtnActived(e.target.getAttribute('data-key'))
@@ -35,7 +38,7 @@ function Header() {
                             onClick={e => handleBtnClick(e)}
                             data-key={btn.name}
                         >
-                            {btn.name}
+                            {t(btn.name)}
                         </span>
                     </NavLink>
                         {btn.name === 'Storage' && <MiniModal />}
@@ -59,6 +62,8 @@ function Header() {
                 </label>
                 <NavLink to="/work" className={clsx(styles.btnStart, styles.btnFunc)}>Get Started</NavLink>
             </div>
+            
+            <button  key="a" onClick={value.languagesHandle}>{value.lang}</button>
         </div>
     )
 }

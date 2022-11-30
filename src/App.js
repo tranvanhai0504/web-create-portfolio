@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './pages/ErrorPage/ErrorPage'
 import MainPage from './pages/MainPage/MainPage'
 import MainScreenWork from "./pages/MainScreenWorkPage/MainScreenWork.js";
-
+ 
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
 
 
 function App() {
-
   const value = useContext(GlobalContext)
+
 
   return (
     <div className="App" id={value.theme} style={{width: '100%', height: '100%'}}>
