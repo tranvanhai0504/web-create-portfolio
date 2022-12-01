@@ -1,15 +1,16 @@
 .header{
     position: fixed;
-    height: 7%;
-    width: 100vw;
-    padding: 20px 0;    
+    /* height: 7%; */
+    width: 100%;
+    padding: 20px 24px;    
     display:flex;
     flex-direction: row;
+    box-sizing: border-box;
 }
 
 .logo{
-    margin-left: 120px;
-    width: 6% !important;
+    /* margin-left: 120px; */
+    width: 40% !important;
 }
 
 .logoImg{
@@ -20,7 +21,8 @@
     display: flex;
     flex-direction: row;
     font-size: 23px;
-    padding-left:60px;
+    /* padding-left:60px; */
+    width: 66%;
 }
 
 
@@ -39,7 +41,7 @@
 }
 
 .btnHeader{
-    margin-left: 60px;
+    margin-right: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,10 +56,11 @@
 }
 
 .btnFuncList{
-    width: 100%;
+    width: 24%;
     display: flex;
-    padding-right: 120px;
-    justify-content: flex-end;
+    /* padding-right: 120px; */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .btnFunc{
@@ -65,7 +68,7 @@
 }
 
 .btnStart{
-    padding: 0 35px;
+    padding: 16px 35px;
     background-color: var(--primary-color);
     color: #fff;
     border-radius: 25px;
@@ -73,6 +76,20 @@
     flex-direction: column;
     justify-content: center;
     font-weight: 500;
+}
+
+.logoShell {
+    width: 10%;
+}
+
+.functionshell {
+    display: flex;
+}
+
+.globalIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
 }
 
 @keyframes textSlide{

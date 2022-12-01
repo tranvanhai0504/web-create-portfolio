@@ -3,6 +3,8 @@ import card from '../../assets/cardimg.png'
 import { useTranslation } from 'react-i18next'
 import card2 from '../../assets/cardimg2.png'
 import { NavLink } from 'react-router-dom'
+
+
 function Smallcard({data})
 { 
     return (
@@ -42,18 +44,20 @@ function HomePageCard(){
     )
 }
 function Content(){
+    const { t, i18n } = useTranslation();
+
     return (
         <div className={Styles.Content}>
             <div className={Styles.contentsec} id={Styles.section1}>
-                <div>The <span id={Styles.contentS}>easiest </span>way to make</div>
-                <div>your portfolio</div>
-                <div>impressive and different!</div></div>
+                <div>{t('th')} <span id={Styles.contentS}>{t('eas')} </span>{t('wtm')}</div>
+                <div>{t('yp')}</div>
+                <div>{t('iad')}</div></div>
             <div className={Styles.contentsec} id={Styles.section2}>
                 <div>Store, fill and download your porfolio with our diversity templates.</div>
                 <div>Impress recruiters and make your portfolio </div>
             </div>
             <div className={Styles.contentsec} id={Styles.section3}>
-                <NavLink to="/work" className={Styles.trybtn}>Try with us!</NavLink>
+                <NavLink to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
         </div>
     )
