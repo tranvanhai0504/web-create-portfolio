@@ -1,0 +1,29 @@
+.listItemBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: var(--primary-color)
+}
+
+.cover{
+    cursor: pointer;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hover{
+    border-radius: 5px;
+}
+
+.hover:hover{
+    background-color: var(--grey-secondary);
+}
+
+.selected .hover:first-child{
+    background-color: var(--grey-secondary) !important;
+    border: 3px solid var(--primary-color)
+    /* color: #fff; */
+}

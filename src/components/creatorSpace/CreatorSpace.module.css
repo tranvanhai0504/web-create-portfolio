@@ -3,6 +3,7 @@
     width: 75vw;
     height: 100vh;
     position: relative;
+    /* transform: scale(2) */
 }
 
 .targeted{

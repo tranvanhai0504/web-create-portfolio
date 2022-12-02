@@ -7,7 +7,7 @@ import logo from '../../assets/logo.png'
 import MiniModal from './MiniModal/MiniModal'
 import { GlobalContext } from "../../globalState/GlobalState";
 import { useContext } from 'react'
-import { FiSun, FiMoon } from "react-icons/fi";
+import { FiMoon } from "react-icons/fi";
 import { ImSun } from "react-icons/im";
 import { useTranslation } from 'react-i18next';
 
