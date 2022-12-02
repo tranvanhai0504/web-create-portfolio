@@ -9,14 +9,30 @@ const resources = {
     translation: {
       "Home": "Home",
       "Storage": "Storage",
-      "About": "About"
+      "About": "About",
+      "getstarted": "Get Started",
+      "try" : "Try with us!",
+      "th": "The",
+      "eas": "easiest",
+      "wtm": "way to make",
+      "yp": " your portfolio",
+      "iad": "impressive and different!"
+
     }
   },
-  vn: {
+  vi: {
     translation: {
-      "Home": "Trang",
-      "Storage": "Kho",
-      "About": "Về"
+      "Home": "Trang chủ",
+      "Storage": "Kho lưu trữ",
+      "About": "Về chúng tôi",
+      "getstarted": "Bắt đầu",
+      "try": "Thử ngay!",
+      "th": "Cách",
+      "eas": "dễ dàng nhất",
+      "wtm": " để tạo cho mình",
+      "yp" : " một chiếc prortfolio",
+      "iad": "ấn tượng và khác bọt!"
+
     }
   }
 };

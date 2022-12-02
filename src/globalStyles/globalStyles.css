@@ -10,7 +10,9 @@ html{
 
 #light{
     --primary-color: #793AFC;
+    --background-btn: #000;
     --text-color: #000;
+    --text-color-reverse: #fff;
     --mini-modal-background: grey;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
@@ -24,7 +26,9 @@ html{
 
 #dark {
     --primary-color: #2A0c67;
+    --background-btn: #fff;
     --text-color: #fff;
+    --text-color-reverse: #000;
     --mini-modal-background: #005bed;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;

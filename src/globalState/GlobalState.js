@@ -12,11 +12,18 @@ function GlobalProvider({children}){
     const dataToggle = JSON.parse(localStorage.getItem('checked'))|| false
     const [theme, setTheme] = useState(data)
     const [checked, setChecked] = useState(dataToggle)
-
-
+    
+    
     //Languages handle variables
     const language = 'en'
     const [lang, setLang] = useState(language)
+    
+    //select element handle variables
+    const [active, setActive] = useState(false)
+    const [selected, setSelected] = useState()
+    const  activeHandle = () =>{
+        setActive(!active)
+    }
 
 
     //Page mode handle function
@@ -32,7 +39,7 @@ function GlobalProvider({children}){
     
     //Languages handle function
     const languagesHandle = () => {
-        setLang(lang === 'en' ? 'vn': 'en')
+        setLang(lang === 'en' ? 'vi': 'en')
     }
     
     useEffect(()=> {
@@ -44,6 +51,8 @@ function GlobalProvider({children}){
         checked,
         theme,
         toggleTheme,
+        active,
+        activeHandle,
         lang,
         languagesHandle
     }
