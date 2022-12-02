@@ -1,23 +1,29 @@
-.header{
+.header {
     position: fixed;
     /* height: 7%; */
     width: 100%;
-    padding: 20px 24px;    
-    display:flex;
+    padding: 20px 100px;
+    display: flex;
     flex-direction: row;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
-.logo{
+.logo {
     /* margin-left: 120px; */
     width: 40% !important;
 }
 
-.logoImg{
+.logoImg {
     width: 100% !important;
 }
 
-.directBtns{
+.directBtns {
     display: flex;
     flex-direction: row;
     font-size: 23px;
@@ -26,13 +32,13 @@
 }
 
 
-.btnNavBar{
+.btnNavBar {
     white-space: nowrap;
     color: var(--text-color);
     font-weight: 600;
 }
 
-.btnNavBar:hover{
+.btnNavBar:hover {
     background-image: var(--primary-btn-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -40,7 +46,7 @@
     animation: textSlide infinite 0.7s;
 }
 
-.btnHeader{
+.btnHeader {
     margin-right: 60px;
     display: flex;
     flex-direction: column;
@@ -48,14 +54,14 @@
     position: relative;
 }
 
-.actived{
+.actived {
     background-image: var(--primary-btn-gradient);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.btnFuncList{
+.btnFuncList {
     width: 24%;
     display: flex;
     /* padding-right: 120px; */
@@ -63,11 +69,11 @@
     align-items: center;
 }
 
-.btnFunc{
+.btnFunc {
     margin-left: 20px;
 }
 
-.btnStart{
+.btnStart {
     padding: 16px 35px;
     background-color: var(--primary-color);
     color: #fff;
@@ -92,13 +98,12 @@
     margin-right: 6px;
 }
 
-@keyframes textSlide{
-    from{
+@keyframes textSlide {
+    from {
         background-image: var(--gradient-x);
     }
 
-    to{
+    to {
         background-image: var(--gradient-y);
     }
 }
-

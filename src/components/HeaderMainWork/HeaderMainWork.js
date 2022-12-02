@@ -2,7 +2,7 @@ import styles from './HeaderMainWork.module.css'
 import clsx from 'clsx'
 import logo from '../../assets/logo.png'
 import { NavLink } from 'react-router-dom'
-import StringTooltip from '../tooltip/StringTooltip'
+import StringTooltip from '../tooltip/StringTooltip/StringTooltip'
 import ExportButton from '../button/headerWorkSpace/ExportButton/ExportButton'
 import ListItemBtn from './ListItemBtn/ListItemBtn'
 

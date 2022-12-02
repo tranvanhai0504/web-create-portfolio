@@ -1,0 +1,47 @@
+.tooltip {
+    position: relative;
+}
+
+.tooltip_content {
+    position: absolute;
+    background-color: rgb(102, 102, 102);
+    text-align: center;
+    color: #fff;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    border-radius: 4px;
+    padding: 6px 10px;
+    z-index: 100;
+    font-size: 12px;
+}
+
+/* POSITION TOP */
+.tooltip_content.top {
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 10px;
+}
+
+/* POSITION RIGHT */
+.tooltip_content.right {
+    left: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-left: 10px;
+  }
+  
+  /* POSITION BOTTOM */
+  .tooltip_content.bottom {
+    top: 100%;
+    left: 50%;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  
+  /* POSITION LEFT */
+  .tooltip_content.left {
+    right: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-right: 10px;
+  }
