@@ -21,8 +21,11 @@ function GlobalProvider({children}){
     //select element handle variables
     const [active, setActive] = useState(false)
     const [selected, setSelected] = useState()
-    const  activeHandle = () =>{
-        setActive(!active)
+    const  activeHandle = (e) =>{
+        if(e=='false')
+            setActive(false)
+        else
+            setActive(!active)
     }
 
 

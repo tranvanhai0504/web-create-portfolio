@@ -1,6 +1,8 @@
 import styles from './CreatorSpace.module.css'
 import { useState, useEffect } from 'react'
+import WorkSpace from './backgroundGrid'
 import clsx from 'clsx'
+import dropDrag from './dropDrag'
 
 const style = {
     height: '20%',
@@ -26,8 +28,8 @@ function CreatorSpace() {
 
   return (
     <div className={styles.creatorSpace}>
-        <div onClick={handleClick} className={clsx(isTarget && styles.targeted)} draggable={isTarget} style={style}></div>
-    </div>
+      <WorkSpace></WorkSpace>
+        </div>
   )
 }
 
