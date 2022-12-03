@@ -21,11 +21,6 @@ function CreatorSpace() {
         setIsTarget(!isTarget)
     }
 
-    // useEffect(() => {
-    //     // isTarget ? setTestStyle( prev => {Ơ}) : setTestStyle
-    //     // isTarget ? style.border = 'solid 2px blue' : style.border = 'unset';
-    // }, [isTarget])
-
   return (
     <div className={styles.creatorSpace}>
       <WorkSpace></WorkSpace>

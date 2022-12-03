@@ -16,6 +16,7 @@ html{
     --mini-modal-background: grey;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
+    --grey-third: #c7c7c7;
     --primary-background: #fff;
     --primary-btn-gradient: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
     --gradient-x: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);

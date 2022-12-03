@@ -5,6 +5,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    /* transform: scale(2) */
 }
 
 .targeted{

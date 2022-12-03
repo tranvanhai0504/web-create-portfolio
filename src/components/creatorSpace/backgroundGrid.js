@@ -2,11 +2,13 @@ import styles from './CreatorSpace.module.css'
 import clsx from 'clsx'
 import dropDrag from './dropDrag'
 import {useEffect} from 'react'
+import ProduceItems from './ProduceItems'
 
 function WorkSpace() {
 
     useEffect(()=> {
         dropDrag()
+        ProduceItems()
     }, [])
 
     let boxs= [<div className={clsx("box", styles.box)} key = "00"><div draggable={true} className={clsx(styles.element, 'target')}></div></div>]

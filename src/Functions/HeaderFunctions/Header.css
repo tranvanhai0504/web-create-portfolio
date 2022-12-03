@@ -1,71 +1,71 @@
 .switch {
-    align-self: center;
-    position: absolute;
-    display: inline-block;  
-    width: 60px;
-    height: 30px;
-    border-radius: 15px;
-    background-image: var(--primary-btn-gradient);
+  align-self: center;
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  background-image: var(--primary-btn-gradient);
 }
 
 input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 30px;
-    background-image: var(--primary-btn-gradient);
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  background-image: var(--primary-btn-gradient);
 }
 
-.sliderSwitch{
-    position: absolute;
-    height: 27px;
-    width: 27px;
-    right: 3px;
-    bottom: 2px;
-    border-radius: 100%;
-    background-color: #fff;
-    box-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
-    transition: .4s;
-    z-index: 2;
+.sliderSwitch {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  right: 2px;
+  bottom: 3px;
+  border-radius: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
+  transition: .4s;
+  z-index: 2;
 }
 
-.sliderSwitch.switchDark{
-    background-color: rgb(8, 0, 40);
-    transform: translateX(-27px);
+.sliderSwitch.switchDark {
+  background-color: rgb(8, 0, 40);
+  transform: translateX(-31px);
 }
 
-.modeLabel{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    font-size: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding-left: 6px;
+.modeLabel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-left: 5px;
 }
 
-.lightBtn{
-    font-weight: bold;
-    /* color: #fff; */
+.lightBtn {
+  font-weight: bold;
+  /* color: #fff; */
 }
 
 .dark {
-    color: #fff;
+  color: #fff;
 }
 
 .unChecked {
-    display: none;
+  display: none;
 
 }
 
@@ -100,21 +100,27 @@ input {
 }
 
 .selected {
-    width: 36px;
-    display: flex;
-    align-items: center;
+  width: 36px;
+  display: flex;
+  align-items: center;
 }
 
 .selectElement {
-    /* background-color: #fff; */
-    color: var(--text-color);
-    border-bottom: solid 1px var(--text-color);
-    position: relative;
-    top: 0px;
-    left: -52px;
-    padding: 4px 10px;
-    cursor: pointer;
-    z-index: 99999;
+  /* background-color: #fff; */
+  color: var(--text-color);
+  border-bottom: solid 1px var(--text-color);
+  position: relative;
+  top: 0px;
+  left: -52px;
+  padding: 4px 10px;
+  cursor: pointer;
+  z-index: 99999;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
 
 .selectElement::before {
@@ -127,61 +133,66 @@ input {
   right: 0;
 }
 
- @-webkit-keyframes scale-up-ver-top {
-    0% {
-      -webkit-transform: scaleY(0.4);
-              transform: scaleY(0.4);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-    100% {
-      -webkit-transform: scaleY(1);
-              transform: scaleY(1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-  }
-  @keyframes scale-up-ver-top {
-    0% {
-      -webkit-transform: scaleY(0.4);
-              transform: scaleY(0.4);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-    100% {
-      -webkit-transform: scaleY(1);
-              transform: scaleY(1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
+@-webkit-keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
   }
 
-  @-webkit-keyframes scale-up-ver-top1 {
-    0% {
-      -webkit-transform: scaleY(-0.4);
-              transform: scaleY(-0.4);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-    100% {
-      -webkit-transform: scaleY(-1);
-              transform: scaleY(-1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
   }
-  @keyframes scale-up-ver-top1 {
-    0% {
-      -webkit-transform: scaleY(-0.4);
-              transform: scaleY(-0.4);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-    100% {
-      -webkit-transform: scaleY(-1);
-              transform: scaleY(-1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
+}
+
+@keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
   }
 
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+
+@-webkit-keyframes scale-up-ver-top1 {
+  0% {
+    -webkit-transform: scaleY(-0.4);
+    transform: scaleY(-0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+
+  100% {
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}
+
+@keyframes scale-up-ver-top1 {
+  0% {
+    -webkit-transform: scaleY(-0.4);
+    transform: scaleY(-0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+
+  100% {
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+  }
+}

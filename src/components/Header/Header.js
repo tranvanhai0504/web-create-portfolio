@@ -4,6 +4,10 @@ import clsx from 'clsx'
 import styles from './Header.module.css'
 import logo from '../../assets/logo.png'
 import MiniModal from './MiniModal/MiniModal'
+import { GlobalContext } from "../../globalState/GlobalState";
+import { useContext } from 'react'
+import { FiMoon } from "react-icons/fi";
+import { ImSun } from "react-icons/im";
 import { useTranslation } from 'react-i18next';
 import { PageModeFunction, LanguageFunction } from '../../Functions/HeaderFunctions'
 
