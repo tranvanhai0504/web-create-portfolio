@@ -1,11 +1,19 @@
-.creatorSpace{
+.creatorSpace {
     background-color: #fff;
     width: 75vw;
     height: 100vh;
     position: relative;
     /* transform: scale(2) */
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
 }
 
-.targeted{
+.targeted {
     border: solid 2px blue;
+}
+
+.isMove{
+    cursor: grab;
 }

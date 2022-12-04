@@ -7,6 +7,10 @@ html{
     font-family: arial,sans-serif;
 }
 
+p{
+    margin: unset;
+}
+
 
 #light{
     --primary-color: #793AFC;

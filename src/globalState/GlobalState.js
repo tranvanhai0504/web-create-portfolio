@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 
 const GlobalContext = createContext()
@@ -46,6 +46,15 @@ function GlobalProvider({children}){
         localStorage.setItem('language', JSON.stringify(lang))
         i18n.changeLanguage(lang)
     }, [lang])
+
+    //zoom function
+    const [zoom, setZoom] = useState(1)
+    const ZOOM_SPEED = 0.005;
+    const MAX = 2.00
+    const MIN = 0.1
+
+    //move function
+    const [isMove, setIsMove] = useState(false)
     
     const value = {
         checked,
@@ -54,7 +63,14 @@ function GlobalProvider({children}){
         active,
         activeHandle,
         lang,
-        languagesHandle
+        languagesHandle,
+        ZOOM_SPEED,
+        zoom,
+        setZoom,
+        MAX,
+        MIN,
+        isMove,
+        setIsMove
     }
 
     return (
