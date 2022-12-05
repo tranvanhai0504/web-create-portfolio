@@ -25,7 +25,6 @@ function GlobalProvider({children}){
         setActive(!active)
     }
 
-
     //Page mode handle function
     const toggleTheme = () => {
         setTheme(theme==='light'? 'dark' : 'light')
