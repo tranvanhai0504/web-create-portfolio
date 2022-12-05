@@ -29,7 +29,6 @@ const router = createBrowserRouter([
 function App() {
   const value = useContext(GlobalContext)
 
-
   return (
     <div className="App" id={value.theme} style={{width: '100%', height: '100%'}}>
       <RouterProvider router={router}></RouterProvider>

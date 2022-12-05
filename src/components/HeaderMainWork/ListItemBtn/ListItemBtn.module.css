@@ -27,3 +27,17 @@
     border: 3px solid var(--primary-color)
     /* color: #fff; */
 }
+
+.resetSizeBtn{
+    margin-top: 10px;
+    border: unset;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: #fff;
+    opacity: 0.8;
+    border-radius: 20%;
+}
+
+.resetSizeBtn:hover{
+    opacity: 1
+}

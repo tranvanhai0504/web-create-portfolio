@@ -1,14 +1,18 @@
-.creatorSpace{
+.creatorSpace {
     background-color: #fff;
     width: 75vw;
     height: 100vh;
     position: relative;
-    display: flex;
+    /* transform: scale(2) */
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
     flex-wrap: wrap;
-
+    display: flex;
 }
 
-.targeted{
+.targeted {
     border: solid 2px blue;
 }
 
@@ -49,4 +53,7 @@
 
 .workspaceItem {
     position: relative;
+}
+.isMove{
+    cursor: grab;
 }

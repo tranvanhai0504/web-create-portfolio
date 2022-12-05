@@ -9,6 +9,7 @@ function ElementTooltip({ content, children, position = 'top', isActive = false,
     useEffect(() => {
         setShow(isActive)
     }, [isActive])
+    
 
     function choosePosition(position){
         switch(position){
@@ -29,7 +30,7 @@ function ElementTooltip({ content, children, position = 'top', isActive = false,
         <div className={styles.tooltip}>
             {show && <div
                 className={clsx(styles.tooltip_content, choosePosition(position))}
-            >{element}</div>}
+            >{show && element}</div>}
             {children}
         </div>
     )

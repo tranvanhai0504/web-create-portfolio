@@ -1,0 +1,53 @@
+.controlBarContainer{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;  
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.progress{
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: #ccc;
+    border-radius:2px;
+    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.progress_bar{
+    position: relative;
+    height: 100%;
+    width: 10%;
+    background-color: var(--primary-color)
+}
+
+.progress_circle{
+    display: none;
+    position: absolute;
+    top: -3px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transform: translateX(-4px);
+}
+
+.progress:hover .progress_circle{
+    display: block;
+}
+
+.progress.isDragging{
+    height: 5px
+}
+
+.progress.isDragging .progress_circle{
+    display: block;
+}

@@ -6,6 +6,12 @@
     width: 20.5%;
     background-color: #fff; 
     /* overflow-y: scroll; */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .headerSideBar{
@@ -14,6 +20,7 @@
     height: 8%;
     font-size: 15px;
     border-bottom: solid 1.2px #ccc;
+    
 }
 
 .btnHeaderSideBar{

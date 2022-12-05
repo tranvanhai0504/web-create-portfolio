@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 
 const GlobalContext = createContext()
@@ -34,19 +34,34 @@ function GlobalProvider({children}){
     function handleClick(e) {
         if(e){
             let btn = e.target
-            while (!btn.querySelector('svg')) {
-                btn = btn.parentElement
+        while (!btn.querySelector('svg')) {
+            btn = btn.parentElement
+        }
+        if (btn.getAttribute('data-name') === value.selectedBtn) {
+            setSelectedBtn(null);
+            value.setIsMove(false)
+            return
+        } else {
+            setSelectedBtn(btn.getAttribute('data-name'));
+        }
+
+        switch(btn.getAttribute('data-name')){
+            case 'handMove': {
+                value.setIsMove(true)
+                break;
             }
-            if (btn.getAttribute('data-name') === selectedBtn) {
-                setSelectedBtn(null);
-            } else {
-                setSelectedBtn(btn.getAttribute('data-name'));
+            case 'zoom': {
+                value.setIsMove(false)
+                break
             }
+            default: return;
+        }
         }else{
             console.log('set null')
             setSelectedBtn(null);
         }
     }
+
 
 
     //Page mode handle variables
@@ -90,6 +105,15 @@ function GlobalProvider({children}){
         localStorage.setItem('language', JSON.stringify(lang))
         i18n.changeLanguage(lang)
     }, [lang])
+
+    //zoom function
+    const [zoom, setZoom] = useState(1)
+    const ZOOM_SPEED = 0.005;
+    const MAX = 2.00
+    const MIN = 0.1
+
+    //move function
+    const [isMove, setIsMove] = useState(false)
     
     const value = {
         checked,
@@ -104,8 +128,14 @@ function GlobalProvider({children}){
         handleListItems,
         listUsingElement,
         targetItemHandle,
-        targetItem
-
+        targetItem,
+        ZOOM_SPEED,
+        zoom,
+        setZoom,
+        MAX,
+        MIN,
+        isMove,
+        setIsMove
     }
 
     return (

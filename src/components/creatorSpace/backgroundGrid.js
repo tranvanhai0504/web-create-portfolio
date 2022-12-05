@@ -8,16 +8,10 @@ import ReactDOMServer from 'react-dom/server';
 import './style.css'
 
 let boxsQuery = document.querySelector('.workSpace')
+console.log(boxsQuery)
 let itemsQuery = document.querySelectorAll('.workspaceItem')
 function BackgroundGrid() {
     const value = useContext(GlobalContext)
-    function activeHandle() {
-        document.querySelectorAll('.elementInWorkSpace').forEach(element=> {
-            element.addEventListener('click', ()=> {
-                
-            })
-        }) 
-    }
 
     function HandleEventItem() {
         itemsQuery.forEach(item=> {
@@ -37,6 +31,7 @@ function BackgroundGrid() {
     }
     
     function handleEvent(e) {
+        console.log(e.target)
         let item = ''
         switch(value.selectedBtn){
             case 'block' : {
@@ -68,9 +63,9 @@ function BackgroundGrid() {
         if(itemsQuery) HandleEventItem()
     }, [value.selectedBtn])
     
-    useEffect(()=> {
-        dropDrag()
-    }, [])
+    // useEffect(()=> {
+    //     dropDrag()
+    // }, [])
 
     let boxs= [<div className={clsx(styles.box, 'box')}><div draggable='false' className={clsx(styles.imgBlock, 'workspaceItem', styles.workspaceItem)}></div></div>]
     for(let i=1;i<40;i++) {
