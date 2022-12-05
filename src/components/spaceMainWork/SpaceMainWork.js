@@ -20,12 +20,12 @@ function SpaceMainWork() {
     }
 
     function handleFocus(e) {
-        console.log('focus')
+        // console.log('focus')
         e.target.addEventListener('keypress', (e) => zoomfunc(e))
     }
 
     function handleFocusOut(e) {
-        console.log('blur')
+        // console.log('blur')
         e.target.removeEventListener('keypress',(e) => zoomfunc(e))
     }
 

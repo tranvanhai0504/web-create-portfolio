@@ -1,19 +1,29 @@
 import {} from '../../globalState/GlobalState'
 
-
-async function dropDrag() {
-    
+async function dropDrag(target) {
     const boxs = document.querySelectorAll('.box')
-    const target = document.querySelector('.target')
-    console.log({'box': boxs})
-    boxs.forEach((box)=> {
-        box.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            this.appendChild(target)
+    
+        target.addEventListener('dragstart', dragstartHandle)
+
+        target.addEventListener('dragend', function(e) {
+            console.log('dragend')
+            e.target.classList.remove('target')
+            document.querySelector('.workSpace').removeEventListener('dragover', dragoverHandle)
         })
-        box.addEventListener('drop',  function(e) {
-            this.appendChild(target)
-        })
-    })
+
+        function dragstartHandle(e) {
+            document.querySelector('.workSpace').addEventListener('dragover', dragoverHandle)
+            console.log('dragstart handle')
+            e.target.classList.add('target')
+        }
+        function dragoverHandle(e) {
+            e.preventDefault()
+            if(e.target.classList.contains('box')) {
+                e.target.appendChild(target)
+            }
+
+        }
+
 }
 export default dropDrag
+//bi lap cong don 1 2 3 6

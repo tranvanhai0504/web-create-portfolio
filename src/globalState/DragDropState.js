@@ -1,14 +1,19 @@
 import { createContext } from 'react'
 import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next';
+import { useContext } from 'react'
+import { GlobalContext } from '../../globalState/GlobalState'
 
 const DragDropContext = createContext()
 
-function DragDropState() {
+
+function DragDropState(children) {
+    const value = useContext(GlobalContext)
+    const [listUsingElement, setListUsingElement] = useState([])
     const [taget, setTaget] = useState(false)
-    return (<GlobalContext.Provider
-        value={value}
->
-    {children}
-</GlobalContext.Provider>)
+
+    function  handleAddElement(e) {
+        setListUsingElement(prev=> [...prev, e])
+    }
 }
+
+export { DragDropContext }

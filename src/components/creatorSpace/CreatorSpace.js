@@ -1,6 +1,6 @@
 import styles from './CreatorSpace.module.css'
 import { useState, useEffect } from 'react'
-import WorkSpace from './backgroundGrid'
+import BackgroundGrid from './backgroundGrid'
 import clsx from 'clsx'
 import dropDrag from './dropDrag'
 
@@ -22,8 +22,10 @@ function CreatorSpace() {
     }
 
   return (
-    <div className={styles.creatorSpace}>
-      <WorkSpace></WorkSpace>
+    <div className={clsx(styles.creatorSpace, 'workSpace')}>
+        <BackgroundGrid>
+          
+        </BackgroundGrid>
         </div>
   )
 }

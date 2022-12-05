@@ -7,6 +7,48 @@ const GlobalContext = createContext()
 function GlobalProvider({children}){
     const { t, i18n } = useTranslation();
     
+
+    //===============================
+    const [targetItem, setTargetItem] = useState('')
+    function targetItemHandle(item){
+        console.log('handle', item)
+        setTargetItem(item)
+    }
+
+    useEffect(()=> {
+        setListUsingElement(prev => [...prev, targetItem])
+    }, [targetItem])
+    //================================
+    //list items in workspace
+
+    const [listUsingElement, setListUsingElement] = useState([])
+    const handleListItems = (item)=> {
+        console.log.log('add')
+        // setListUsingElement(prev => [...prev, item])
+        selectedBtn(null)
+        console.log(listUsingElement)
+    }
+
+    //handel btn 
+    const [selectedBtn, setSelectedBtn] = useState(null)
+    function handleClick(e) {
+        if(e){
+            let btn = e.target
+            while (!btn.querySelector('svg')) {
+                btn = btn.parentElement
+            }
+            if (btn.getAttribute('data-name') === selectedBtn) {
+                setSelectedBtn(null);
+            } else {
+                setSelectedBtn(btn.getAttribute('data-name'));
+            }
+        }else{
+            console.log('set null')
+            setSelectedBtn(null);
+        }
+    }
+
+
     //Page mode handle variables
     const data = JSON.parse(localStorage.getItem('theme'))||'light'
     const dataToggle = JSON.parse(localStorage.getItem('checked'))|| false
@@ -27,7 +69,6 @@ function GlobalProvider({children}){
         else
             setActive(!active)
     }
-
 
     //Page mode handle function
     const toggleTheme = () => {
@@ -57,7 +98,14 @@ function GlobalProvider({children}){
         active,
         activeHandle,
         lang,
-        languagesHandle
+        languagesHandle,
+        selectedBtn,
+        handleClick,
+        handleListItems,
+        listUsingElement,
+        targetItemHandle,
+        targetItem
+
     }
 
     return (

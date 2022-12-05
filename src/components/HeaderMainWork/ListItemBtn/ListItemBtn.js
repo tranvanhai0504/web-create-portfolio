@@ -6,6 +6,8 @@ import styles from './ListItemBtn.module.css'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip';
 import ElementTooltip from '../../tooltip/elementTooltip/ElementTooltip'
 import { TbHandStop } from "react-icons/tb";
+import { useContext } from 'react';
+import { GlobalContext } from '../../../globalState/GlobalState';
 
 const listBtn = [
     {
@@ -37,20 +39,20 @@ const listBtn = [
 ]
 
 function ListItemBtn() {
+    const value = useContext(GlobalContext)
+    // const [selectedBtn, setSelectedBtn] = useState(null)
 
-    const [selectedBtn, setSelectedBtn] = useState(null)
-
-    function handleClick(e) {
-        let btn = e.target
-        while (!btn.querySelector('svg')) {
-            btn = btn.parentElement
-        }
-        if (btn.getAttribute('data-name') === selectedBtn) {
-            setSelectedBtn(null);
-        } else {
-            setSelectedBtn(btn.getAttribute('data-name'));
-        }
-    }
+    // function handleClick(e) {
+    //     let btn = e.target
+    //     while (!btn.querySelector('svg')) {
+    //         btn = btn.parentElement
+    //     }
+    //     if (btn.getAttribute('data-name') === selectedBtn) {
+    //         setSelectedBtn(null);
+    //     } else {
+    //         setSelectedBtn(btn.getAttribute('data-name'));
+    //     }
+    // }
 
     return (
         <div className={clsx(styles.listItemBtn, 'listToolTips')}>
@@ -58,13 +60,13 @@ function ListItemBtn() {
                 return <div key={index} className={styles.cover}>
                     {btn.name === 'zoom'
                         ?
-                        (<StringTooltip isBlocked={!(selectedBtn === 'zoom')} content={btn.description} position={'bottom'}>
-                            <ElementTooltip position={'bottom'} isActive={selectedBtn === 'zoom'} element={<p>element</p>}>
+                        (<StringTooltip isBlocked={!(value.selectedBtn === 'zoom')} content={btn.description} position={'bottom'}>
+                            <ElementTooltip position={'bottom'} isActive={value.selectedBtn === 'zoom'} element={<p>element</p>}>
                                 <div
 
                                     data-name={btn.name}
-                                    className={clsx(styles.itemBtn, selectedBtn === btn.name && styles.selected)}
-                                    onClick={function (e) { handleClick(e) }}
+                                    className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
+                                    onClick={function (e) { value.handleClick(e) }}
                                 >
                                     {btn.icon}
                                 </div>
@@ -75,8 +77,8 @@ function ListItemBtn() {
                             <div
 
                                 data-name={btn.name}
-                                className={clsx(styles.itemBtn, selectedBtn === btn.name && styles.selected)}
-                                onClick={function (e) { handleClick(e) }}
+                                className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
+                                onClick={function (e) { value.handleClick(e) }}
                             >
                                 {btn.icon}
                             </div>
