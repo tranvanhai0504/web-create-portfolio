@@ -1,9 +1,11 @@
 import styles from './CreatorSpace.module.css'
+import BackgroundGrid from './backgroundGrid'
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import clsx from 'clsx'
+import dropDrag from './dropDrag'
 
 const style = {
   height: '20%',
@@ -79,9 +81,10 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
   return (
     <animated.div
       ref={page}
-      className={clsx(styles.creatorSpace, value.isMove && styles.isMove)}
+      className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
       style={styleComponent}
     >
+      <BackgroundGrid/>
       <div onClick={handleClick} className={clsx(isTarget && styles.targeted)} draggable={isTarget} style={style}></div>
     </animated.div>
   )

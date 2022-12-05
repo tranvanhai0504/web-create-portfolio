@@ -7,6 +7,63 @@ const GlobalContext = createContext()
 function GlobalProvider({children}){
     const { t, i18n } = useTranslation();
     
+
+    //===============================
+    const [targetItem, setTargetItem] = useState('')
+    function targetItemHandle(item){
+        console.log('handle', item)
+        setTargetItem(item)
+    }
+
+    useEffect(()=> {
+        setListUsingElement(prev => [...prev, targetItem])
+    }, [targetItem])
+    //================================
+    //list items in workspace
+
+    const [listUsingElement, setListUsingElement] = useState([])
+    const handleListItems = (item)=> {
+        console.log.log('add')
+        // setListUsingElement(prev => [...prev, item])
+        selectedBtn(null)
+        console.log(listUsingElement)
+    }
+
+    //handel btn 
+    const [selectedBtn, setSelectedBtn] = useState(null)
+    function handleClick(e) {
+        if(e){
+            let btn = e.target
+        while (!btn.querySelector('svg')) {
+            btn = btn.parentElement
+        }
+        if (btn.getAttribute('data-name') === value.selectedBtn) {
+            setSelectedBtn(null);
+            value.setIsMove(false)
+            return
+        } else {
+            setSelectedBtn(btn.getAttribute('data-name'));
+        }
+
+        switch(btn.getAttribute('data-name')){
+            case 'handMove': {
+                value.setIsMove(true)
+                break;
+            }
+            case 'zoom': {
+                value.setIsMove(false)
+                break
+            }
+            default: return;
+        }
+        }else{
+            console.log('set null')
+            setSelectedBtn(null);
+        }
+    }
+
+
+
     //Page mode handle variables
     const data = JSON.parse(localStorage.getItem('theme'))||'light'
     const dataToggle = JSON.parse(localStorage.getItem('checked'))|| false
@@ -21,8 +78,11 @@ function GlobalProvider({children}){
     //select element handle variables
     const [active, setActive] = useState(false)
     const [selected, setSelected] = useState()
-    const  activeHandle = () =>{
-        setActive(!active)
+    const  activeHandle = (e) =>{
+        if(e=='false')
+            setActive(false)
+        else
+            setActive(!active)
     }
 
     //Page mode handle function
@@ -63,6 +123,12 @@ function GlobalProvider({children}){
         activeHandle,
         lang,
         languagesHandle,
+        selectedBtn,
+        handleClick,
+        handleListItems,
+        listUsingElement,
+        targetItemHandle,
+        targetItem,
         ZOOM_SPEED,
         zoom,
         setZoom,

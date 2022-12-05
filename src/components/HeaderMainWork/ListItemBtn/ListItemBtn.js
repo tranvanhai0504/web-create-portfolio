@@ -39,35 +39,7 @@ const listBtn = [
 ]
 
 function ListItemBtn() {
-
-    const [selectedBtn, setSelectedBtn] = useState(null)
     const value = useContext(GlobalContext)
-
-    function handleClick(e) {
-        let btn = e.target
-        while (!btn.querySelector('svg')) {
-            btn = btn.parentElement
-        }
-        if (btn.getAttribute('data-name') === selectedBtn) {
-            setSelectedBtn(null);
-            value.setIsMove(false)
-            return
-        } else {
-            setSelectedBtn(btn.getAttribute('data-name'));
-        }
-
-        switch(btn.getAttribute('data-name')){
-            case 'handMove': {
-                value.setIsMove(true)
-                break;
-            }
-            case 'zoom': {
-                value.setIsMove(false)
-                break
-            }
-            default: return;
-        }
-    }
 
     function handleClickResetBtn(e){
         value.setZoom(1)
@@ -75,15 +47,15 @@ function ListItemBtn() {
 
 
     return (
-        <div className={styles.listItemBtn}>
+        <div className={clsx(styles.listItemBtn, 'listToolTips')}>
             {listBtn.map((btn, index) => {
                 return <div key={index} className={styles.cover}>
                     {btn.name === 'zoom'
                         ?
-                        (<StringTooltip isBlocked={!(selectedBtn === 'zoom')} content={btn.description} position={'bottom'}>
+                        (<StringTooltip isBlocked={!(value.selectedBtn === 'zoom')} content={btn.description} position={'bottom'}>
                             <ElementTooltip
                                 position={'bottom'}
-                                isActive={selectedBtn === 'zoom'}
+                                isActive={value.selectedBtn === 'zoom'}
                                 element={
                                     <>
                                         <p>{Math.ceil(value.zoom * 100) + '%'}</p>
@@ -95,8 +67,8 @@ function ListItemBtn() {
                                 <div
 
                                     data-name={btn.name}
-                                    className={clsx(styles.itemBtn, selectedBtn === btn.name && styles.selected)}
-                                    onClick={function (e) { handleClick(e) }}
+                                    className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
+                                    onClick={function (e) { value.handleClick(e) }}
                                 >
                                     {btn.icon}
                                 </div>
@@ -107,8 +79,8 @@ function ListItemBtn() {
                             <div
 
                                 data-name={btn.name}
-                                className={clsx(styles.itemBtn, selectedBtn === btn.name && styles.selected)}
-                                onClick={function (e) { handleClick(e) }}
+                                className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
+                                onClick={function (e) { value.handleClick(e) }}
                             >
                                 {btn.icon}
                             </div>
