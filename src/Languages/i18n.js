@@ -11,12 +11,15 @@ const resources = {
       "Storage": "Storage",
       "About": "About",
       "getstarted": "Get Started",
+      "fth":"First time here?",
       "try" : "Try with us!",
       "th": "The",
       "eas": "easiest",
       "wtm": "way to make",
       "yp": " your portfolio",
-      "iad": "impressive and different!"
+      "iad": "impressive and different!",
+      "Sigdes1":"Store and download your porfolio with our diversity templates",
+      "Sigdes2":"Impress recruiters and make your portfolio stand out from the crown"
 
     }
   },
@@ -26,12 +29,15 @@ const resources = {
       "Storage": "Kho lưu trữ",
       "About": "Về chúng tôi",
       "getstarted": "Bắt đầu",
+      "fth":"Lần đầu đến đây?",
       "try": "Thử ngay!",
       "th": "Cách",
       "eas": "dễ dàng nhất",
-      "wtm": " để tạo cho mình",
-      "yp" : " một chiếc prortfolio",
-      "iad": "ấn tượng và khác bọt!"
+      "wtm": " để tạo",
+      "yp" : "một chiếc portfolio",
+      "iad": "ấn tượng và khác bọt!",
+      "Sigdes1":"Lưu trữ và tải về các mẫu portfolio đa dạng của chúng tôi.",
+      "Sigdes2":"Khiến các nhà tuyển dụng ấn tượng và nổi bật hơn trong đám đông"
 
     }
   }
