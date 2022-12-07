@@ -1,44 +1,77 @@
 import Styles from './Home.module.css'
-import card from '../../assets/cardimg.png'
+import card from '../../assets/cardHighP.png'
 import { useTranslation } from 'react-i18next'
-import card2 from '../../assets/cardimg2.png'
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import clsx from 'clsx'
 
 
 function Smallcard({data})
-{ 
+{   
+    const [classes,setClasses]=useState(data.id)
+    const mouseOver=()=>{
+        setClasses(prev=>{
+            const newClasses=[...prev,data.oA].filter((items)=>items!==data.oO)
+            return newClasses
+        })
+    }
+    const mouseOff=()=>{
+        setClasses(prev=>{
+            const newClasses=[...prev,data.oO].filter((items)=>items!==data.oA)
+            return newClasses
+        })
+    }
     return (
-        <div 
-            className={Styles.smallcard}
-            id={data.id}>
+        <div
+            onMouseOver={mouseOver}
+            onMouseLeave={mouseOff}
+            className={clsx(classes)}>
                 <img
                     src={data.imgsrc}
-                    style={data.style}
+                    className={data.style}
                     alt=''>
                 </img>
         </div>
     )
 }
 function HomePageCard(){
+    const [classes3,setClasses3]=useState([Styles.sm3])
+    const mouseOver=()=>{
+        setClasses3(prev=>{
+            const newClasses=[...prev,Styles.sm3a].filter((items)=>items!==Styles.sm3o)
+            return newClasses
+        })
+    }
+    const mouseOff=()=>{
+        setClasses3(prev=>{
+            const newClasses=[...prev,Styles.sm3o].filter((items)=>items!==Styles.sm3a)
+            return newClasses
+        })
+    }
+      
     return (
         <div className={Styles.HomePageCard}>
             <div className={Styles.Bigcard}>
                 <Smallcard
                   data={{
-                    id:Styles.sm1,
+                    id:[Styles.sm1,Styles.smallcard],
+                    oA:Styles.sm1a,
+                    oO:Styles.sm1o,
                     imgsrc:card,
-                    style:{width:'85%',height:'85%'}
+                    style:Styles.imgstyle1
                   }} 
                 > 
                 </Smallcard>
                 <Smallcard
                   data={{
-                    id:Styles.sm2,
-                    imgsrc:card2,
-                    style:{width:'85%',height:'85%'}
+                    id:[Styles.sm2,Styles.smallcard],
+                    oA:Styles.sm2a,
+                    oO:Styles.sm2o,
+                    imgsrc:card,
+                    style:Styles.imgstyle2
                   }}  
                 ></Smallcard>
-                <div id={Styles.sm3}></div>
+                <div className={clsx(classes3)} onMouseOver={mouseOver} onMouseLeave={mouseOff}></div>
             </div>
         </div>
     )
@@ -49,14 +82,15 @@ function Content(){
     return (
         <div className={Styles.Content}>
             <div className={Styles.contentsec} id={Styles.section1}>
-                <div>{t('th')} <span id={Styles.contentS}>{t('eas')} </span>{t('wtm')}</div>
-                <div>{t('yp')}</div>
-                <div>{t('iad')}</div></div>
+                <p>{t('th')} <span id={Styles.contentS}>{t('eas')} </span>{t('wtm')}</p>
+                <p>{t('yp')}</p>
+                <p>{t('iad')}</p></div>
             <div className={Styles.contentsec} id={Styles.section2}>
-                <div>Store, fill and download your porfolio with our diversity templates.</div>
-                <div>Impress recruiters and make your portfolio </div>
+                <p>{t('Sigdes1')}</p>
+                <p>{t('Sigdes2')}</p>
             </div>
             <div className={Styles.contentsec} id={Styles.section3}>
+                <p>{t('fth')}</p>
                 <NavLink to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
         </div>
