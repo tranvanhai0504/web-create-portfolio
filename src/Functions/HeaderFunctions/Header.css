@@ -8,6 +8,10 @@
   background-image: var(--primary-btn-gradient);
 }
 
+.switch input{
+  display: none;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;

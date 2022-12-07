@@ -19,7 +19,6 @@ const style = {
 const useGesture = createUseGesture([dragAction])
 
 function CreatorSpace({ showResetBtn, setShowResetBtn }) {
-  const [isTarget, setIsTarget] = useState(false)
   const value = useContext(GlobalContext)
   const page = useRef()
 
@@ -51,10 +50,11 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
 
   useGesture(
     {
-      onDrag: ({ offset: [x, y] }) => {
+      onDrag: ({ offset: [x, y], down, currentTarget }) => {
         if (!showResetBtn) {
           setShowResetBtn(true)
         }
+        down ? currentTarget.classList.add('grabbing') : currentTarget.classList.remove('grabbing') 
         api.start({ x, y })
       },
     },
@@ -72,12 +72,6 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
     }
   )
 
-
-  function handleClick(e) {
-    console.log('click' + isTarget);
-    setIsTarget(!isTarget)
-  }
-
   return (
     <animated.div
       ref={page}
@@ -85,7 +79,6 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
       style={styleComponent}
     >
       <BackgroundGrid/>
-      <div onClick={handleClick} className={clsx(isTarget && styles.targeted)} draggable={isTarget} style={style}></div>
     </animated.div>
   )
 }

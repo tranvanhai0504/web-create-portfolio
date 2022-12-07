@@ -1,5 +1,6 @@
 import styles from './HeaderMainWork.module.css'
 import clsx from 'clsx'
+import { memo } from 'react'
 import logo from '../../assets/logo.png'
 import { NavLink } from 'react-router-dom'
 import StringTooltip from '../tooltip/StringTooltip/StringTooltip'
@@ -22,4 +23,4 @@ function HeaderMainWork() {
     )
 }
 
-export default HeaderMainWork
+export default memo(HeaderMainWork)

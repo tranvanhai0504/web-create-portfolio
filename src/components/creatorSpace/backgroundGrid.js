@@ -74,7 +74,7 @@ function BackgroundGrid() {
                 data-row={i} data-col={j} 
                 id={`$${i*112}${j}`}
                 className={clsx(styles.box, 'box')} 
-                key = {`$${i*112}${j}`}               
+                key = {`$${i*112}${j}`}
                 ></div>)
 
     }
