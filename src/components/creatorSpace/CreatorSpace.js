@@ -1,11 +1,14 @@
 import styles from './CreatorSpace.module.css'
-import BackgroundGrid from './backgroundGrid'
+import WorkSpace from './workSpace'
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import clsx from 'clsx'
-import dropDrag from './dropDrag'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import {DndContext} from '@dnd-kit/core';
+import Draggable from 'react-draggable';
 
 const style = {
   height: '20%',
@@ -78,14 +81,24 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
     setIsTarget(!isTarget)
   }
 
+  function DragHandle (data) {
+      console.log('x: ', data.x)
+      console.log('y: ', data.y)
+  }
+
   return (
     <animated.div
       ref={page}
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
       style={styleComponent}
     >
-      <BackgroundGrid/>
-      <div onClick={handleClick} className={clsx(isTarget && styles.targeted)} draggable={isTarget} style={style}></div>
+         <Draggable onDrag={(e, data)=> DragHandle(data)}>
+            <div className='box'>
+              <div style={{'width':  '100px', 'height': '100px', 'backgroundColor': 'red'}}></div>
+           </div>
+         </Draggable>
+          <WorkSpace/>
+         
     </animated.div>
   )
 }

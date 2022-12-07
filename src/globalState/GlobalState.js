@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 
@@ -7,11 +7,15 @@ const GlobalContext = createContext()
 function GlobalProvider({children}){
     const { t, i18n } = useTranslation();
     
+    //drag=============================
+    const [DraggingItem, setDraggingItem] = useState('')
+    function DraggingHandle(item) {
+        setDraggingItem(item)
+    }
 
     //===============================
     const [targetItem, setTargetItem] = useState('')
     function targetItemHandle(item){
-        console.log('handle', item)
         setTargetItem(item)
     }
 
@@ -135,7 +139,9 @@ function GlobalProvider({children}){
         MAX,
         MIN,
         isMove,
-        setIsMove
+        setIsMove,
+        DraggingItem,
+        DraggingHandle
     }
 
     return (

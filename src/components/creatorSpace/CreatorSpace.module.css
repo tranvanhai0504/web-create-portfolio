@@ -39,21 +39,9 @@
 .blockItem:hover {
     background-color: #000;
 }
-.imgBlock {
-    width: 60px;
-    height: 60px;
-    background-color: #ccc;
-}
 
-.inputText {
-    background-color: #cfcc;
-    min-width: 60px;
-    min-height: 20px;
-}
 
-.workspaceItem {
-    position: relative;
-}
+
 .isMove{
     cursor: grab;
 }
