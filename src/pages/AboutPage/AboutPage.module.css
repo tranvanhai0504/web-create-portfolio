@@ -67,15 +67,16 @@
     font-weight: bold;
 }
 .content,.Aboutcontent{
-    padding: 8px 30px 16px 30px;
+    padding: 20px 26px 0px 26px;
+    text-align: center;
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
 }
 .Aboutcontent{
-    height: 82px;
+    height: 22%;
 }
 .about{
-    padding: 12px 0px 10px 0px;
+    padding: 25px 0px 0px 0px;
     color: white;
     font-size: 18px;
     font-weight: bold;
