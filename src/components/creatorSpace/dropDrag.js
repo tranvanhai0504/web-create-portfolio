@@ -1,4 +1,6 @@
-import {} from '../../globalState/GlobalState'
+import { getValue } from '@testing-library/user-event/dist/utils'
+// import {} from '../../globalState/GlobalState'
+
 
 async function dropDrag(target) {
     const boxs = document.querySelectorAll('.box')
@@ -12,9 +14,10 @@ async function dropDrag(target) {
         })
 
         function dragstartHandle(e) {
-            document.querySelector('.workSpace').addEventListener('dragover', dragoverHandle)
-            console.log('dragstart handle')
-            e.target.classList.add('target')
+            // document.querySelector('.workSpace').addEventListener('dragover', dragoverHandle)
+            // console.log('dragstart handle')
+            // e.target.classList.add('target')
+            // value.DraggingHandle
         }
         function dragoverHandle(e) {
             e.preventDefault()

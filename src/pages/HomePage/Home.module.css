@@ -19,31 +19,31 @@
     height: 88%;
     background-image: linear-gradient(to left bottom, #be03a1, #f7037c, #ff5053, #ff8d29, #ffc400);
     border-radius: 20px;  
-    text-align: center;  
+    text-align: center;
     position: relative;
 }
 .sm2a{
-    transform: translate(-1%,0.5%);
+    transform: translate(-2%,1%);
     transition-duration: 1000ms;
 }
 .sm1a{
-    transform: translate(0.7%,-0.5%);
+    transform: translate(1.2%,-1%);
     transition-duration: 1000ms;
 }
 .sm2o{
-    transform: translate(1%,-0.5%);
+    transform: translate(2%,-1%);
     transition-duration: 1500ms;
 }
 .sm1o{
-    transform: translate(-0.7%,0.5%);
+    transform: translate(-1.2%,1%);
     transition-duration: 1500ms;
 }
 .sm3a{
-    transform: translate(-1%,-2%);
+    transform: translate(-2%,-3%);
     transition-duration: 1000ms;
 }
 .sm3o{
-    transform: translate(1%,2%);
+    transform: translate(2%,3%);
     transition-duration: 1500ms;
 }
 .smallcard{

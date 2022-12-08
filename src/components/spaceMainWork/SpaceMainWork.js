@@ -9,6 +9,7 @@ function SpaceMainWork() {
     const ZOOM_SPEED = value.ZOOM_SPEED;
     const space = useRef()
     const [showResetBtn, setShowResetBtn] = useState(false)
+    const [pages, setPages] = useState([])
 
     zoom.current =  value.zoom
     useEffect(() => {
@@ -51,7 +52,7 @@ function SpaceMainWork() {
             ref={space}
             className={styles.spaceMainWork}
         >
-            <CreatorSpace showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>
+            <CreatorSpace pages={pages} setPages={setPages} showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>
             {showResetBtn && <button onClick={(e) => setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}
         </div>
     )

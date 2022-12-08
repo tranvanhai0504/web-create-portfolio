@@ -5,13 +5,16 @@ import GlobalStyles from './globalStyles'
 import { GlobalProvider } from './globalState/GlobalState';
 import reportWebVitals from './reportWebVitals';
 import '../src/Languages/i18n';
+import { DragDropState } from './globalState/DragDropState';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     <GlobalStyles>
-      <GlobalProvider>
-          <App />
-      </GlobalProvider>
+      {/* <DragDropState> */}
+        <GlobalProvider>
+            <App />
+        </GlobalProvider>
+      {/* </DragDropState> */}
     </GlobalStyles>
   //</React.StrictMode>
 );

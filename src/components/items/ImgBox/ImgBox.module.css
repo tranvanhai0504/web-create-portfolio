@@ -1,0 +1,8 @@
+.imgBlock {
+    width: 60px;
+    height: 60px;
+    background-color: #ccc;
+}
+.workspaceItem {
+    position: relative;
+}

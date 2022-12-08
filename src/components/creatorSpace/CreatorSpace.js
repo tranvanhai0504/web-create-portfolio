@@ -1,26 +1,28 @@
 import styles from './CreatorSpace.module.css'
-import BackgroundGrid from './backgroundGrid'
+import WorkSpace from './workSpace'
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import clsx from 'clsx'
-import dropDrag from './dropDrag'
-
-const style = {
-  height: '20%',
-  width: '20%',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  backgroundColor: 'green'
-}
+// import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+// import {DndContext} from '@dnd-kit/core';
+import Draggable from 'react-draggable';
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ showResetBtn, setShowResetBtn }) {
+function CreatorSpace({ showResetBtn, setShowResetBtn, pages, setPages }) {
   const value = useContext(GlobalContext)
   const page = useRef()
+  const pageDetail = useRef({
+    name: 'page1',
+    listItem: []
+  })
+
+  useEffect(() => {
+    setPages(prev => [...prev, pageDetail])
+  }, [pageDetail.current]) 
 
   useEffect(() => {
     const handler = e => e.preventDefault()
@@ -54,7 +56,7 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
         if (!showResetBtn) {
           setShowResetBtn(true)
         }
-        down ? currentTarget.classList.add('grabbing') : currentTarget.classList.remove('grabbing') 
+        down ? currentTarget.classList.add('grabbing') : currentTarget.classList.remove('grabbing')
         api.start({ x, y })
       },
     },
@@ -64,7 +66,7 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
       drag: {
         from: () => {
           if (!showResetBtn) { return [0, 0] }
-          else{
+          else {
             return [styleComponent.x.get(), styleComponent.y.get()]
           }
         }
@@ -78,7 +80,8 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
       style={styleComponent}
     >
-      <BackgroundGrid/>
+      <WorkSpace />
+
     </animated.div>
   )
 }
