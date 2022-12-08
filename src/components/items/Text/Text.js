@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Text.module.css'
+import Draggable from 'react-draggable';
 
 import clsx from 'clsx'
 
@@ -14,11 +15,15 @@ function Text() {
     return result;
   } 
   return (
-    <textarea 
-      type={makeid(10)}
-      className={clsx(styles.inputText, 'workspaceItem', styles.workspaceItem)} 
-      draggable='true'>
-    </textarea>
+    <Draggable>
+      <div>
+        <textarea 
+        type={makeid(10)}
+        className={clsx(styles.inputText, 'workspaceItem', styles.workspaceItem)} 
+        draggable='true'>
+      </textarea>
+      </div>
+    </Draggable>
   )
 }
 

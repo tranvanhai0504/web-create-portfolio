@@ -16,7 +16,8 @@ import Draggable from 'react-draggable';
 
 function BackgroundGrid() {
     const [listItem, setListItem] = useState([])
-
+    
+    
     function handleListItem(item) {
         setListItem(prev=>{
             return [...prev, item]})
@@ -24,9 +25,6 @@ function BackgroundGrid() {
 
     let itemsQuery = document.querySelectorAll('.workspaceItem')
     let boxsQuery = document.querySelector('.workSpace')
-     document.addEventListener('mousemove', function(e){
-    })
-    console.log(boxsQuery)
     const value = useContext(GlobalContext)
 
     function HandleEventItem() {
@@ -44,7 +42,7 @@ function BackgroundGrid() {
     }
     
     function handleEvent(e) {
-        console.log(e.target)
+        console.log('event', e.target)
         let item = ''
         switch(value.selectedBtn){
             case 'block' : {
@@ -52,16 +50,17 @@ function BackgroundGrid() {
                 break
             }
             case 'text': {
-                item  = (<Draggable><div><Text></Text></div></Draggable>)
+                item  = (<Text></Text>)
                 break
             }
             case 'imgBlock': {
-                item = (<Draggable><div><ImgBox></ImgBox></div></Draggable>)
+                item = (<ImgBox></ImgBox>)
                 break
             }
         }
         if(item!='' && value.selectedBtn!=null){
             handleListItem(item)
+            console.log('push to list')
             boxsQuery.removeEventListener('click', handleEvent, true)
             value.handleClick(null)
         }
@@ -74,13 +73,6 @@ function BackgroundGrid() {
         if(itemsQuery) HandleEventItem()
     }, [value.selectedBtn])
 
-    function handleDragEnd () {
-        console.log('dragend')
-      }
-      function DragHandle (data) {
-        console.log('x: ', data.x)
-        console.log('y: ', data.y)
-    }
     console.log('call:', listItem)
     return <>
         {listItem.map(item=> item)}
