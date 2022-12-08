@@ -27,13 +27,7 @@ function Block(props) {
     return result;
 
   } 
-  // const [{ isDragging }, drag] = useDrag(() => ({ 
-  //   type: 'value.DraggingItem',
-  //   collect: (monitor) => ({
-  //     isDragging: !!monitor.isDragging()
-  //   })
-  // }))
-  
+
 
   return (
     <Draggable onDrag= {(e,data)=> PositionHandle(data)} style={{'position': 'absolute', 'top':position.y, 'left': position.x}}>
