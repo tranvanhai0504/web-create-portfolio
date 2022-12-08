@@ -1,17 +1,32 @@
-import { useState, useRef, useEffect, useContext, useImperativeHandle } from 'react'
+import { useState, useRef, useEffect, useContext, memo } from 'react'
 import styles from './SpaceMainWork.module.css'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
 import {GlobalContext} from '../../globalState/GlobalState'
+import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 function SpaceMainWork() {
     const value = useContext(GlobalContext)
+    const dataValue = useContext(MSWContext)
+    const [showResetBtn, setShowResetBtn] = useState(false)
+    const pages = useRef([{
+        name: 'mainPage',
+        listItem: [],
+        page({key}){return <CreatorSpace listItem={this.listItem} key={key} showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>}
+    }])
+
+    console.log(pages)
+
+    useEffect(() => {
+        dataValue.setData(pages.current)
+    }, [pages.current])
+
+    const space = useRef()
+
+    //zoom
     let zoom = useRef(value.zoom);
     const ZOOM_SPEED = value.ZOOM_SPEED;
-    const space = useRef()
-    const [showResetBtn, setShowResetBtn] = useState(false)
-    const [pages, setPages] = useState([])
-
     zoom.current =  value.zoom
+
     useEffect(() => {
         space.current.children[0].style.transform = `scale(${zoom.current})`
     }, [zoom.current])
@@ -52,9 +67,13 @@ function SpaceMainWork() {
             ref={space}
             className={styles.spaceMainWork}
         >
-            <CreatorSpace pages={pages} setPages={setPages} showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>
+            {pages.current.map( (page, index) => {
+                return(
+                    page.page(index)
+                )
+            })}
             {showResetBtn && <button onClick={(e) => setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}
         </div>
     )
 }
-export default SpaceMainWork
+export default memo(SpaceMainWork)

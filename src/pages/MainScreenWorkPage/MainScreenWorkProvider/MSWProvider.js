@@ -4,10 +4,16 @@ const MSWContext = createContext()
 
 function MSWProvider({children}){
     const [data, setData] = useState([])
+    const [itemTarget, setItemTarget] = useState()
+    const [pageSelect, setPageSelect] = useState()
 
     const value = {
         data,
-        setData
+        setData,
+        itemTarget,
+        setItemTarget,
+        pageSelect,
+        setPageSelect
     }
 
     return (

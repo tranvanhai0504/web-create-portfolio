@@ -5,24 +5,12 @@ import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import clsx from 'clsx'
-// import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-// import {DndContext} from '@dnd-kit/core';
-import Draggable from 'react-draggable';
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ showResetBtn, setShowResetBtn, pages, setPages }) {
+function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
   const value = useContext(GlobalContext)
   const page = useRef()
-  const pageDetail = useRef({
-    name: 'page1',
-    listItem: []
-  })
-
-  useEffect(() => {
-    setPages(prev => [...prev, pageDetail])
-  }, [pageDetail.current]) 
 
   useEffect(() => {
     const handler = e => e.preventDefault()
@@ -80,8 +68,7 @@ function CreatorSpace({ showResetBtn, setShowResetBtn, pages, setPages }) {
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
       style={styleComponent}
     >
-      <WorkSpace />
-
+      <WorkSpace listItem={listItem}/>
     </animated.div>
   )
 }

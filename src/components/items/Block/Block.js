@@ -21,6 +21,17 @@ function Block({style}) {
     setPosition({x: data.x, y: data.y})
   }
   
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+
+  } 
+
 
   return (
     <Draggable onDrag= {(e,data)=> PositionHandle(data)} style={{'position': 'absolute', 'top':position.y, 'left': position.x}}>

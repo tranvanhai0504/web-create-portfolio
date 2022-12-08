@@ -24,7 +24,7 @@ const btns = [
 function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
-    const values = useContext(MSWContext) 
+    const values = useContext(MSWContext)
 
     function handelActiveBtn(e){
         setActivedBtn(Number(e.target.getAttribute('data-id')))
@@ -50,7 +50,6 @@ function SideBar() {
                 {activedBtn === 1 && <DetailObject/>}
                 {activedBtn === 2 && <OptionPage/>}
                 {activedBtn === 3 && <TemplateOption/>}
-
             </div>
         </div>
     )
