@@ -6,6 +6,7 @@ function MSWProvider({children}){
     const [data, setData] = useState([])
     const [itemTarget, setItemTarget] = useState()
     const [pageSelect, setPageSelect] = useState()
+    const [isDragging, setIsDragging] = useState(false)
 
     const value = {
         data,
@@ -13,7 +14,9 @@ function MSWProvider({children}){
         itemTarget,
         setItemTarget,
         pageSelect,
-        setPageSelect
+        setPageSelect,
+        isDragging,
+        setIsDragging
     }
 
     return (
