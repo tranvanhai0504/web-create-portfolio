@@ -8,7 +8,7 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 
 
 function Text({style, id, position, text}) {
-  console.log(text.text)
+
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
@@ -25,7 +25,7 @@ function Text({style, id, position, text}) {
     width: ${style.width};
     height: ${style.height};
     z-index: ${style.zIndex};
-    transform: rotate(${style.rotate})
+    transform: ${style.rotate}
   `
 
   useEffect(() => {
@@ -53,12 +53,14 @@ function Text({style, id, position, text}) {
       value.setItemTarget(id)
   }
  
+  
+
   return (
     
     <Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
       
       <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
-        <TextComp ref={textInput} onChange={(e) => contentHandle(e)} value={content}/>
+        <TextComp ref={textInput} onChange={(e) => contentHandle(e)} value={content}></TextComp>
       </div>
     </Draggable>
   )

@@ -8,7 +8,7 @@ import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
 import Draggable from 'react-draggable';
 import ReactDOMServer from 'react-dom/server'
-
+import images from '../../assets/defaultAvatar.png'
 function WorkSpace({listItem}) {
     const [listItemStore, setListItemStore] = useState(listItem)
 
@@ -61,14 +61,15 @@ function WorkSpace({listItem}) {
                 item = {
                     id,
                     style: {fontSize: '24px',
-                    color: 'green',
-                    fontWeight: '500',
-                    display: 'inline-block',
-                    border: 'solid 1px #ccc',
-                    width: '100px',
-                    height: '60px',
-                    zIndex: 1,
-                    transform: 'rotate(0deg)'},
+                        color: 'green',
+                        fontWeight: '500',
+                        display: 'inline-block',
+                        border: 'solid 1px #ccc',
+                        width: '100px',
+                        height: '60px',
+                        zIndex: 1,
+                        transform: 'rotate(0deg)'
+                    },
                     component(){return (<Text text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
                     position: {x: 0, y: 0},
                     text: {text: 'hello'}
@@ -76,7 +77,24 @@ function WorkSpace({listItem}) {
                 break
             }
             case 'imgBlock': {
-                item = (<ImgBox></ImgBox>)
+                    const id = makeid(10)
+                    item = {
+                        id,
+                        style: {
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '4px',
+                            border: 'solid 1px #ccc',
+                            zIndex: 1,
+                            backgroundImage: `url(${images})`,
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            transform: 'rotate(0deg)'
+                        },
+                        component(){return (<ImgBox text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
+                        position: {x: 0, y: 0},
+                        text: {text: 'hello'}
+                    }
                 break
             }
             default: {
