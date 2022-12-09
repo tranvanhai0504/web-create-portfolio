@@ -1,10 +1,11 @@
 import { memo } from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import clsx from 'clsx'
 import styles from './SideBar.module.css'
 import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
+import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 const btns = [
     {
@@ -23,6 +24,7 @@ const btns = [
 function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
+    const values = useContext(MSWContext)
 
     function handelActiveBtn(e){
         setActivedBtn(Number(e.target.getAttribute('data-id')))
@@ -48,7 +50,6 @@ function SideBar() {
                 {activedBtn === 1 && <DetailObject/>}
                 {activedBtn === 2 && <OptionPage/>}
                 {activedBtn === 3 && <TemplateOption/>}
-
             </div>
         </div>
     )

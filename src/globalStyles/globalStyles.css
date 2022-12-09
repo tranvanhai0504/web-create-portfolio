@@ -49,4 +49,6 @@ a{
     text-align: center;
 }
 
-
+.grabbing{
+    cursor: grabbing;
+}

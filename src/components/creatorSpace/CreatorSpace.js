@@ -5,21 +5,10 @@ import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import clsx from 'clsx'
-import Draggable from 'react-draggable';
-
-const style = {
-  height: '20%',
-  width: '20%',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  backgroundColor: 'green'
-}
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ showResetBtn, setShowResetBtn }) {
-  const [isTarget, setIsTarget] = useState(false)
+function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
   const value = useContext(GlobalContext)
   const page = useRef()
 
@@ -51,10 +40,11 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
 
   useGesture(
     {
-      onDrag: ({ offset: [x, y] }) => {
+      onDrag: ({ offset: [x, y], down, currentTarget }) => {
         if (!showResetBtn) {
           setShowResetBtn(true)
         }
+        down ? currentTarget.classList.add('grabbing') : currentTarget.classList.remove('grabbing')
         api.start({ x, y })
       },
     },
@@ -64,7 +54,7 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
       drag: {
         from: () => {
           if (!showResetBtn) { return [0, 0] }
-          else{
+          else {
             return [styleComponent.x.get(), styleComponent.y.get()]
           }
         }
@@ -72,22 +62,13 @@ function CreatorSpace({ showResetBtn, setShowResetBtn }) {
     }
   )
 
-
-  function handleClick(e) {
-    console.log('click' + isTarget);
-    setIsTarget(!isTarget)
-  }
-
-  
-
   return (
     <animated.div
       ref={page}
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
       style={styleComponent}
     >
-         <WorkSpace/>
-         
+      <WorkSpace listItem={listItem}/>
     </animated.div>
   )
 }

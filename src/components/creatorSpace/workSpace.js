@@ -3,80 +3,107 @@ import clsx from 'clsx'
 import {useEffect, useState, useRef, useContext} from 'react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import './style.css'
-import { renderToString } from 'react-dom/server'
-import CreateItem from './CreateItem'
-import ReactDOMServer from 'react-dom/server';
-
 import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
-import {Droppable} from './DragDrop/Droppable'
-import {DndContext} from '@dnd-kit/core';
 import Draggable from 'react-draggable';
+import ReactDOMServer from 'react-dom/server'
 
-function BackgroundGrid() {
-    const [listItem, setListItem] = useState([])
-    
-    
+function WorkSpace({listItem}) {
+    const [listItemStore, setListItemStore] = useState(listItem)
+
     function handleListItem(item) {
-        setListItem(prev=>{
+        listItem.push(item)
+        setListItemStore(prev=>{
             return [...prev, item]})
     }
 
-    let itemsQuery = document.querySelectorAll('.workspaceItem')
+    console.log(listItemStore)
+
     let boxsQuery = document.querySelector('.workSpace')
     const value = useContext(GlobalContext)
 
-    function HandleEventItem() {
-        itemsQuery.forEach(item=> {
-            item.addEventListener('mouseover', ()=> {
-                value.targetItemHandle(item)
-            })
-        })
-    }
-
-    
     function ProduceItems() {
         boxsQuery.removeEventListener('click',handleEvent, true)     
         boxsQuery.addEventListener('click',handleEvent, true)     
     }
-    
+    function makeid(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     function handleEvent(e) {
-        console.log('event', e.target)
         let item = ''
         switch(value.selectedBtn){
             case 'block' : {
-                item = (<Block></Block>) 
+                const id = makeid(10)
+                item = {
+                    id,
+                    style: {borderRadius: '5px',
+                    backgroundColor: 'red',
+                    border: 'solid 1px #ccc',
+                    width: '100px',
+                    height: '100px',
+                    zIndex: 1,
+                    transform: '0deg'},
+                    component(){return (<Block position={this.position} style={this.style} id= {this.id}/>)},
+                    position: {x: 0, y: 0}
+                }
                 break
             }
             case 'text': {
-                item  = (<Text></Text>)
+                const id = makeid(10)
+                item = {
+                    id,
+                    style: {fontSize: '24px',
+                    color: 'green',
+                    fontWeight: '500',
+                    display: 'inline-block',
+                    border: 'solid 1px #ccc',
+                    width: '100px',
+                    height: '60px',
+                    zIndex: 1,
+                    transform: 'rotate(0deg)'},
+                    component(){return (<Text text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
+                    position: {x: 0, y: 0},
+                    text: {text: 'hello'}
+                }
                 break
             }
             case 'imgBlock': {
                 item = (<ImgBox></ImgBox>)
                 break
             }
+            default: {
+
+            }
         }
         if(item!='' && value.selectedBtn!=null){
             handleListItem(item)
-            console.log('push to list')
+            // console.log('push to list:', ReactDOMServer.renderToStaticMarkup(item))
             boxsQuery.removeEventListener('click', handleEvent, true)
             value.handleClick(null)
         }
+        console.log(item)
     }
 
     useEffect(()=> {
         boxsQuery = document.querySelector('.workSpace')
-        itemsQuery = document.querySelectorAll('.workspaceItem')
         if(boxsQuery) ProduceItems()
-        if(itemsQuery) HandleEventItem()
+        // if(listItemStore) HandleEventItem()
     }, [value.selectedBtn])
 
-    console.log('call:', listItem)
+    console.log(listItemStore[0]?.position)
     return <>
-        {listItem.map(item=> item)}
+        {listItemStore.map(item => {
+            return item.component()
+        })}
         </>
 }
 
-export default BackgroundGrid
+export default WorkSpace
