@@ -41,9 +41,9 @@ function GlobalProvider({children}){
         while (!btn.querySelector('svg')) {
             btn = btn.parentElement
         }
-        if (btn.getAttribute('data-name') === value.selectedBtn) {
+        if (btn.getAttribute('data-name') === selectedBtn) {
             setSelectedBtn(null);
-            value.setIsMove(false)
+            setIsMove(false)
             return
         } else {
             setSelectedBtn(btn.getAttribute('data-name'));
@@ -51,14 +51,14 @@ function GlobalProvider({children}){
 
         switch(btn.getAttribute('data-name')){
             case 'handMove': {
-                value.setIsMove(true)
+                setIsMove(true)
                 break;
             }
             case 'zoom': {
-                value.setIsMove(false)
+                setIsMove(false)
                 break
             }
-            default: return;
+            default: setIsMove(false);
         }
         }else{
             console.log('set null')

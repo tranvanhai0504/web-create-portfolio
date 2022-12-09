@@ -8,6 +8,7 @@ function SpaceMainWork() {
     const value = useContext(GlobalContext)
     const dataValue = useContext(MSWContext)
     const [showResetBtn, setShowResetBtn] = useState(false)
+    console.log(showResetBtn)
     const pages = useRef([{
         name: 'mainPage',
         listItem: [],
@@ -43,20 +44,17 @@ function SpaceMainWork() {
         if (e.keyCode === 81 && e.shiftKey) {
             if(zoom.current < value.MAX){
                 zoom.current += ZOOM_SPEED;
-                space.current.children[0].style.transform = `scale(${zoom.current})`
                 value.setZoom(zoom.current)
             }
         }
         if ((e.keyCode === 87 && e.shiftKey) || (e.keyCode === 431 && e.shiftKey)) {
             if(zoom.current > value.MIN){
                 zoom.current -= ZOOM_SPEED;
-                space.current.children[0].style.transform = `scale(${zoom.current})`
                 value.setZoom(zoom.current)
             }
         }
         if(e.keyCode === 69 && e.shiftKey){
             zoom.current = 1;
-            space.current.children[0].style.transform = `scale(${zoom.current})`
             value.setZoom(zoom.current)
         }
     }
