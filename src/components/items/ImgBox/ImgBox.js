@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './ImgBox.module.css'
 import clsx from 'clsx'
+import Draggable from 'react-draggable';
 
 function ImgBox() {
   function makeid(length) {
@@ -12,11 +13,15 @@ function ImgBox() {
     }
     return result;
   } 
-  return (
-    <div 
-      type={makeid(10 )}
-      draggable='true' 
-      className={clsx(styles.imgBlock, 'workspaceItem', styles.workspaceItem)}></div>
+  return (<Draggable>
+    <div>
+      <div 
+        type={makeid(10 )}
+        draggable='true' 
+        className={clsx(styles.imgBlock, 'workspaceItem', styles.workspaceItem)}></div>
+      </div>
+  </Draggable>
+    
   )
 }
 

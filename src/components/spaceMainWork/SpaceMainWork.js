@@ -64,6 +64,7 @@ function SpaceMainWork() {
 
     return (
         <div
+        key={Math.random()}
             ref={space}
             className={styles.spaceMainWork}
         >

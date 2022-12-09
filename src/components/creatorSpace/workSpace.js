@@ -7,8 +7,9 @@ import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
 import Draggable from 'react-draggable';
+import ReactDOMServer from 'react-dom/server'
 
-function BackgroundGrid({listItem}) {
+function WorkSpace({listItem}) {
     const [listItemStore, setListItemStore] = useState(listItem)
 
     function handleListItem(item) {
@@ -17,36 +18,65 @@ function BackgroundGrid({listItem}) {
             return [...prev, item]})
     }
 
+    console.log(listItemStore)
+
     let boxsQuery = document.querySelector('.workSpace')
     const value = useContext(GlobalContext)
 
-    function HandleEventItem() {
-        listItemStore.forEach(item=> {
-            item.addEventListener('mouseover', ()=> {
-                value.targetItemHandle(item)
-            })
-        })
-    }
-
-    
     function ProduceItems() {
         boxsQuery.removeEventListener('click',handleEvent, true)     
         boxsQuery.addEventListener('click',handleEvent, true)     
     }
-    
+    function makeid(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     function handleEvent(e) {
         let item = ''
         switch(value.selectedBtn){
             case 'block' : {
-                item = (<Block></Block>) 
+                const id = makeid(10)
+                item = {
+                    id,
+                    style: {borderRadius: '5px',
+                    backgroundColor: 'red',
+                    border: 'solid 1px #ccc',
+                    width: '100px',
+                    height: '100px',
+                    zIndex: 1,
+                    transform: '0deg'},
+                    component(){return (<Block position={this.position} style={this.style} id= {this.id}/>)},
+                    position: {x: 0, y: 0}
+                }
                 break
             }
             case 'text': {
-                item  = (<Draggable><div><Text></Text></div></Draggable>)
+                const id = makeid(10)
+                item = {
+                    id,
+                    style: {fontSize: '24px',
+                    color: 'green',
+                    fontWeight: '500',
+                    display: 'inline-block',
+                    border: 'solid 1px #ccc',
+                    width: '100px',
+                    height: '60px',
+                    zIndex: 1,
+                    transform: 'rotate(0deg)'},
+                    component(){return (<Text text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
+                    position: {x: 0, y: 0},
+                    text: {text: 'hello'}
+                }
                 break
             }
             case 'imgBlock': {
-                item = (<Draggable><div><ImgBox></ImgBox></div></Draggable>)
+                item = (<ImgBox></ImgBox>)
                 break
             }
             default: {
@@ -55,27 +85,25 @@ function BackgroundGrid({listItem}) {
         }
         if(item!='' && value.selectedBtn!=null){
             handleListItem(item)
+            // console.log('push to list:', ReactDOMServer.renderToStaticMarkup(item))
             boxsQuery.removeEventListener('click', handleEvent, true)
             value.handleClick(null)
         }
+        console.log(item)
     }
 
     useEffect(()=> {
         boxsQuery = document.querySelector('.workSpace')
         if(boxsQuery) ProduceItems()
-        if(listItemStore) HandleEventItem()
+        // if(listItemStore) HandleEventItem()
     }, [value.selectedBtn])
 
-    function handleDragEnd () {
-        console.log('dragend')
-      }
-      function DragHandle (data) {
-        console.log('x: ', data.x)
-        console.log('y: ', data.y)
-    }
+    console.log(listItemStore[0]?.position)
     return <>
-        {listItemStore.map(item=> item)}
+        {listItemStore.map(item => {
+            return item.component()
+        })}
         </>
 }
 
-export default BackgroundGrid
+export default WorkSpace
