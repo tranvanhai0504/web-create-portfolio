@@ -8,22 +8,21 @@ import { use } from 'i18next';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import {useContext} from 'react'
 
+const BlockComp = styled.div.attrs((props) => {
+
+})`
+    border-radius: ${props => props.style.borderRadius};
+    background-color: ${props => props.style.backgroundColor};
+    border: ${props => props.style.border};
+    width: ${props => props.style.width};
+    height: ${props => props.style.height};
+    z-index: ${props => props.style.zIndex};
+    transform: rotate(${props => props.style.rotate})
+  `
+
 function Block({style, id, position}) {
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
-  console.log('id: ',id)
-  const BlockComp = styled.div`
-    border-radius: ${style.borderRadius};
-    background-color: ${style.backgroundColor};
-    border: ${style.border};
-    width: ${style.width};
-    height: ${style.height};
-    z-index: ${style.zIndex};
-    transform: rotate(${style.rotate})
-  `
-  console.log(
-    position
-  )
 
   const PositionHandle = (data)=> {
     console.log(position)
@@ -33,16 +32,11 @@ function Block({style, id, position}) {
   }
   
   function HandleEventItem(e) {
-    console.log(id+ "=========" + value.itemTarget)
-    if(value.itemTarget === id) {
-      // e.target.classList.remove('target')
-      // console.log('remove target',  e.target)
+    if(value.itemTarget === id) 
       value.setItemTarget(null)
-    }else{
-      // e.target.classList.add('target') 
+    else
       value.setItemTarget(id)
-      // console.log('add target', e.target)
-    }
+    
   }
 
   console.log('re-render')
@@ -50,7 +44,7 @@ function Block({style, id, position}) {
   return (
     <Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
       <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
-        <BlockComp/>
+        <BlockComp style={style}/>
       </div>
     </Draggable>
   )

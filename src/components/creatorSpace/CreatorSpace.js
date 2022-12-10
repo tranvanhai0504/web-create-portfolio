@@ -52,8 +52,10 @@ function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
       target: page,
       enabled: value.isMove,
       drag: {
-        from: () => {
-          if (!showResetBtn) { return [0, 0] }
+        from: (showResetBtn) => {
+          if (!showResetBtn) { 
+            return [0, 0]
+          }
           else {
             return [styleComponent.x.get(), styleComponent.y.get()]
           }

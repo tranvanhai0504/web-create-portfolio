@@ -7,18 +7,13 @@
     position: absolute;
     bottom: 0;
     /* color: transparent; */
+    width: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    cursor: pointer;
 }
 .customInputImg::-webkit-file-upload-button {
     visibility: hidden;
   }
 
-.customInputImg::before {
-    content: '';
-    width: 24.5%;
-    height: 100%;
-    background-color: #ffa500cc;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-}

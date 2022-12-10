@@ -2,6 +2,7 @@ import styles from './CreatorSpace.module.css'
 import clsx from 'clsx'
 import {useEffect, useState, useRef, useContext} from 'react'
 import { GlobalContext } from '../../globalState/GlobalState'
+import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import './style.css'
 import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
@@ -10,6 +11,9 @@ import Draggable from 'react-draggable';
 import ReactDOMServer from 'react-dom/server'
 import images from '../../assets/defaultAvatar.png'
 function WorkSpace({listItem}) {
+    const MSWValue = useContext(MSWContext)
+    console.log('MSW', MSWValue)
+    console.log('log image: ', MSWValue.image)
     const [listItemStore, setListItemStore] = useState(listItem)
 
     function handleListItem(item) {
@@ -77,6 +81,7 @@ function WorkSpace({listItem}) {
                 break
             }
             case 'imgBlock': {
+                console.log('img: ',(MSWValue.value)&&MSWValue.image)
                     const id = makeid(10)
                     item = {
                         id,
@@ -86,7 +91,7 @@ function WorkSpace({listItem}) {
                             borderRadius: '4px',
                             border: 'solid 1px #ccc',
                             zIndex: 1,
-                            backgroundImage: `url(${images})`,
+                            backgroundImage: `url(${MSWValue.image||images})`,
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
                             transform: 'rotate(0deg)'

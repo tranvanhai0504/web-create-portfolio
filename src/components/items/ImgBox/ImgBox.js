@@ -5,12 +5,10 @@ import Draggable from 'react-draggable';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import {useContext, useState, useRef} from 'react'
 import  styled  from 'styled-components'
-
+import FileInput from './FileInput'
 function ImgBox({style, id, position}) {
-  const [image, setImage] = useState('')
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
-  console.log('id: ',id)
   const ImgComp = styled.div`
     width: ${style.width};
     height: ${style.height};
@@ -19,7 +17,7 @@ function ImgBox({style, id, position}) {
     z-index: ${style.zIndex};
     background-position: ${style.backgroundPosition};
     background-size: ${style.backgroundSize};
-    background-image: ${image.preview||style.backgroundImage};
+    background-image: ${style.backgroundImage};
     transform: ${style.transform}
   `
   const PositionHandle = (data)=> {
@@ -38,22 +36,11 @@ function ImgBox({style, id, position}) {
     
   }
 
-  function handleFile(e) {
-    console.log('input')
-    const file = e.target.files[0]
-    file.preview = URL.createObjectURL(file)
-    setImage(file)
-  }
 
 
   return (<Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
             <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
               <ImgComp/>
-              <input 
-                type='file'
-                className='customInputImg'
-                onChange={e=> handleFile}
-              ></input>
             </div>
             
           </Draggable>

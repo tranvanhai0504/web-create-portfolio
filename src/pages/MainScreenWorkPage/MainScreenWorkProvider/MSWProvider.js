@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState,useRef } from 'react';
 
 const MSWContext = createContext()
 
@@ -6,6 +6,8 @@ function MSWProvider({children}){
     const [data, setData] = useState([])
     const [itemTarget, setItemTarget] = useState()
     const [pageSelect, setPageSelect] = useState()
+    const [isDragging, setIsDragging] = useState(false)
+    const image = useRef(null)
 
     const value = {
         data,
@@ -13,7 +15,11 @@ function MSWProvider({children}){
         itemTarget,
         setItemTarget,
         pageSelect,
-        setPageSelect
+        setPageSelect,
+        isDragging,
+        setIsDragging,
+        image
+
     }
 
     return (
