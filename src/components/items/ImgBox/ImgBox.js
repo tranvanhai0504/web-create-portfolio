@@ -15,21 +15,18 @@ const ImgComp = styled.div`
   z-index: ${props=>props.style.zIndex};
   background-position: ${props=>props.style.backgroundPosition};
   background-size: ${props=>props.style.backgroundSize};
-  background-image: ${props=>props.style.backgroundImage};
+  background-image: url(${props=>props.style.src});
   transform: ${props=>props.style.transform}
 `
-function ImgBox({style, id, position}) {
+function ImgBox({style, id, position, src}) {
   const value = useContext(MSWContext)
   const [nowTarget, setNowTarget] = useState(value.itemTarget.current)
   const [nowPosion, setNowPositon] = useState(position)
   const PositionHandle = (data)=> {
-    console.log(position)
     position.x =  data.x
     position.y =  data.y
     setNowPositon({x: data.x, y: data.y})
   }
-
-
   
   function HandleEventItem(e) {
     if(value.itemTarget.current === id) {
@@ -40,7 +37,6 @@ function ImgBox({style, id, position}) {
       setNowTarget(id)
     }
   }
-
 
 
   return (<Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>

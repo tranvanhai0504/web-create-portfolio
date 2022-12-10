@@ -54,7 +54,6 @@ function ListItemBtn() {
         MSWValue.setImg(file)
         file.preview = URL.createObjectURL(file)
         value.image.current = file.preview
-        console.log('itemmm', value.image)
     }
 
 

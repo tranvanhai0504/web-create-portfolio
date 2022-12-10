@@ -7,15 +7,10 @@ import './style.css'
 import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
-import Draggable from 'react-draggable';
-import ReactDOMServer from 'react-dom/server'
 import images from '../../assets/defaultAvatar.png'
 function WorkSpace({listItem}) {
     const value = useContext(GlobalContext)
     const MSWValue = useContext(MSWContext)
-    console.log('MSW from workSpace', MSWValue)
-    console.log('imgRef: ', value.image)
-    console.log('imgState: ', MSWValue.img)
     const [listItemStore, setListItemStore] = useState(listItem)
 
     function handleListItem(item) {
@@ -23,8 +18,6 @@ function WorkSpace({listItem}) {
         setListItemStore(prev=>{
             return [...prev, item]})
     }
-
-    console.log(listItemStore)   
 
     let boxsQuery = document.querySelector('.workSpace')
 
@@ -82,24 +75,26 @@ function WorkSpace({listItem}) {
                 break
             }
             case 'imgBlock': {
-                console.log('img: ',(MSWValue.value)&&MSWValue.image.current, MSWValue)
                     const id = makeid(10)
+                    const src = `${value.image.current||images}`
                     item = {
                         id,
+                        _this: this,
                         style: {
                             width: '60px',
                             height: '60px',
                             borderRadius: '4px',
                             border: 'solid 1px #ccc',
                             zIndex: 1,
-                            backgroundImage: `url(${value.image.current||images})`,
+                            backgroundImage: `url(${src})`,
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
-                            transform: 'rotate(0deg)'
+                            transform: 'rotate(0deg)',
                         },
                         component(){return (<ImgBox text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
                         position: {x: 0, y: 0},
-                        text: {text: 'hello'}
+                        text: {text: 'hello'},
+                        source: {src: src}
                     }
                 break
             }
