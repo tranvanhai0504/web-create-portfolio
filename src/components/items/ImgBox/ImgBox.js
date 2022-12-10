@@ -3,7 +3,7 @@ import styles from './ImgBox.module.css'
 import clsx from 'clsx'
 import Draggable from 'react-draggable';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import {useContext, useState, useRef} from 'react'
+import {useContext, useState, useRef, useEffect} from 'react'
 import  styled  from 'styled-components'
 import FileInput from './FileInput'
 function ImgBox({style, id, position}) {
@@ -26,6 +26,8 @@ function ImgBox({style, id, position}) {
     position.y =  data.y
     setNowPositon({x: data.x, y: data.y})
   }
+
+
   
   function HandleEventItem(e) {
     console.log(id+ "=========" + value.itemTarget)

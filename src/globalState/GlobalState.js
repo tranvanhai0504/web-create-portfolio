@@ -74,6 +74,7 @@ function GlobalProvider({children}){
     const [theme, setTheme] = useState(data)
     const [checked, setChecked] = useState(dataToggle)
     
+    const image = useRef()
     
     //Languages handle variables
     const language = 'en'
@@ -141,7 +142,8 @@ function GlobalProvider({children}){
         isMove,
         setIsMove,
         DraggingItem,
-        DraggingHandle
+        DraggingHandle,
+        image
     }
 
     return (

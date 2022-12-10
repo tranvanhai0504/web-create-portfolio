@@ -11,9 +11,11 @@ import Draggable from 'react-draggable';
 import ReactDOMServer from 'react-dom/server'
 import images from '../../assets/defaultAvatar.png'
 function WorkSpace({listItem}) {
+    const value = useContext(GlobalContext)
     const MSWValue = useContext(MSWContext)
-    console.log('MSW', MSWValue)
-    console.log('log image: ', MSWValue.image)
+    console.log('MSW from workSpace', MSWValue)
+    console.log('imgRef: ', value.image)
+    console.log('imgState: ', MSWValue.img)
     const [listItemStore, setListItemStore] = useState(listItem)
 
     function handleListItem(item) {
@@ -22,10 +24,9 @@ function WorkSpace({listItem}) {
             return [...prev, item]})
     }
 
-    console.log(listItemStore)
+    console.log(listItemStore)   
 
     let boxsQuery = document.querySelector('.workSpace')
-    const value = useContext(GlobalContext)
 
     function ProduceItems() {
         boxsQuery.removeEventListener('click',handleEvent, true)     
@@ -81,7 +82,7 @@ function WorkSpace({listItem}) {
                 break
             }
             case 'imgBlock': {
-                console.log('img: ',(MSWValue.value)&&MSWValue.image)
+                console.log('img: ',(MSWValue.value)&&MSWValue.image.current, MSWValue)
                     const id = makeid(10)
                     item = {
                         id,
@@ -91,7 +92,7 @@ function WorkSpace({listItem}) {
                             borderRadius: '4px',
                             border: 'solid 1px #ccc',
                             zIndex: 1,
-                            backgroundImage: `url(${MSWValue.image||images})`,
+                            backgroundImage: `url(${value.image.current||images})`,
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
                             transform: 'rotate(0deg)'
