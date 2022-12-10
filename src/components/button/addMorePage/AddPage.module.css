@@ -1,0 +1,12 @@
+.AddPageBtn{
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border: dashed 2px #ccc;
+    border-radius: 12%;
+}
+
+.AddPageBtn:hover{
+    background-color: rgb(250, 250, 250)
+}

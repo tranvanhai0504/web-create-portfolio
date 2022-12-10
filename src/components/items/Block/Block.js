@@ -23,27 +23,28 @@ const BlockComp = styled.div.attrs((props) => {
 function Block({style, id, position}) {
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
+  const [nowTarget, setNowTarget] = useState(value.itemTarget.current)
+  
 
   const PositionHandle = (data)=> {
-    console.log(position)
     position.x =  data.x
     position.y =  data.y
     setNowPositon({x: data.x, y: data.y})
   }
   
   function HandleEventItem(e) {
-    if(value.itemTarget === id) 
-      value.setItemTarget(null)
-    else
-      value.setItemTarget(id)
-    
+    if(value.itemTarget.current === id) {
+      value.itemTarget.current = null
+      setNowTarget(null)
+    }else{
+      value.itemTarget.current = id
+      setNowTarget(id)
+    }
   }
 
-  console.log('re-render')
-
   return (
-    <Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
-      <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
+    <Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
+      <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
         <BlockComp style={style}/>
       </div>
     </Draggable>

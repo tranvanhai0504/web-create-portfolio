@@ -6,20 +6,22 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import {useContext, useState, useRef, useEffect} from 'react'
 import  styled  from 'styled-components'
 import FileInput from './FileInput'
+
+const ImgComp = styled.div`
+  width: ${props=>props.style.width};
+  height: ${props=>props.style.height};
+  border-radius: ${props=>props.style.borderRadius};
+  border: ${props=>props.style.border};
+  z-index: ${props=>props.style.zIndex};
+  background-position: ${props=>props.style.backgroundPosition};
+  background-size: ${props=>props.style.backgroundSize};
+  background-image: ${props=>props.style.backgroundImage};
+  transform: ${props=>props.style.transform}
+`
 function ImgBox({style, id, position}) {
   const value = useContext(MSWContext)
+  const [nowTarget, setNowTarget] = useState(value.itemTarget.current)
   const [nowPosion, setNowPositon] = useState(position)
-  const ImgComp = styled.div`
-    width: ${style.width};
-    height: ${style.height};
-    border-radius: ${style.borderRadius};
-    border: ${style.border};
-    z-index: ${style.zIndex};
-    background-position: ${style.backgroundPosition};
-    background-size: ${style.backgroundSize};
-    background-image: ${style.backgroundImage};
-    transform: ${style.transform}
-  `
   const PositionHandle = (data)=> {
     console.log(position)
     position.x =  data.x
@@ -30,19 +32,20 @@ function ImgBox({style, id, position}) {
 
   
   function HandleEventItem(e) {
-    console.log(id+ "=========" + value.itemTarget)
-    if(value.itemTarget === id) 
-      value.setItemTarget(null)
-    else
-      value.setItemTarget(id)
-    
+    if(value.itemTarget.current === id) {
+      value.itemTarget.current = null
+      setNowTarget(null)
+    }else{
+      value.itemTarget.current = id
+      setNowTarget(id)
+    }
   }
 
 
 
-  return (<Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
-            <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
-              <ImgComp/>
+  return (<Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
+            <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
+              <ImgComp style={style}/>
             </div>
             
           </Draggable>
