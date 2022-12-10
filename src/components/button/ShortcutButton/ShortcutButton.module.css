@@ -1,0 +1,21 @@
+.shortcutButton_i{
+    font-size: 25px;
+    color:var(--primary-color);
+}
+.shortcutButton{
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border-style: none;
+}
+.container{
+    margin-right: 2%;
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+.shortcutButton:hover{
+   background-color: var(--grey-secondary);
+   border-radius: 5px;
+}
