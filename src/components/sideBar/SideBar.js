@@ -6,6 +6,7 @@ import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
+import { useEffect } from 'react'
 
 const btns = [
     {
@@ -30,6 +31,10 @@ function SideBar() {
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
 
+    useEffect(() => {
+        values.setPageSelect(values.data[0]?.name)
+    })
+
     return (
         <div className={styles.sidebar}>
             <div className={styles.headerSideBar}>
@@ -47,9 +52,9 @@ function SideBar() {
                 })}
             </div>
             <div className={styles.sideBarContent}>
-                {activedBtn === 1 && <DetailObject/>}
-                {activedBtn === 2 && <OptionPage/>}
-                {activedBtn === 3 && <TemplateOption/>}
+                {activedBtn === 1 && <DetailObject data={values}/>}
+                {activedBtn === 2 && <OptionPage data={values}/>}
+                {activedBtn === 3 && <TemplateOption data={values}/>}
             </div>
         </div>
     )

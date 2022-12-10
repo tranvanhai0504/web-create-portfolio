@@ -15,8 +15,6 @@ function SpaceMainWork() {
         page({key}){return <CreatorSpace listItem={this.listItem} key={key} showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>}
     }])
 
-    console.log(pages)
-
     useEffect(() => {
         dataValue.setData(pages.current)
     }, [pages.current])

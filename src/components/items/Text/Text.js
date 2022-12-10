@@ -8,7 +8,8 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 
 const TextComp = styled.textarea.attrs((props) => ({
   onChange: props.onChange,
-  ref: props.ref
+  ref: props.ref,
+  onClick: props.onClick
 }))`
   color: ${props => props.style.color};
   font-size: ${props => props.style.fontSize};
@@ -26,15 +27,8 @@ function Text({style, id, position, text}) {
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
+  const [nowTarget, setNowTarget] = useState(value.itemTarget.current)
   const textInput = useRef()
-
-  useEffect(() => {
-    if(value.itemTarget === id){
-      console.log(textInput)
-      textInput.current.selectionStart = content.length
-      textInput.current.focus()
-    }
-  }, [content])
   
   function contentHandle(e) {
     text.text = e.target.value
@@ -47,17 +41,20 @@ function Text({style, id, position, text}) {
   }
 
   function HandleEventItem(e) {
-    if(value.itemTarget === id) 
-      value.setItemTarget(null)
-    else
-      value.setItemTarget(id)
+    if(value.itemTarget.current === id) {
+      value.itemTarget.current = null
+      setNowTarget(null)
+    }else{
+      value.itemTarget.current = id
+      setNowTarget(id)
+    }
   }
  
   return (
     
-    <Draggable disabled={!(value.itemTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
+    <Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
       
-      <div className={clsx(value.itemTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
+      <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
         <TextComp style={style} ref={textInput} onChange={(e) => contentHandle(e)} value={content}/>
       </div>
     </Draggable>
