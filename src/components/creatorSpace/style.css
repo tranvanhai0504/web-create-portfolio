@@ -1,3 +1,28 @@
 .target {
-    border: solid 1px red;
+    border: solid 1px rgb(164, 159, 255);
+}
+
+.customInputImg {
+    /* display: none; */
+    position: absolute;
+    bottom: 0;
+    /* color: transparent; */
+    width: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    cursor: pointer;
+}
+.customInputImg::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+.target::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -2px;
+    left: -2px;
+    border: solid 2px rgb(42, 42, 255);
 }

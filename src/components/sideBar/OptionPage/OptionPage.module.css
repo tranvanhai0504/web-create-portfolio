@@ -1,0 +1,27 @@
+.optionPage {
+    /* height: 100%; */
+    padding: 20px;
+}
+
+.listPage {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.page{
+    border: unset;
+    background-color: #fff;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.disableText {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}

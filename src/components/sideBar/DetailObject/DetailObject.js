@@ -1,4 +1,6 @@
-function DetailObject(){
+function DetailObject({data}){
+
+    console.log(data)
     return (
         <div>
 

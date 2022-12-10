@@ -46,8 +46,7 @@ function Header() {
             <div className={clsx(styles.btnFuncList)}>
                 <div class={styles.functionshell}>
                     <PageModeFunction />
-                    <LanguageFunction/>
-                    
+                    <LanguageFunction/>                    
                 </div>
                 <NavLink to="/work" className={clsx(styles.btnStart, styles.btnFunc)}>{t('getstarted')}</NavLink>
             </div>

@@ -7,6 +7,7 @@ import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import Trashcan from './Trashcan/Trashcan'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
+import { useEffect } from 'react'
 
 const btns = [
     {
@@ -30,6 +31,10 @@ function SideBar() {
     function handelActiveBtn(e){
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
+
+    useEffect(() => {
+        values.setPageSelect(values.data[0]?.name)
+    })
 
     return (
         <div className={styles.sidebar}>
