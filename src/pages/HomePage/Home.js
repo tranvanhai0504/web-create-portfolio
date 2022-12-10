@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 
-
 function Smallcard({data})
 {   
     const [classes,setClasses]=useState(data.id)

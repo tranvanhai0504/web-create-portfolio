@@ -5,6 +5,7 @@ import styles from './SideBar.module.css'
 import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
+import Trashcan from './Trashcan/Trashcan'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 const btns = [
@@ -47,9 +48,10 @@ function SideBar() {
                 })}
             </div>
             <div className={styles.sideBarContent}>
-                {activedBtn === 1 && <DetailObject/>}
-                {activedBtn === 2 && <OptionPage/>}
-                {activedBtn === 3 && <TemplateOption/>}
+                {!values.isDragging && activedBtn === 1 && <DetailObject/>}
+                {!values.isDragging && activedBtn === 2 && <OptionPage/>}
+                {!values.isDragging && activedBtn === 3 && <TemplateOption/>}
+                {values.isDragging && <Trashcan></Trashcan>}
             </div>
         </div>
     )

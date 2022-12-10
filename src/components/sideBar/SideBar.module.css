@@ -42,6 +42,7 @@
 }
 
 .sideBarContent{
-    overflow-y: scroll;
-    width: 100%;
+/*     overflow-y: scroll;
+ */    width: 100%;
+       height: 92%;
 }
