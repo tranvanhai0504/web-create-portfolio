@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png'
 import { NavLink } from 'react-router-dom'
 import StringTooltip from '../tooltip/StringTooltip/StringTooltip'
 import ExportButton from '../button/headerWorkSpace/ExportButton/ExportButton'
+import ShortcutButton from '../button/ShortcutButton/ShortcutButton'
 import ListItemBtn from './ListItemBtn/ListItemBtn'
 
 function HeaderMainWork() {
@@ -14,7 +15,8 @@ function HeaderMainWork() {
                 <NavLink className={styles.logo} to="/"><img className={styles.logoImg} src={logo} alt="a" ></img></NavLink>
             </StringTooltip>
             <div className={styles.btnList}>
-                <ListItemBtn/>
+                <ListItemBtn/> 
+                <ShortcutButton/>
                 <StringTooltip content={'export to html, css file'} position={'bottom'}>
                     <ExportButton />
                 </StringTooltip>

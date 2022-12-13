@@ -4,19 +4,30 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import { createUseGesture, dragAction } from '@use-gesture/react'
 import { GlobalContext } from '../../globalState/GlobalState'
+import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import clsx from 'clsx'
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
+function CreatorSpace({ listItem, name }) {
   const value = useContext(GlobalContext)
+  const valueData = useContext(MSWContext)
   const page = useRef()
+
+  function handleClickPage(e){
+    if(e.target === page.current){
+      valueData.setItemTarget(null)
+    }
+  }
 
   useEffect(() => {
     const handler = e => e.preventDefault()
     document.addEventListener('gesturestart', handler)
     document.addEventListener('gesturechange', handler)
     document.addEventListener('gestureend', handler)
+
+    page.current.addEventListener('click', handleClickPage)
+
     return () => {
       document.removeEventListener('gesturestart', handler)
       document.removeEventListener('gesturechange', handler)
@@ -35,15 +46,14 @@ function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
   }, [value.zoom])
 
   useEffect(() => {
-    api.start({ x: 0, y: 0 })
-  }, [showResetBtn])
+    if (valueData.showResetBtn === false)
+      api.start({ x: 0, y: 0 })
+  }, [valueData.showResetBtn])
 
   useGesture(
     {
       onDrag: ({ offset: [x, y], down, currentTarget }) => {
-        if (!showResetBtn) {
-          setShowResetBtn(true)
-        }
+        valueData.setShowResetBtn(true)
         down ? currentTarget.classList.add('grabbing') : currentTarget.classList.remove('grabbing')
         api.start({ x, y })
       },
@@ -52,8 +62,8 @@ function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
       target: page,
       enabled: value.isMove,
       drag: {
-        from: (showResetBtn) => {
-          if (!showResetBtn) { 
+        from: (valueData) => {
+          if (valueData.showResetBtn) {
             return [0, 0]
           }
           else {
@@ -67,10 +77,10 @@ function CreatorSpace({ showResetBtn, setShowResetBtn, listItem}) {
   return (
     <animated.div
       ref={page}
-      className={clsx(styles.creatorSpace, value.isMove && styles.isMove, 'workSpace')}
+      className={clsx(styles.creatorSpace, value.isMove && styles.isMove,)}
       style={styleComponent}
     >
-      <WorkSpace listItem={listItem}/>
+      <WorkSpace listItem={listItem} page={page} />
     </animated.div>
   )
 }

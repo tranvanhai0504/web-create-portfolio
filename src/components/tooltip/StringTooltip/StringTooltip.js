@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import './tooltip.css'
 import clsx from 'clsx'
 
-function StringTooltip({ content, children, position = 'top', isBlocked = true }) {
+function StringTooltip({ style, content, children, position = 'top', isBlocked = true, className }) {
 
     const [show, setShow] = useState(false)
 
@@ -14,7 +14,7 @@ function StringTooltip({ content, children, position = 'top', isBlocked = true }
         setShow(false)
     }
     return (
-        <div className={"tooltip"} onMouseOver={(e) => handleMouseIn(e)} onMouseLeave={(e) => handleMouseOut(e)}>
+        <div style={style} className={clsx("tooltip", className)} onMouseOver={(e) => handleMouseIn(e)} onMouseLeave={(e) => handleMouseOut(e)}>
             {show && isBlocked && <div
                 className={clsx('tooltip_content', `${position}`)}
                 dangerouslySetInnerHTML={{ __html: content }}

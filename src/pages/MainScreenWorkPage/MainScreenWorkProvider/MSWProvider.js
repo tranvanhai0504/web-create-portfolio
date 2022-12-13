@@ -4,9 +4,10 @@ const MSWContext = createContext()
 
 function MSWProvider({children}){
     const [data, setData] = useState([])
-    const itemTarget = useRef()
+    const [itemTarget, setItemTarget] = useState()
     const [pageSelect, setPageSelect] = useState()
     const [isDragging, setIsDragging] = useState(false)
+    const [showResetBtn, setShowResetBtn] = useState(false)
     const [img, setImg] = useState(null)
     const image = useRef()
 
@@ -14,13 +15,16 @@ function MSWProvider({children}){
         data,
         setData,
         itemTarget,
+        setItemTarget,
         pageSelect,
         setPageSelect,
         isDragging,
         setIsDragging,
         image,
         img,
-        setImg
+        setImg,
+        showResetBtn,
+        setShowResetBtn
 
     }
 

@@ -5,6 +5,7 @@ import styles from './SideBar.module.css'
 import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
+import Trashcan from './Trashcan/Trashcan'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import { useEffect } from 'react'
 
@@ -25,15 +26,12 @@ const btns = [
 function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
+    const [isEnterTrash, setIsEnterTrash] = useState(false)
     const values = useContext(MSWContext)
 
-    function handelActiveBtn(e){
+    function handelActiveBtn(e) {
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
-
-    useEffect(() => {
-        values.setPageSelect(values.data[0]?.name)
-    })
 
     return (
         <div className={styles.sidebar}>
@@ -52,9 +50,10 @@ function SideBar() {
                 })}
             </div>
             <div className={styles.sideBarContent}>
-                {activedBtn === 1 && <DetailObject data={values}/>}
-                {activedBtn === 2 && <OptionPage data={values}/>}
-                {activedBtn === 3 && <TemplateOption data={values}/>}
+                {activedBtn === 1 && <DetailObject data={values} />}
+                {activedBtn === 2 && <OptionPage data={values} />}
+                {activedBtn === 3 && <TemplateOption data={values} />}
+                {(values.isDragging || isEnterTrash) && <Trashcan setIsEnterTrash={setIsEnterTrash}></Trashcan>}
             </div>
         </div>
     )

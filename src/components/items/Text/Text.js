@@ -1,15 +1,16 @@
 import styles from './Text.module.css'
 import Draggable from 'react-draggable';
 import { GlobalContext } from '../../../globalState/GlobalState'
-import {useContext, useState, useEffect, useRef} from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import clsx from 'clsx'
-import  styled  from 'styled-components'
+import styled from 'styled-components'
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 const TextComp = styled.textarea.attrs((props) => ({
+  disabled: props.disabled,
   onChange: props.onChange,
   ref: props.ref,
-  onClick: props.onClick
+  onClick: props.onClick,
 }))`
   color: ${props => props.style.color};
   font-size: ${props => props.style.fontSize};
@@ -22,42 +23,48 @@ const TextComp = styled.textarea.attrs((props) => ({
   transform: rotate(${props => props.style.rotate})
 `
 
-function Text({style, id, position, text}) {
+function Text({ style, id, position, text }) {
 
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
   const [nowPosion, setNowPositon] = useState(position)
-  const [nowTarget, setNowTarget] = useState(value.itemTarget.current)
+  const [nowTarget, setNowTarget] = useState(value.itemTarget)
+  const [canEditable, setCanEditable] = useState(true)
   const textInput = useRef()
-  
+
   function contentHandle(e) {
     text.text = e.target.value
     setContent(e.target.value)
   }
-  const PositionHandle = (data)=> {
-    position.x =  data.x
-    position.y =  data.y
-    setNowPositon({x: data.x, y: data.y})
+  const PositionHandle = (data) => {
+    position.x = data.x
+    position.y = data.y
+    setNowPositon({ x: data.x, y: data.y })
   }
+
+  useEffect(() => {
+    setNowTarget(value.itemTarget)
+    setCanEditable(true)
+  }, [value.itemTarget])
+
+  console.log(value)
 
   function HandleEventItem(e) {
-    if(value.itemTarget.current === id) {
-      value.itemTarget.current = null
-      setNowTarget(null)
-    }else{
-      value.itemTarget.current = id
-      setNowTarget(id)
+    if (e.detail === 2) {
+      if (nowTarget === value.itemTarget) {
+        setCanEditable(false)
+      }
     }
+    value.setItemTarget(id)
+    setNowTarget(id)
   }
- 
-  
 
   return (
-    
-    <Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
-      
-      <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
-        <TextComp style={style} ref={textInput} onChange={(e) => contentHandle(e)} value={content}/>
+
+    <Draggable disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosion.x, y: nowPosion.y }} style={{ height: 'fit-content' }} onDrag={(e, data) => PositionHandle(data)}>
+
+      <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{ height: 'fit-content' }}>
+        <TextComp disabled={canEditable} onResize={(e) => { console.log('resize') }} style={style} ref={textInput} onChange={(e) => contentHandle(e)} value={content} />
       </div>
     </Draggable>
   )

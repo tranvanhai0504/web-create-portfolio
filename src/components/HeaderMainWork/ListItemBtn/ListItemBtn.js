@@ -42,24 +42,15 @@ const listBtn = [
 function ListItemBtn() {
     const MSWValue = useContext(MSWContext)
     const value = useContext(GlobalContext)
-    
-    console.log('MSW from listItemBtn: ', MSWValue)
-    console.log('value: ', value)
     function handleClickResetBtn(e){
         value.setZoom(1)
     }
 
     function FileHandle(e) {
-        let photo = e.target.files[0];
-        let formData = new FormData();
-            
-        formData.append("photo", photo);
-        fetch('/assets/', {method: "POST", body: formData});
-
-        MSWValue.setImg(photo)
-        photo.preview = URL.createObjectURL(photo)
-        value.image.current = photo.preview
-        console.log('itemmm', value.image)
+        const file = e.target.files[0]
+        MSWValue.setImg(file)
+        file.preview = URL.createObjectURL(file)
+        value.image.current = file.preview
     }
 
 
