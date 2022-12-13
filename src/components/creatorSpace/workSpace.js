@@ -55,7 +55,11 @@ function WorkSpace({listItem}) {
                     width: '100px',
                     height: '100px',
                     zIndex: 1,
-                    transform: '0deg'},
+                    transform: '0deg',
+                    resize: 'both',
+                    overflow: 'overlay'
+
+                },
                     component(){return (<Block position={this.position} style={this.style} id= {this.id}/>)},
                     position: {x: 0, y: 0}
                 }
@@ -95,7 +99,9 @@ function WorkSpace({listItem}) {
                             backgroundImage: `url(${value.image.current||images})`,
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
-                            transform: 'rotate(0deg)'
+                            transform: 'rotate(0deg)',
+                            resize: 'both',
+                            overflow: 'overlay'
                         },
                         component(){return (<ImgBox text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
                         position: {x: 0, y: 0},

@@ -50,10 +50,15 @@ function ListItemBtn() {
     }
 
     function FileHandle(e) {
-        const file = e.target.files[0]
-        MSWValue.setImg(file)
-        file.preview = URL.createObjectURL(file)
-        value.image.current = file.preview
+        let photo = e.target.files[0];
+        let formData = new FormData();
+            
+        formData.append("photo", photo);
+        fetch('/assets/', {method: "POST", body: formData});
+
+        MSWValue.setImg(photo)
+        photo.preview = URL.createObjectURL(photo)
+        value.image.current = photo.preview
         console.log('itemmm', value.image)
     }
 
@@ -104,5 +109,4 @@ function ListItemBtn() {
         </div>
     )
 }
-
 export default ListItemBtn

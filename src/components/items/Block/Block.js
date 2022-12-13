@@ -17,7 +17,10 @@ const BlockComp = styled.div.attrs((props) => {
     width: ${props => props.style.width};
     height: ${props => props.style.height};
     z-index: ${props => props.style.zIndex};
-    transform: rotate(${props => props.style.rotate})
+    transform: rotate(${props => props.style.rotate});
+    resize: ${props=>props.style.resize};
+    overflow: ${props=>props.style.overflow};
+    position: 'relative'; 
   `
 
 function Block({style, id, position}) {
@@ -42,6 +45,8 @@ function Block({style, id, position}) {
     }
   }
 
+
+
   return (
     <Draggable disabled={!(nowTarget === id)} defaultPosition={{x: 0, y: 0}} position={{x: nowPosion.x, y: nowPosion.y}} style={{height: 'fit-content'}} onDrag= {(e,data)=> PositionHandle(data)}>
       <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{height: 'fit-content'}}>
@@ -50,5 +55,4 @@ function Block({style, id, position}) {
     </Draggable>
   )
 }
-
 export default memo(Block)
