@@ -26,15 +26,12 @@ const btns = [
 function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
+    const [isEnterTrash, setIsEnterTrash] = useState(false)
     const values = useContext(MSWContext)
 
-    function handelActiveBtn(e){
+    function handelActiveBtn(e) {
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
-
-    useEffect(() => {
-        values.setPageSelect(values.data[0]?.name)
-    })
 
     return (
         <div className={styles.sidebar}>
@@ -53,10 +50,10 @@ function SideBar() {
                 })}
             </div>
             <div className={styles.sideBarContent}>
-                {!values.isDragging && activedBtn === 1 && <DetailObject/>}
-                {!values.isDragging && activedBtn === 2 && <OptionPage/>}
-                {!values.isDragging && activedBtn === 3 && <TemplateOption/>}
-                {values.isDragging && <Trashcan></Trashcan>}
+                {activedBtn === 1 && <DetailObject data={values} />}
+                {activedBtn === 2 && <OptionPage data={values} />}
+                {activedBtn === 3 && <TemplateOption data={values} />}
+                {(values.isDragging || isEnterTrash) && <Trashcan setIsEnterTrash={setIsEnterTrash}></Trashcan>}
             </div>
         </div>
     )

@@ -61,7 +61,6 @@ function GlobalProvider({children}){
             default: setIsMove(false);
         }
         }else{
-            console.log('set null')
             setSelectedBtn(null);
         }
     }
