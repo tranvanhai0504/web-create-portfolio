@@ -79,6 +79,7 @@ function CreatorSpace({ listItem, name }) {
       ref={page}
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove,)}
       style={styleComponent}
+      data-name={name}
     >
       <WorkSpace listItem={listItem} page={page} />
     </animated.div>

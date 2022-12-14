@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext, memo } from 'react'
+import { useState, useRef, useEffect, useContext, useReducer, memo } from 'react'
 import clsx from 'clsx'
 import styles from './SpaceMainWork.module.css'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
