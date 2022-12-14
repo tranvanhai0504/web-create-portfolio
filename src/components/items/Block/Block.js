@@ -15,10 +15,12 @@ const BlockComp = styled.div.attrs((props) => { return {
     border-radius: ${props => props.style.borderRadius}%;
     background-color: ${props => props.style.backgroundColor};
     border: ${props => props.style.border};
-    width: ${props => props.style.width}%;
-    height: ${props => props.style.height}%;
+    width: ${props => props.style.width}px;
+    height: ${props => props.style.height}px;
     z-index: ${props => props.style.zIndex};
-    transform: rotate(${props => props.style.rotate})
+    transform: rotate(${props => props.style.rotate}deg);
+    resize: ${props=>props.style.resize};
+    overflow: ${props=>props.style.overflow};
   `
 
 function Block({ style, id, position }) {
@@ -38,10 +40,8 @@ function Block({ style, id, position }) {
   }, [value.itemTarget])
 
   useEffect(() => {
-    console.log(id, 'position change')
-    console.log(position)
     setNowPositon({ x: position.x, y: position.y })
-  }, [value.data])
+  }, [position])
 
   function draggingStart(e){
     value.setIsDragging(true);
@@ -52,17 +52,24 @@ function Block({ style, id, position }) {
   }
 
   function HandleEventItem(e) {
+    const workSpaceWidth = e.target.parentElement.parentElement.clientWidth
+    const workSpaceHeight = e.target.parentElement.parentElement.clientHeight
+    const itemWidth = e.target.clientWidth
+    const itemHeight = e.target.clientHeight
+    style.width = itemWidth
+    style.height = itemHeight
     value.setItemTarget(id)
     setNowTarget(id)
   }
 
+
+
   return (
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosion.x, y: nowPosion.y }} onDrag={(e, data) => PositionHandle(data)}>
       <div  type={id} key={id} onClick={HandleEventItem} style={{ positon: 'absolute', height: 'fit-content' }}>
-        <BlockComp className={clsx(nowTarget === id && 'target')} style={style}>{id}</BlockComp>
+        <BlockComp className={clsx(nowTarget === id && 'target')} style={style}></BlockComp>
       </div>
     </Draggable>
   )
 }
-
 export default memo(Block)

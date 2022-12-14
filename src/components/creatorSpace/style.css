@@ -1,4 +1,6 @@
 
+
+
 .customInputImg {
     /* display: none; */
     position: absolute;
@@ -23,4 +25,14 @@
     top: -3px;
     left: -3px;
     border: solid 3px rgb(42, 42, 255);
+}
+
+.resizer {
+    width: 8px;
+    height: 8px;
+    background-color: blue;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
 }

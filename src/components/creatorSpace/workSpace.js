@@ -1,6 +1,6 @@
 import styles from './CreatorSpace.module.css'
 import clsx from 'clsx'
-import { useEffect, useState, useRef, useContext } from 'react'
+import { useEffect, useState, useRef, useContext, useReducer } from 'react'
 import { GlobalContext } from '../../globalState/GlobalState'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import './style.css'
@@ -10,7 +10,6 @@ import ImgBox from '../items/ImgBox/ImgBox'
 import images from '../../assets/defaultAvatar.png'
 function WorkSpace({ listItem, page }) {
     const value = useContext(GlobalContext)
-    const dataValue = useContext(MSWContext)
     const [listItemCurrent, setListItemCurrent] = useState(listItem)
 
     function handleListItem(item) {
@@ -39,16 +38,17 @@ function WorkSpace({ listItem, page }) {
                 item = {
                     id,
                     style: {
-                        borderRadius: 5,
-                        backgroundColor: 'red',
-                        border: 'unset',
-                        width: 100,
-                        height: 100,
-                        zIndex: 3,
-                        rotate: 0
-                    },
-                    component() { return (<Block position={this.position} style={this.style} id={this.id} />) },
-                    position: { x: 0, y: 0 }
+                    borderRadius: 0,
+                    backgroundColor: 'red',
+                    border: 'unset',
+                    width: 100,
+                    height: 100,
+                    zIndex: 3,
+                    resize: 'both',
+                    overflow: 'overlay',
+                    rotate: 0},
+                    component(){return (<Block position={this.position} style={this.style} id= {this.id}/>)},
+                    position: {x: 0, y: 0}
                 }
                 break
             }
@@ -74,25 +74,27 @@ function WorkSpace({ listItem, page }) {
                 break
             }
             case 'imgBlock': {
-                const id = makeid(10)
-                const src = `${value.image.current || images}`
-                item = {
-                    id,
-                    _this: this,
-                    style: {
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '4px',
-                        border: 'solid 1px #ccc',
-                        zIndex: 1,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        transform: 'rotate(0deg)',
-                    },
-                    component() { return (<ImgBox src={src} text={this.text} position={this.position} style={this.style} id={this.id} />) },
-                    position: { x: 0, y: 0 },
-                    source: { src: src }
-                }
+                    const id = makeid(10)
+                    const src = `${value.image.current||images}`
+                    item = {
+                        id,
+                        _this: this,
+                        style: {
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '4px',
+                            border: 'solid 1px #ccc',
+                            zIndex: 1,
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            transform: 'rotate(0deg)',
+                            resize: 'both',
+                            overflow: 'overlay'
+                        },
+                        component(){return (<ImgBox src={src} text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
+                        position: {x: 0, y: 0},
+                        source: {src: src}
+                    }
                 break
             }
             default: {
@@ -111,18 +113,8 @@ function WorkSpace({ listItem, page }) {
     }, [value.selectedBtn])
 
     useEffect(() => {
-        console.log(dataValue.data)
-        const namePage = page.current.getAttribute('data-name')
-        if (namePage) {
-            setListItemCurrent((prev, page) => {
-                const pageCurrent = dataValue.data.filter(pageElement => {
-                    return namePage === pageElement.name
-                })
-                return pageCurrent[0].listItem
-            })
-        }
-
-    }, [dataValue.data])
+        setListItemCurrent(listItem)
+    }, [listItem])
 
     return <>
         {listItemCurrent.map(item => {
