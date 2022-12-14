@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import style from './DetailObject.module.css'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip'
-import clsx from 'clsx'
 
 const blockSetting = [
     {
@@ -56,9 +55,6 @@ const blockSetting = [
 ]
 
 function DetailObject({ data }) {
-
-    console.log(data)
-    // const [inputSelect, setInputSelect] = useState()
     const [dataSelect, setDataSelect] = useState(selectStyle())
 
     function selectStyle() {
@@ -78,7 +74,6 @@ function DetailObject({ data }) {
                 })
             }
         })
-
         return newData
     }
 
@@ -135,6 +130,7 @@ function DetailObject({ data }) {
                                 style: dataSelect.style
                             }
                         }
+                        return item
                     })
                 }
             }
@@ -151,8 +147,6 @@ function DetailObject({ data }) {
                     <div className={style.blockOptionDetail}>
                         <p className={style.blockName}>{block.name}</p>
                         {block.element({
-                            // inputSelect,
-                            // setInputSelect,
                             dataSelect,
                             handleChange
                         })}

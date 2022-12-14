@@ -8,10 +8,10 @@ import { use } from 'i18next';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import { useContext } from 'react'
 
-const BlockComp = styled.div.attrs((props) => {
-
-})`
-    position: relative;
+const BlockComp = styled.div.attrs((props) => { return {
+  className: props.className
+}})`
+    position: absolute;
     border-radius: ${props => props.style.borderRadius}%;
     background-color: ${props => props.style.backgroundColor};
     border: ${props => props.style.border};
@@ -38,10 +38,10 @@ function Block({ style, id, position }) {
   }, [value.itemTarget])
 
   useEffect(() => {
-    console.log('position change')
+    console.log(id, 'position change')
     console.log(position)
     setNowPositon({ x: position.x, y: position.y })
-  }, value.data)
+  }, [value.data])
 
   function draggingStart(e){
     value.setIsDragging(true);
@@ -58,8 +58,8 @@ function Block({ style, id, position }) {
 
   return (
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosion.x, y: nowPosion.y }} onDrag={(e, data) => PositionHandle(data)}>
-      <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{ height: 'fit-content' }}>
-        <BlockComp style={style}>{id}</BlockComp>
+      <div  type={id} key={id} onClick={HandleEventItem} style={{ positon: 'absolute', height: 'fit-content' }}>
+        <BlockComp className={clsx(nowTarget === id && 'target')} style={style}>{id}</BlockComp>
       </div>
     </Draggable>
   )
