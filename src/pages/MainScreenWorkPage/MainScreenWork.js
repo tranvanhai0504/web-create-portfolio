@@ -4,6 +4,7 @@ import SpaceMainWork from '../../components/spaceMainWork/SpaceMainWork'
 import SideBar from '../../components/sideBar/SideBar'
 import styles from './MainScreenWork.module.css'
 import { MSWProvider } from './MainScreenWorkProvider/MSWProvider'
+import ScrollDialog from '../../components/Dialog/Dialog'
 
 function MainScreenWork() {
 
@@ -12,6 +13,7 @@ function MainScreenWork() {
             <HeaderMainWork />
             <div className={styles.mainSpace}>
                 <MSWProvider>
+                    <ScrollDialog/>
                     <SideBar />
                     <SpaceMainWork />
                 </MSWProvider>

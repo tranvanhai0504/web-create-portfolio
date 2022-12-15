@@ -20,7 +20,7 @@ function MSWProvider({children}){
         setIsDragging,
         image,
         img,
-        setImg
+        setImg,
 
     }
 

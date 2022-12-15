@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
+import { Footer } from '../../components/Footer/Footer'
 
 function Smallcard({data})
 {   
@@ -92,6 +93,7 @@ function Content(){
                 <p>{t('fth')}</p>
                 <NavLink to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

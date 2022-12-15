@@ -119,6 +119,9 @@ function GlobalProvider({children}){
 
     //move function
     const [isMove, setIsMove] = useState(false)
+
+    //show dialog function
+    const [activeDialog,setOpen]=useState(false)
     
     const value = {
         checked,
@@ -143,7 +146,9 @@ function GlobalProvider({children}){
         setIsMove,
         DraggingItem,
         DraggingHandle,
-        image
+        image,
+        activeDialog,
+        setOpen
     }
 
     return (

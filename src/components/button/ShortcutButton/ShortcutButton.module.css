@@ -18,4 +18,5 @@
 .shortcutButton:hover{
    background-color: var(--grey-secondary);
    border-radius: 5px;
+   cursor: pointer;
 }
