@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, useContext, memo } from 'react'
+import { useState, useRef, useEffect, useContext, useReducer, memo } from 'react'
+import clsx from 'clsx'
 import styles from './SpaceMainWork.module.css'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
 import {GlobalContext} from '../../globalState/GlobalState'
@@ -7,17 +8,20 @@ import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvide
 function SpaceMainWork() {
     const value = useContext(GlobalContext)
     const dataValue = useContext(MSWContext)
-    const [showResetBtn, setShowResetBtn] = useState(false)
-    console.log(showResetBtn)
-    const pages = useRef([{
+    const [pages, setPages] = useState([{
         name: 'mainPage',
         listItem: [],
-        page({key}){return <CreatorSpace listItem={this.listItem} key={key} showResetBtn={showResetBtn} setShowResetBtn={setShowResetBtn}/>}
+        page({key}){return <CreatorSpace name={this.name} listItem={this.listItem} key={key}/>}
     }])
 
     useEffect(() => {
-        dataValue.setData(pages.current)
-    }, [pages.current])
+        dataValue.setData(pages)
+        dataValue.setPageSelect(pages[0].name)
+    }, [])
+
+    useEffect(() => {
+        setPages(dataValue.data)
+    }, [dataValue.data])
 
     const space = useRef()
 
@@ -27,7 +31,8 @@ function SpaceMainWork() {
     zoom.current =  value.zoom
 
     useEffect(() => {
-        space.current.children[0].style.transform = `scale(${zoom.current})`
+        if(space.current.children[0])
+            space.current.children[0].style.transform = `scale(${zoom.current})`
     }, [zoom.current])
 
     useEffect(() => {
@@ -60,16 +65,15 @@ function SpaceMainWork() {
 
     return (
         <div
-        key={Math.random()}
             ref={space}
             className={styles.spaceMainWork}
         >
-            {pages.current.map( (page, index) => {
+            {pages.map( (page, index) => {
                 return(
-                    page.page(index)
+                    dataValue.pageSelect === page.name && page.page(index)
                 )
             })}
-            {showResetBtn && <button onClick={(e) => setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}
+            {dataValue.showResetBtn && <button onClick={(e) => dataValue.setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}
         </div>
     )
 }

@@ -42,9 +42,6 @@ const listBtn = [
 function ListItemBtn() {
     const MSWValue = useContext(MSWContext)
     const value = useContext(GlobalContext)
-    
-    console.log('MSW from listItemBtn: ', MSWValue)
-    console.log('value: ', value)
     function handleClickResetBtn(e){
         value.setZoom(1)
     }
@@ -54,7 +51,6 @@ function ListItemBtn() {
         MSWValue.setImg(file)
         file.preview = URL.createObjectURL(file)
         value.image.current = file.preview
-        console.log('itemmm', value.image)
     }
 
 
@@ -104,5 +100,4 @@ function ListItemBtn() {
         </div>
     )
 }
-
 export default ListItemBtn

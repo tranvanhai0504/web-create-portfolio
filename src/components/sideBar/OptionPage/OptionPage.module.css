@@ -1,20 +1,18 @@
 .optionPage {
     /* height: 100%; */
-    padding: 20px;
+    padding: 20px 44px;
 }
 
 .listPage {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
 .page{
     border: unset;
     background-color: #fff;
-    cursor: pointer;
-    margin-bottom: 15px;
 }
 
 .disableText {
@@ -24,4 +22,24 @@
     /* IE 10 and IE 11 */
     user-select: none;
     /* Standard syntax */
+}
+
+.pageOver{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.isTargetMouseEnterPage::after{
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -2px;
+    left: -2px;
+    border: solid 2px rgb(42, 42, 255);
+}
+
+.pageSelect{
+    color: var(--primary-color)
 }

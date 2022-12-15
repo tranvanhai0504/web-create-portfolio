@@ -1,6 +1,5 @@
-.target {
-    border: solid 1px rgb(164, 159, 255);
-}
+
+
 
 .customInputImg {
     /* display: none; */
@@ -19,10 +18,21 @@
 
 .target::before {
     content: "";
-    position: absolute;
+    position: fixed;
+    z-index: 100;
     width: 100%;
     height: 100%;
-    top: -2px;
-    left: -2px;
-    border: solid 2px rgb(42, 42, 255);
+    top: -3px;
+    left: -3px;
+    border: solid 3px rgb(42, 42, 255);
+}
+
+.resizer {
+    width: 8px;
+    height: 8px;
+    background-color: blue;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
 }

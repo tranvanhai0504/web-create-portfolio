@@ -13,6 +13,7 @@ p{
 
 
 #light{
+    --warning-color: #ea1f00;
     --primary-color: #793AFC;
     --background-btn: #000;
     --text-color: #000;
@@ -51,4 +52,8 @@ a{
 
 .grabbing{
     cursor: grabbing;
+}
+
+.pageHide{
+    display: none;
 }
