@@ -90,7 +90,7 @@ function ListItemBtn() {
                                 className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
                                 onClick={function (e) { 
                                     value.handleClick(e) 
-                                    document.querySelector('.customInputImg').click()
+                                    if(btn.name==='imgBlock') document.querySelector('.customInputImg').click()
                                 }}
                             >
                                 {btn.icon}
