@@ -27,6 +27,8 @@
 .pageOver{
     position: relative;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
 }
 
 .isTargetMouseEnterPage::after{
@@ -37,9 +39,14 @@
     height: 100%;
     top: -2px;
     left: -2px;
+    border-radius: 5px;
     border: solid 2px rgb(42, 42, 255);
 }
 
 .pageSelect{
     color: var(--primary-color)
+}
+
+.coverOptionBtn:hover{
+    background-color: red
 }
