@@ -7,7 +7,6 @@ import { MSWProvider } from './MainScreenWorkProvider/MSWProvider'
 import { GlobalContext } from '../../globalState/GlobalState'
 
 function MainScreenWork() {
-
     const value = useContext(GlobalContext)
     const [produce, setProduce] = useState(() => {
 

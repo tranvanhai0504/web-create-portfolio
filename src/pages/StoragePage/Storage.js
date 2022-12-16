@@ -6,41 +6,79 @@ import { useDrag } from '@use-gesture/react'
 import styles from './Storage.module.css';
 import { NavLink } from 'react-router-dom'
 import { SlPlus } from "react-icons/sl";
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import {GlobalContext } from '../../globalState/GlobalState'
+import makeid from '../../utils/makeid'
 
 import clsx from "clsx";
 function Template() {
     return (
-    <div>
+        <div>
 
     </div>)
 }
 
-
-
-
 function Storage(){
-    const [listTemplates, setListItemTemplates] =  useState([])
-    function createNewTemplate() {
-        setListItemTemplates(prev=> [...prev, <Template/>])
+    const [name, setName] = useState('New Template')
+    const [itemHover, setItemHover] = useState()
+    const value  = useContext(GlobalContext)
+    
+
+    const [listTemplates, setListItemTemplates] =  useState(value.produces.map((produce, index) => {
+        return (
+            <NewProduct 
+                id = {produce.id}
+                key={index}
+            >
+                <CreatorSpace 
+                    listItem={produce.listPage[0].listItem} 
+                    id={produce.id}
+                    forceUpdate={()=>{}}
+                />
+            </NewProduct>
+        )
+    }))
+
+    function handleClick(id) {
+        value.setProduceSelect(id)
     }
 
-    function Template() {
-        const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
-    
-        const bind = useDrag(({ down, movement: [mx, my] }) => {
+    function NewProduct({children, id}) {
+        let [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
+        let bind = useDrag(({ down, movement: [mx, my] }) => {
             api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
+        }, {
+            enabled: itemHover
         })
+        
         return (
             <animated.div  {...bind()} style={{ x, y }} className={styles.templateContainer}>
                 <div className={styles.template}>
-                    <span className={styles.editMessage}>Edit Template</span>
+                    <NavLink onClick={handleClick(id)} to="/work" className={styles.editMessage}>Edit Template</NavLink>
+                    {children}
                 </div>
-                <span contentEditable={true}>New Template</span>
+                <span onInput={e=> {setName(e.target.textContent)}} contentEditable={true}>{name}</span>
             </animated.div>
         )
     }
 
+    function createNewTemplate(e) { 
+        const produce = {
+            name: '',
+            id : makeid(10),
+            listPage: [{
+                name: 'mainPage',
+                id: makeid(10),
+                listItem: [],
+            }]
+        }
+        
+        value.setProduces(prev => [...prev, produce])
+        setListItemTemplates(prev => [...prev,( 
+            <NewProduct>
+                <CreatorSpace listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/>
+            </NewProduct>)])
+    }
 
     return (
         <div className={styles.container}>
