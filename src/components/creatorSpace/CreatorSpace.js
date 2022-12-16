@@ -9,7 +9,7 @@ import clsx from 'clsx'
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ listItem, name }) {
+function CreatorSpace({ listItem, id, forceUpdate }) {
   const value = useContext(GlobalContext)
   const valueData = useContext(MSWContext)
   const page = useRef()
@@ -19,6 +19,10 @@ function CreatorSpace({ listItem, name }) {
       valueData.setItemTarget(null)
     }
   }
+
+  // useEffect(() => {
+  //   console.log('not same')
+  // }, [listItem])
 
   useEffect(() => {
     const handler = e => e.preventDefault()
@@ -79,9 +83,9 @@ function CreatorSpace({ listItem, name }) {
       ref={page}
       className={clsx(styles.creatorSpace, value.isMove && styles.isMove,)}
       style={styleComponent}
-      data-name={name}
+      data-id={id}
     >
-      <WorkSpace listItem={listItem} page={page} />
+      <WorkSpace forceUpdate={forceUpdate} listItem={listItem} page={page} />
     </animated.div>
   )
 }

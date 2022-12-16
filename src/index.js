@@ -6,7 +6,6 @@ import { GlobalProvider } from './globalState/GlobalState';
 import { MSWContext, MSWProvider } from './pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider';
 import reportWebVitals from './reportWebVitals';
 import '../src/Languages/i18n';
-import { DragDropState } from './globalState/DragDropState';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>

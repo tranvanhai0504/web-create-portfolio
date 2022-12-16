@@ -1,26 +1,27 @@
-import { useState, useRef, useEffect, useContext, useReducer, memo } from 'react'
-import clsx from 'clsx'
+import { useState, useRef, useEffect, useContext, memo } from 'react'
 import styles from './SpaceMainWork.module.css'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
 import {GlobalContext} from '../../globalState/GlobalState'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
-function SpaceMainWork() {
+function SpaceMainWork({ setProduce, listPage }) {
     const value = useContext(GlobalContext)
     const dataValue = useContext(MSWContext)
-    const [pages, setPages] = useState([{
-        name: 'mainPage',
-        listItem: [],
-        page({key}){return <CreatorSpace name={this.name} listItem={this.listItem} key={key}/>}
-    }])
+    const [pages, setPages] = useState(listPage)
 
     useEffect(() => {
         dataValue.setData(pages)
-        dataValue.setPageSelect(pages[0].name)
+        dataValue.setPageSelect(pages[0].id)
     }, [])
 
     useEffect(() => {
         setPages(dataValue.data)
+        setProduce(prev => {
+            return {
+                ...prev,
+                listPage: dataValue.data
+            }
+        })
     }, [dataValue.data])
 
     const space = useRef()
@@ -35,32 +36,32 @@ function SpaceMainWork() {
             space.current.children[0].style.transform = `scale(${zoom.current})`
     }, [zoom.current])
 
-    useEffect(() => {
-        document.addEventListener('keypress', (e) => zoomfunc(e))
+    // useEffect(() => {
+    //     document.addEventListener('keypress', (e) => zoomfunc(e))
 
-        return () => {
-            document.removeEventListener('keypress', (e) => zoomfunc(e))
-        }
-    }, []) 
+    //     return () => {
+    //         document.removeEventListener('keypress', (e) => zoomfunc(e))
+    //     }
+    // }, []) 
 
-    const zoomfunc = (e) => { 
-        if (e.keyCode === 81 && e.shiftKey) {
-            if(zoom.current < value.MAX){
-                zoom.current += ZOOM_SPEED;
-                value.setZoom(zoom.current)
-            }
-        }
-        if ((e.keyCode === 87 && e.shiftKey) || (e.keyCode === 431 && e.shiftKey)) {
-            if(zoom.current > value.MIN){
-                zoom.current -= ZOOM_SPEED;
-                value.setZoom(zoom.current)
-            }
-        }
-        if(e.keyCode === 69 && e.shiftKey){
-            zoom.current = 1;
-            value.setZoom(zoom.current)
-        }
-    }
+    // const zoomfunc = (e) => { 
+    //     if (e.keyCode === 81 && e.shiftKey) {
+    //         if(zoom.current < value.MAX){
+    //             zoom.current += ZOOM_SPEED;
+    //             value.setZoom(zoom.current)
+    //         }
+    //     }
+    //     if ((e.keyCode === 87 && e.shiftKey) || (e.keyCode === 431 && e.shiftKey)) {
+    //         if(zoom.current > value.MIN){
+    //             zoom.current -= ZOOM_SPEED;
+    //             value.setZoom(zoom.current)
+    //         }
+    //     }
+    //     if(e.keyCode === 69 && e.shiftKey){
+    //         zoom.current = 1;
+    //         value.setZoom(zoom.current)
+    //     }
+    // }
 
 
     return (
@@ -70,7 +71,7 @@ function SpaceMainWork() {
         >
             {pages.map( (page, index) => {
                 return(
-                    dataValue.pageSelect === page.name && page.page(index)
+                    dataValue.pageSelect === page.id && <CreatorSpace setPages={setPages} id={page.id} listItem={page.listItem} key={index}/>
                 )
             })}
             {dataValue.showResetBtn && <button onClick={(e) => dataValue.setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}

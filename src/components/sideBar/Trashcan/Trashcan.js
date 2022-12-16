@@ -6,14 +6,13 @@ import {BsTrash} from 'react-icons/bs'
 function Trashcan({setIsEnterTrash}) {
 
     const value = useContext(MSWContext)
-    console.log(value)
 
     function handleMouseUp(e){
         const targetId = value.itemTarget
         const targetPage = value.pageSelect
 
         const newData = value.data.map(page => {
-            if(targetPage === page.name){
+            if(targetPage === page.id){
                 return {
                     ...page,
                     listItem: page.listItem.filter(item => {
