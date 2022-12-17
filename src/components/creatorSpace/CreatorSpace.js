@@ -20,10 +20,6 @@ function CreatorSpace({ listItem, id, forceUpdate }) {
     }
   }
 
-  // useEffect(() => {
-  //   console.log('not same')
-  // }, [listItem])
-
   useEffect(() => {
     const handler = e => e.preventDefault()
     document.addEventListener('gesturestart', handler)

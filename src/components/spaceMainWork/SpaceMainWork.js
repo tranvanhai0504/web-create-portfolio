@@ -11,7 +11,7 @@ function SpaceMainWork({ setProduce, listPage }) {
 
     useEffect(() => {
         dataValue.setData(pages)
-        dataValue.setPageSelect(pages[0].id)
+        dataValue.setPageSelect(pages[0]?.id)
     }, [])
 
     useEffect(() => {

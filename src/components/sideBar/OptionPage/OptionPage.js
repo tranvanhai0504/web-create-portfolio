@@ -1,40 +1,94 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import AddPageBtn from '../../button/addMorePage/AddPageBtn'
 import styles from './OptionPage.module.css'
-import ElementTooltip from '../../tooltip/elementTooltip/ElementTooltip'
+import makeid from '../../../utils/makeid'
 import { FiMoreVertical } from "react-icons/fi";
+import Menu from '../../menuCustom/Menu'
 import clsx from 'clsx'
 
 function OptionPage({ data }) {
 
     const [pageSelectedRename, setPageSelectedRename] = useState()
     const [pageSelectMouseEnter, setPageSelectMouseEnter] = useState()
-    const [optionMoreSelect, setOptionMoreSelect] = useState()
+    const [isActiveMenu, setIsActiveMenu] = useState(false)
+    const [positionMenu, setPositionMenu] = useState({ x: 0, y: 0 })
+
+    useEffect(() => {
+        function turnOffMenu(e) {
+            setIsActiveMenu(false)
+        }
+        document.addEventListener('click', turnOffMenu)
+
+        return () => {
+            document.removeEventListener('click', turnOffMenu)
+        }
+    }, [])
 
     function handleClick(e) {
 
-        switch (e.detail) {
-            case 1: {
-                data.setPageSelect(e.target.getAttribute('data-id'))
-                break
-            }
-            case 2: {
-                if (e.target.getAttribute('data-id') === pageSelectedRename?.name) {
-                    setPageSelectedRename(null)
-                } else {
-                    setPageSelectMouseEnter(null)
-                    setPageSelectedRename((prev) => {
-                        const [tempData] = data.data.filter((d) => {
-                            return d.id === e.target.getAttribute('data-id')
+        if (!e.target.getAttribute('data-id')) {
+            const func = (e.target.getAttribute('data-func'))
+
+            switch (func) {
+                case 'Delete': {
+                    const id = e.target.getAttribute('id')
+
+                    data.setData(prev => {
+                        return prev.filter(data => {
+                            return data.id !== id
                         })
-                        return tempData
                     })
-                    e.target.children[0].focus()
+                    setIsActiveMenu(false)
+                    break
                 }
-                break
+                case 'Copy': {
+                    const id = e.target.getAttribute('id')
+
+                    data.setData(prev => {
+                        const copyData = prev.filter(data => {
+                            return data.id === id
+                        })[0]
+
+                        const newData = {
+                            id: makeid(10),
+                            name: copyData.name + ' (copy)',
+                            listItem: copyData.listItem
+                        }
+
+                        return [...prev, newData]
+                    })
+                    setIsActiveMenu(false)
+
+                }
+                default: { }
             }
-            default: { }
+        } else {
+            switch (e.detail) {
+                case 1: {
+                    data.setPageSelect(e.target.getAttribute('data-id'))
+                    data.setItemTarget(null)
+                    break
+                }
+                case 2: {
+                    if (e.target.getAttribute('data-id') === pageSelectedRename?.name) {
+                        setPageSelectedRename(null)
+                    } else {
+                        setPageSelectMouseEnter(null)
+                        setPageSelectedRename((prev) => {
+                            const [tempData] = data.data.filter((d) => {
+                                return d.id === e.target.getAttribute('data-id')
+                            })
+                            return tempData
+                        })
+                        e.target.children[0].focus()
+                    }
+                    break
+                }
+                default: { }
+            }
         }
+
+
     }
 
     function handleMouseEnter(e) {
@@ -64,16 +118,37 @@ function OptionPage({ data }) {
         setPageSelectedRename(null)
     }
 
-    function handleMouseDown(e, id) {
+    function handleClickBtnMenu(e) {
+        console.log(e.target)
+    }
+
+    let listButtonMenu = useRef([
+        {
+            name: 'Delete',
+            func: handleClickBtnMenu
+        },
+        {
+            name: 'Copy',
+            func: handleClickBtnMenu
+        }
+    ])
+
+    function handleMouseDown(e) {
 
         function turnOnMenu(e) {
-            setOptionMoreSelect(id)
+            setIsActiveMenu(true)
+            const x = e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width
+            const y = e.target.getBoundingClientRect().top - 15
+            setPositionMenu({
+                id: e.target.getAttribute('data-id'),
+                x: x,
+                y: y
+            })
             e.preventDefault()
         }
 
         if (e.button === 2) {
             e.target.addEventListener('contextmenu', turnOnMenu)
-            // window.removeEventListener('contextmenu', turnOnMenu)
         }
     }
 
@@ -82,30 +157,29 @@ function OptionPage({ data }) {
             <div className={styles.listPage}>
                 {data.data.map((page, index) => {
                     return (
-                        <ElementTooltip isActive={data.pageSelect === page.id && optionMoreSelect === page.id} position={"right"} element={<p>hi</p>}>
-                            <div key={index}
-                                onClick={handleClick}
+                        <div key={index}
+                            onClick={handleClick}
+                            data-id={page.id}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            onMouseDown={(e) => handleMouseDown(e, page.id)}
+                            className={clsx(pageSelectMouseEnter === page.id && styles.isTargetMouseEnterPage, styles.pageOver)}
+                        >
+                            <input
+                                className={clsx(!(pageSelectedRename?.id === page.id) && styles.disableText, styles.page, data.pageSelect === page.id && styles.pageSelect)}
                                 data-id={page.id}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                onMouseDown={(e) => handleMouseDown(e, page.id)}
-                                className={clsx(pageSelectMouseEnter === page.id && styles.isTargetMouseEnterPage, styles.pageOver)}
+                                value={page.name}
+                                disabled={!(pageSelectedRename?.id === page.id)}
+                                onBlur={handleBlur}
+                                onChange={handleOnChange}
                             >
-                                <input
-                                    className={clsx(!(pageSelectedRename?.id === page.id) && styles.disableText, styles.page, data.pageSelect === page.id && styles.pageSelect)}
-                                    data-id={page.id}
-                                    value={page.name}
-                                    disabled={!(pageSelectedRename?.id === page.id)}
-                                    onBlur={handleBlur}
-                                    onChange={handleOnChange}
-                                >
-                                </input>
-                            </div>
-                        </ElementTooltip>
+                            </input>
+                            {isActiveMenu && <Menu children={listButtonMenu.current} setIsActive={setIsActiveMenu} data={data} position={positionMenu} direction={'right'}></Menu>}
+                        </div>
                     )
                 })}
+                <AddPageBtn data={data} />
             </div>
-            <AddPageBtn data={data} />
         </div>
     )
 }

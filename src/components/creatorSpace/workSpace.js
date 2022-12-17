@@ -39,8 +39,19 @@ function WorkSpace({ listItem, page }) {
                     id,
                     style: {
                         borderRadius: 0,
-                        backgroundColor: 'red',
+                        color: {
+                            type: 'solid',
+                            code: 'red'
+                        },
+                        boxSizing: 'content-box',
                         border: 'unset',
+                        borderColor: '',
+                        borderType: '',
+                        borderSize: 1,
+                        unBorderLeft: false,
+                        unBorderRight: false,
+                        unBorderTop: false,
+                        unBorderBottom: false,
                         width: 100,
                         height: 100,
                         zIndex: 3,

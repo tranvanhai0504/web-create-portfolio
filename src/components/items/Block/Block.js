@@ -10,10 +10,26 @@ import { useContext } from 'react'
 const BlockComp = styled.div.attrs((props) => {
 
 })`
-
+    border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize}px ${props.style.borderColor} !important` }};
+    ${props => {
+    let string = ''
+    if (props.style.unBorderLeft) {
+      string += 'border-left: unset !important;'
+    }
+    if (props.style.unBorderRight) {
+      string += 'border-right: unset !important;'
+    }
+    if (props.style.unBorderTop) {
+      string += 'border-top: unset !important;'
+    }
+    if (props.style.unBorderBottom) {
+      string += 'border-bottom: unset !important;'
+    }
+    return string
+  }}
+    box-sizing: ${props => props.style.boxSizing}%;
     border-radius: ${props => props.style.borderRadius}%;
-    background-color: ${props => props.style.backgroundColor};
-    border: ${props => props.style.border};
+    background: ${props => props.style.color.code};
     width: ${props => props.style.width}px;
     height: ${props => props.style.height}px;
     transform: rotate(${props => props.style.rotate}deg);
@@ -49,19 +65,19 @@ function Block({ style, id, position }) {
   }
 
   function HandleEventItem(e) {
-    const workSpaceWidth = e.target.parentElement.parentElement.clientWidth
-    const workSpaceHeight = e.target.parentElement.parentElement.clientHeight
-    const itemWidth = e.target.clientWidth
-    const itemHeight = e.target.clientHeight
-    style.width = itemWidth
-    style.height = itemHeight
+    // const workSpaceWidth = e.target.parentElement.parentElement.clientWidth
+    // const workSpaceHeight = e.target.parentElement.parentElement.clientHeight
+    // const itemWidth = e.target.clientWidth
+    // const itemHeight = e.target.clientHeight
+    // style.width = itemWidth
+    // style.height = itemHeight
     value.setItemTarget(id)
     setNowTarget(id)
   }
 
   return (
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
-      <div type={id} key={id} onClick={HandleEventItem} style={{position: 'absolute', height: 'fit-content', zIndex: style.zIndex}} className={clsx(nowTarget === id && 'target')}>
+      <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target')}>
         <BlockComp style={style}></BlockComp>
       </div>
     </Draggable>
