@@ -53,7 +53,7 @@ function SideBar() {
                 {activedBtn === 1 && <DetailObject data={values} />}
                 {activedBtn === 2 && <OptionPage data={values} />}
                 {activedBtn === 3 && <TemplateOption data={values} />}
-                {(values.isDragging || isEnterTrash) && <Trashcan setIsEnterTrash={setIsEnterTrash}></Trashcan>}
+                {true && <Trashcan setIsEnterTrash={setIsEnterTrash}></Trashcan>}
             </div>
         </div>
     )

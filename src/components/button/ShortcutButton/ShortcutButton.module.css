@@ -15,6 +15,9 @@
     display: flex;
     align-items: center;
 }
+.dialog{
+    text-align: left;
+}
 .shortcutButton:hover{
    background-color: var(--grey-secondary);
    border-radius: 5px;
