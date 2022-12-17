@@ -11,6 +11,7 @@ const useGesture = createUseGesture([dragAction])
 
 function CreatorSpace({ listItem, id, forceUpdate }) {
   const value = useContext(GlobalContext)
+  console.log(value.produceSelect)
   const valueData = useContext(MSWContext)
   const page = useRef()
 
@@ -20,9 +21,6 @@ function CreatorSpace({ listItem, id, forceUpdate }) {
     }
   }
 
-  // useEffect(() => {
-  //   console.log('not same')
-  // }, [listItem])
 
   useEffect(() => {
     const handler = e => e.preventDefault()

@@ -69,16 +69,17 @@
     overflow: hidden;
 }
 
-.template:hover {
-    background-color: rgba(168, 168, 168, 0.2);
-}
-
 .template:hover .editMessage{
     display: block!important;
 }
 
+
 .editMessage {
+   
+
     display: none;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     -webkit-user-select: none; 
   -ms-user-select: none; 
@@ -101,6 +102,11 @@
     align-items: center;
 }
 
+.scale {
+    transform: scale(0.12);
+    margin-right: 12px;
+    margin-bottom: 88px;
+}
 
  @-webkit-keyframes scale-up-center {
     0% {

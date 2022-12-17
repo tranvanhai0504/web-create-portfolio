@@ -9,14 +9,8 @@ import { SlPlus } from "react-icons/sl";
 import {useState, useContext} from 'react'
 import {GlobalContext } from '../../globalState/GlobalState'
 import makeid from '../../utils/makeid'
-
 import clsx from "clsx";
-function Template() {
-    return (
-        <div>
 
-    </div>)
-}
 
 function Storage(){
     const [name, setName] = useState('New Template')
@@ -25,26 +19,29 @@ function Storage(){
     
 
     const [listTemplates, setListItemTemplates] =  useState(value.produces.map((produce, index) => {
+        console.log('proid: ', produce.id)
         return (
             <NewProduct 
                 id = {produce.id}
                 key={index}
             >
-                <CreatorSpace 
+                <div className={styles.scale}><CreatorSpace 
                     listItem={produce.listPage[0].listItem} 
                     id={produce.id}
                     forceUpdate={()=>{}}
-                />
+                /></div>
             </NewProduct>
         )
     }))
 
-    function handleClick(id) {
+    function handleClick(e) {
+        const id = e.target.getAttribute('data-id')
+        console.log('set', id)
         value.setProduceSelect(id)
     }
 
     function NewProduct({children, id}) {
-        let [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
+        let [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 , scale: 0.2}))
         let bind = useDrag(({ down, movement: [mx, my] }) => {
             api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
         }, {
@@ -54,7 +51,7 @@ function Storage(){
         return (
             <animated.div  {...bind()} style={{ x, y }} className={styles.templateContainer}>
                 <div className={styles.template}>
-                    <NavLink onClick={handleClick(id)} to="/work" className={styles.editMessage}>Edit Template</NavLink>
+                    <NavLink onClick={handleClick} data-id={id} to="/work" className={styles.editMessage}>Edit</NavLink>
                     {children}
                 </div>
                 <span onInput={e=> {setName(e.target.textContent)}} contentEditable={true}>{name}</span>
@@ -75,9 +72,10 @@ function Storage(){
         
         value.setProduces(prev => [...prev, produce])
         setListItemTemplates(prev => [...prev,( 
-            <NewProduct>
-                <CreatorSpace listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/>
+            <NewProduct id={produce.id}>
+                <div className={styles.scale}><CreatorSpace listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/></div>
             </NewProduct>)])
+        console.log('edded')
     }
 
     return (
