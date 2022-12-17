@@ -23,7 +23,7 @@ const listBtn = [
     },
     {
         name: 'imgBlock',
-        icon: <FiImage className={styles.hover} />,
+        icon: <FiImage className={clsx(styles.hover, 'imageBlockIcon')} />,
         description: 'image'
     },
     {
@@ -88,10 +88,13 @@ function ListItemBtn() {
 
                                 data-name={btn.name}
                                 className={clsx(styles.itemBtn, value.selectedBtn === btn.name && styles.selected)}
-                                onClick={function (e) { value.handleClick(e) }}
+                                onClick={function (e) { 
+                                    value.handleClick(e) 
+                                    if(btn.name==='imgBlock') document.querySelector('.customInputImg').click()
+                                }}
                             >
                                 {btn.icon}
-                                {btn.name==='imgBlock'&&(<input type='file' onChange={FileHandle} className='customInputImg'></input>)}
+                                {btn.name==='imgBlock'&&(<input type='file' onChange={FileHandle} className={clsx('customInputImg', styles.inputImage)}></input>)}
                             </div>
                         </StringTooltip>)
                     }

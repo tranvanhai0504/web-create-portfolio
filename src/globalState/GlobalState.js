@@ -119,6 +119,8 @@ function GlobalProvider({children}){
     //move function
     const [isMove, setIsMove] = useState(false)
 
+    //show dialog function
+    const [activeDialog,setOpen]=useState(false)
     const [produces, setProduces] = useState(() => {
         const produces = JSON.parse(localStorage.getItem('produces'))
 
@@ -134,8 +136,7 @@ function GlobalProvider({children}){
         localStorage.setItem('produces', JSON.stringify(produces))
     }, [produces])
 
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-    
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);    
     const value = {
         checked,
         theme,
@@ -160,6 +161,8 @@ function GlobalProvider({children}){
         DraggingItem,
         DraggingHandle,
         image,
+        activeDialog,
+        setOpen,
         produces,
         setProduces,
         produceSelect,

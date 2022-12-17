@@ -7,6 +7,7 @@ import { GlobalContext } from '../../globalState/GlobalState'
 import { useContext } from 'react'
 import makeid from '../../utils/makeid'
 import clsx from 'clsx'
+import { Footer } from '../../components/Footer/Footer'
 
 function Smallcard({data})
 {   
@@ -112,6 +113,7 @@ function Content(){
                 <p>{t('fth')}</p>
                 <NavLink onClick={handleClick} to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

@@ -5,13 +5,14 @@ import SideBar from '../../components/sideBar/SideBar'
 import styles from './MainScreenWork.module.css'
 import { MSWProvider } from './MainScreenWorkProvider/MSWProvider'
 import { GlobalContext } from '../../globalState/GlobalState'
+import { ConfigResolverMap } from '@use-gesture/react'
 
 function MainScreenWork() {
-
     const value = useContext(GlobalContext)
     const [produce, setProduce] = useState(() => {
 
         let idProduceSelect = value.produceSelect
+        console.log('id: ', idProduceSelect)
         if (idProduceSelect === undefined) {
             idProduceSelect = value.produces[0].id
             value.setProduceSelect(idProduceSelect)

@@ -1,5 +1,4 @@
 import styles from './AboutPage.module.css'
-import { useState, useEffect } from 'react'
 import images from '../../assets/images.png'
 
 const cards = [

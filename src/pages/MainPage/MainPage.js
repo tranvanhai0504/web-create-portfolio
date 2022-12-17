@@ -19,7 +19,6 @@ function MainPage(){
             <Route path="/" element={<HomePage />}></Route>
           </Routes>
         </div>
-        <Footer></Footer>
       </div>
     )
 }
