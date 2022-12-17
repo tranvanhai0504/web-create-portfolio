@@ -28,6 +28,10 @@
     /* color: #fff; */
 }
 
+.inputImage:hover .hover{
+    background-color: var(--grey-secondary);
+}
+
 .resetSizeBtn{
     margin-top: 10px;
     border: unset;

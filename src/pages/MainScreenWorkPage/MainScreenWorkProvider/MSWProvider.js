@@ -1,8 +1,10 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useState, useRef, useContext } from 'react';
+import { GlobalContext } from '../../../globalState/GlobalState';
 
 const MSWContext = createContext()
 
 function MSWProvider({children}){
+    const Globalvalue = useContext(GlobalContext)
     const [data, setData] = useState([])
     const [itemTarget, setItemTarget] = useState()
     const [pageSelect, setPageSelect] = useState()
@@ -23,6 +25,9 @@ function MSWProvider({children}){
         image,
         img,
         setImg,
+        showResetBtn,
+        setShowResetBtn,
+        forceUpdate: Globalvalue.forceUpdate
 
     }
 

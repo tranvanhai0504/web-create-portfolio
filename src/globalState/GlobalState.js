@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 
@@ -121,7 +121,22 @@ function GlobalProvider({children}){
 
     //show dialog function
     const [activeDialog,setOpen]=useState(false)
-    
+    const [produces, setProduces] = useState(() => {
+        const produces = JSON.parse(localStorage.getItem('produces'))
+
+        if(produces) {
+            return produces
+        }else{
+            return []
+        }
+    })
+    const [produceSelect, setProduceSelect] = useState()
+
+    useEffect(() => {
+        localStorage.setItem('produces', JSON.stringify(produces))
+    }, [produces])
+
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);    
     const value = {
         checked,
         theme,
@@ -147,7 +162,13 @@ function GlobalProvider({children}){
         DraggingHandle,
         image,
         activeDialog,
-        setOpen
+        setOpen,
+        produces,
+        setProduces,
+        produceSelect,
+        setProduceSelect,
+        ignored,
+        forceUpdate
     }
 
     return (

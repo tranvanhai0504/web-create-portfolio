@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './tooltip.module.css'
 import clsx from 'clsx'
 
-function ElementTooltip({ content, children, position = 'top', isActive = false, element }) {
+function ElementTooltip({ className, style = {}, content, children, position = 'top', isActive = false, element }) {
 
     const [show, setShow] = useState(isActive)
 
@@ -27,7 +27,7 @@ function ElementTooltip({ content, children, position = 'top', isActive = false,
     }
 
     return (
-        <div className={styles.tooltip}>
+        <div style={style} className={clsx(styles.tooltip, className)}>
             {show && <div
                 className={clsx(styles.tooltip_content, choosePosition(position))}
             >{show && element}</div>}

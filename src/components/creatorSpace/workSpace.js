@@ -1,8 +1,5 @@
-import styles from './CreatorSpace.module.css'
-import clsx from 'clsx'
-import { useEffect, useState, useRef, useContext, useReducer } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { GlobalContext } from '../../globalState/GlobalState'
-import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import './style.css'
 import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
@@ -16,8 +13,10 @@ function WorkSpace({ listItem, page }) {
         listItem.push(item)
     }
 
-    function ProduceItems() {
-        page.current.addEventListener('click', handleEvent, true)
+    function ProduceItems(value) {
+        if (value !== null) {
+            page.current.addEventListener('click', handleEvent)
+        }
     }
 
     function makeid(length) {
@@ -36,65 +35,63 @@ function WorkSpace({ listItem, page }) {
             case 'block': {
                 const id = makeid(10)
                 item = {
+                    type: 'block',
                     id,
                     style: {
-                    borderRadius: 0,
-                    backgroundColor: 'red',
-                    border: 'unset',
-                    width: 100,
-                    height: 100,
-                    zIndex: 3,
-                    resize: 'both',
-                    overflow: 'overlay',
-                    rotate: 0},
-                    component(){return (<Block position={this.position} style={this.style} id= {this.id}/>)},
-                    position: {x: 0, y: 0}
+                        borderRadius: 0,
+                        backgroundColor: 'red',
+                        border: 'unset',
+                        width: 100,
+                        height: 100,
+                        zIndex: 3,
+                        rotate: 0,
+                        opacity: 1
+                    },
+                    position: { x: 0, y: 0 }
                 }
                 break
             }
             case 'text': {
                 const id = makeid(10)
                 item = {
+                    type: 'text',
                     id,
                     style: {
-                        fontSize: '24px',
+                        fontSize: 24,
                         color: 'green',
-                        fontWeight: '500',
+                        fontWeight: 500,
                         display: 'inline-block',
-                        border: 'solid 1px #ccc',
-                        width: '100px',
-                        height: '60px',
+                        width: 100,
+                        height: 60,
                         zIndex: 1,
-                        transform: 'rotate(0deg)'
+                        rotate: 0,
+                        opacity: 1
                     },
-                    component() { return (<Text text={this.text} position={this.position} style={this.style} id={this.id} />) },
                     position: { x: 0, y: 0 },
                     text: { text: 'hello' }
                 }
                 break
             }
             case 'imgBlock': {
-                    const id = makeid(10)
-                    const src = `${value.image.current||images}`
-                    item = {
-                        id,
-                        _this: this,
-                        style: {
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '4px',
-                            border: 'solid 1px #ccc',
-                            zIndex: 1,
-                            backgroundPosition: 'center',
-                            backgroundSize: 'cover',
-                            transform: 'rotate(0deg)',
-                            resize: 'both',
-                            overflow: 'overlay'
-                        },
-                        component(){return (<ImgBox src={src} text={this.text} position={this.position} style={this.style} id= {this.id}/>)},
-                        position: {x: 0, y: 0},
-                        source: {src: src}
-                    }
+                const id = makeid(10)
+                const src = `${value.image.current || images}`
+                item = {
+                    type: 'img',
+                    id,
+                    style: {
+                        width: 60,
+                        height: 60,
+                        borderRadius: 0,
+                        border: 'solid 1px #ccc',
+                        zIndex: 1,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        rotate: 0,
+                        opacity: 1
+                    },
+                    position: { x: 0, y: 0 },
+                    source: { src: src }
+                }
                 break
             }
             default: {
@@ -103,22 +100,38 @@ function WorkSpace({ listItem, page }) {
         }
         if (item !== '' && value.selectedBtn != null) {
             handleListItem(item)
-            page.current.removeEventListener('click', handleEvent, true)
+            page.current.removeEventListener('click', handleEvent)
             value.handleClick(null)
         }
     }
 
     useEffect(() => {
-        if (page) ProduceItems()
+        if (page || value.selectedBtn !== null) {
+            ProduceItems(value.selectedBtn)
+        }
+
+        return () => {
+            page.current?.removeEventListener('click', handleEvent)
+        }
     }, [value.selectedBtn])
 
     useEffect(() => {
         setListItemCurrent(listItem)
     }, [listItem])
 
+    useEffect(() => {
+        
+    }, [listItemCurrent])
+
     return <>
         {listItemCurrent.map(item => {
-            return item.component()
+            if (item.type === 'block') {
+                return (<Block position={item.position} style={item.style} id={item.id} />)
+            } else if (item.type === 'text') {
+                return (<Text text={item.text} position={item.position} style={item.style} id={item.id} />)
+            } else if (item.type === 'img') {
+                return (<ImgBox src={item.source.src} text={item.text} position={item.position} style={item.style} id={item.id} />)
+            }
         })}
     </>
 }

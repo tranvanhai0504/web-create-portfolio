@@ -3,6 +3,9 @@ import card from '../../assets/cardHighP.png'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { GlobalContext } from '../../globalState/GlobalState'
+import { useContext } from 'react'
+import makeid from '../../utils/makeid'
 import clsx from 'clsx'
 import { Footer } from '../../components/Footer/Footer'
 
@@ -78,6 +81,23 @@ function HomePageCard(){
 }
 function Content(){
     const { t, i18n } = useTranslation();
+    const value = useContext(GlobalContext)
+
+    function handleClick(e){
+
+        const produce = {
+            name: 'new produce',
+            id : makeid(10),
+            listPage: [{
+                name: 'mainPage',
+                id: makeid(10),
+                listItem: [],
+            }]
+        }
+        
+        value.setProduces(prev => [...prev, produce])
+        value.setProduceSelect(produce.id)
+    }
 
     return (
         <div className={Styles.Content}>
@@ -91,7 +111,7 @@ function Content(){
             </div>
             <div className={Styles.contentsec} id={Styles.section3}>
                 <p>{t('fth')}</p>
-                <NavLink to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
+                <NavLink onClick={handleClick} to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
             <Footer></Footer>
         </div>

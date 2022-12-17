@@ -10,7 +10,7 @@ function Trashcan({setIsEnterTrash}) {
     const [pacmanclasses,setpacmanclasses]=useState([Styles.pacman])
     const [pacmanm,setpacmanm]=useState([Styles.pacmanmouth])
     const [para,setpara]=useState([Styles.para])
-    const [position,setposition]=useState({x:0,y:0})
+    const [position,setposition]=useState({x:240,y:400})
     
     
     const mouseOver=(x,y)=>{
@@ -48,7 +48,7 @@ function Trashcan({setIsEnterTrash}) {
         const targetPage = value.pageSelect
 
         const newData = value.data.map(page => {
-            if(targetPage === page.name){
+            if(targetPage === page.id){
                 return {
                     ...page,
                     listItem: page.listItem.filter(item => {
