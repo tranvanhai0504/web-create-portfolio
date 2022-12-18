@@ -41,7 +41,7 @@ const blockSetting = [
             return (
                 <div className={style.blockContain}>
                     <StringTooltip position={'bottom'} content={'Element with higher stats<br/> can be on top of element with lower stats'}>
-                        <p>layer number: {dataSelect.style?.zIndex}</p>
+                        <p className={style.contain_p}>layer number: {dataSelect.style?.zIndex}</p>
                     </StringTooltip>
                     <div className={style.layerButtonContainer}>
                         <button data-act={'increase'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>increase</button>

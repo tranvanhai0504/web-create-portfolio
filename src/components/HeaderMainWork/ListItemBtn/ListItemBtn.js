@@ -8,6 +8,7 @@ import styles from './ListItemBtn.module.css'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip';
 import ElementTooltip from '../../tooltip/elementTooltip/ElementTooltip'
 import ControlBar from './controlBar/ControlBar'
+import {t, useTranslation } from 'react-i18next'
 import { TbHandStop } from "react-icons/tb";
 
 const listBtn = [
@@ -45,6 +46,36 @@ const listBtn = [
 ]
 
 function ListItemBtn() {
+    const { t, i18n } = useTranslation();
+    const listBtn = [
+        {
+            name: 'block',
+            icon: <FiSquare className={styles.hover} />,
+            description: t('blockbutton')
+        },
+        {
+            name: 'text',
+            icon: <FiType className={styles.hover} />,
+            description: t('txtbutton')
+        },
+        {
+            name: 'imgBlock',
+            icon: <FiImage className={clsx(styles.hover, 'imageBlockIcon')} />,
+            description: t('imgbutton')
+        },
+        {
+            name: 'zoom',
+            icon: <FiZoomIn className={styles.hover} />,
+            description: t('zoombutton')
+        },
+        {
+            name: 'handMove',
+            icon: <TbHandStop className={styles.hover} />,
+            description: t('handbutton')
+        },
+        
+    ]
+
     const MSWValue = useContext(MSWContext)
     const value = useContext(GlobalContext)
     function handleClickResetBtn(e){

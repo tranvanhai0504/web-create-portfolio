@@ -29,12 +29,18 @@ input[type=number] {
     --background-btn: #000;
     --text-color: #000;
     --text-color-reverse: #fff;
+    --space-text:#000;
     --mini-modal-background: grey;
+    --spacebg: rgb(239, 238, 238);
+    --spacebtn:#ccc;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
     --grey-third: #c7c7c7;
+    --exportbtn:#793AFC;
     --primary-background: #fff;
     --primary-btn-gradient: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
+    --space:#fff;
+    --spaceheader:#fff;
     --gradient-x: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
     --gradient-y: linear-gradient(90deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
          
@@ -44,10 +50,16 @@ input[type=number] {
     --primary-color: #2A0c67;
     --background-btn: #fff;
     --text-color: #fff;
+    --space-text:rgb(173, 173, 173);
+    --spacebg: rgb(239, 238, 238);
+    --spacebtn:#ccc;
     --text-color-reverse: #000;
+    --exportbtn:#372b85;
     --mini-modal-background: #005bed;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
+    --space:#fff;
+    --spaceheader:linear-gradient(to top right, #382e77, #20185a);
     --primary-background: linear-gradient(165deg, #1A134A, #140c4ec9);
     --primary-btn-gradient: linear-gradient(90.58deg, #64ddff 2.21%, rgba(105, 253, 91, 0.73) 113.64%);
     --gradient-x: linear-gradient(0, #64ddff 2.21%, rgba(105, 253, 91, 0.73) 113.64%);
