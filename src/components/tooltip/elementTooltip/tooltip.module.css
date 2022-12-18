@@ -46,3 +46,9 @@
     transform: translate(0, -50%);
     margin-right: 10px;
   }
+
+
+  .customRight.tooltip_content.right{
+    left: 100%;
+    top: -600%;
+  }

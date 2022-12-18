@@ -17,7 +17,7 @@ function HeaderMainWork() {
             </StringTooltip>
             <div className={styles.btnList}>
                 <ListItemBtn/> 
-                <ShortcutButton/>
+                {/* <ShortcutButton/> */}
                 <StringTooltip content={'export to html, css file'} position={'bottom'}>
                     <ExportButton />
                 </StringTooltip>

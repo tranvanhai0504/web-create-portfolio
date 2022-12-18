@@ -12,7 +12,6 @@ function MainScreenWork() {
     const [produce, setProduce] = useState(() => {
 
         let idProduceSelect = value.produceSelect
-        console.log('id: ', idProduceSelect)
         if (idProduceSelect === undefined) {
             idProduceSelect = value.produces[0].id
             value.setProduceSelect(idProduceSelect)

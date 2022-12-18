@@ -14,19 +14,17 @@ import clsx from "clsx";
 
 function Storage(){
     const [name, setName] = useState('New Template')
-    const [itemHover, setItemHover] = useState()
     const value  = useContext(GlobalContext)
-    
 
     const [listTemplates, setListItemTemplates] =  useState(value.produces.map((produce, index) => {
-        console.log('proid: ', produce.id)
         return (
             <NewProduct 
                 id = {produce.id}
                 key={index}
             >
                 <div className={styles.scale}><CreatorSpace 
-                    listItem={produce.listPage[0].listItem} 
+                    style={produce.listPage[0].style}
+                    listItem={produce.listPage[0]?.listItem ? produce.listPage[0]?.listItem : []}
                     id={produce.id}
                     forceUpdate={()=>{}}
                 /></div>
@@ -44,8 +42,6 @@ function Storage(){
         let [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 , scale: 0.2}))
         let bind = useDrag(({ down, movement: [mx, my] }) => {
             api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
-        }, {
-            enabled: itemHover
         })
         
         return (
@@ -66,6 +62,14 @@ function Storage(){
             listPage: [{
                 name: 'mainPage',
                 id: makeid(10),
+                style: {
+                    height: 100,
+                    width: 75,
+                    color:{
+                        type: 'solid',
+                        code: 'white'
+                    }
+                },
                 listItem: [],
             }]
         }
@@ -73,7 +77,7 @@ function Storage(){
         value.setProduces(prev => [...prev, produce])
         setListItemTemplates(prev => [...prev,( 
             <NewProduct id={produce.id}>
-                <div className={styles.scale}><CreatorSpace listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/></div>
+                <div className={styles.scale}><CreatorSpace style={produce.style} listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/></div>
             </NewProduct>)])
         console.log('edded')
     }

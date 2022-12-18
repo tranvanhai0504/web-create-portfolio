@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect  } from 'react'
 import clsx from 'clsx'
 import styles from './SideBar.module.css'
 import DetailObject from './DetailObject/DetailObject'
@@ -7,7 +7,6 @@ import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import Trashcan from './Trashcan/Trashcan'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import { useEffect } from 'react'
 
 const btns = [
     {
@@ -32,6 +31,12 @@ function SideBar() {
     function handelActiveBtn(e) {
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
+
+    useEffect (() => {
+        if(values.itemTarget){
+            setActivedBtn(btns[0].id)
+        }
+    }, [values.itemTarget])
 
     return (
         <div className={styles.sidebar}>

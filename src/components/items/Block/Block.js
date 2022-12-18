@@ -27,12 +27,14 @@ const BlockComp = styled.div.attrs((props) => {
     }
     return string
   }}
-    box-sizing: ${props => props.style.boxSizing}%;
+    box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
+    box-sizing: ${props => props.style.boxSizing};
     border-radius: ${props => props.style.borderRadius}%;
     background: ${props => props.style.color.code};
     width: ${props => props.style.width}px;
     height: ${props => props.style.height}px;
     transform: rotate(${props => props.style.rotate}deg);
+    backdrop-filter: blur(${props => props.style.blur}px);
     opacity: ${props => props.style.opacity}
   `
 

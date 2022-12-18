@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 import { useState, useContext } from 'react'
 import {GlobalContext} from '../../../globalState/GlobalState'
 import {MSWContext} from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import { FiSquare, FiType, FiImage, FiZoomIn } from "react-icons/fi";
+import { FiSquare, FiType, FiImage, FiZoomIn, FiLink2 } from "react-icons/fi";
 import styles from './ListItemBtn.module.css'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip';
 import ElementTooltip from '../../tooltip/elementTooltip/ElementTooltip'
@@ -25,6 +25,11 @@ const listBtn = [
         name: 'imgBlock',
         icon: <FiImage className={clsx(styles.hover, 'imageBlockIcon')} />,
         description: 'image'
+    },
+    {
+        name: 'link',
+        icon: <FiLink2 className={clsx(styles.hover)} />,
+        description: 'link'
     },
     {
         name: 'zoom',

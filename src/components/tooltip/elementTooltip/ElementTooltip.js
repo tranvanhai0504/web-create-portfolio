@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './tooltip.module.css'
 import clsx from 'clsx'
 
-function ElementTooltip({ className, style = {}, content, children, position = 'top', isActive = false, element }) {
+function ElementTooltip({ customPosition = false, className, style = {}, content, children, position = 'top', isActive = false, element }) {
 
     const [show, setShow] = useState(isActive)
 
     useEffect(() => {
         setShow(isActive)
     }, [isActive])
-    
 
     function choosePosition(position){
         switch(position){
@@ -29,7 +28,7 @@ function ElementTooltip({ className, style = {}, content, children, position = '
     return (
         <div style={style} className={clsx(styles.tooltip, className)}>
             {show && <div
-                className={clsx(styles.tooltip_content, choosePosition(position))}
+                className={clsx(styles.tooltip_content, choosePosition(position), customPosition && styles.customRight)}
             >{show && element}</div>}
             {children}
         </div>
