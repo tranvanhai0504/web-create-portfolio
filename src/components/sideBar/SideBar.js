@@ -6,24 +6,26 @@ import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import Trashcan from './Trashcan/Trashcan'
+import { useTranslation } from 'react-i18next'
+
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import { useEffect } from 'react'
 
-const btns = [
+function SideBar() { 
+    const { t, i18n } = useTranslation();
+    const btns = [
     {
         id: 1,
-        name: 'Detail'
+        name: t('sideworkdetail')
     },
     {
         id: 2,
-        name: 'Page'
+        name: t('sideworkpage')
     },
     {
         id: 3,
-        name: 'Templates'
+        name: t('sideworktemplate')
     }]
-
-function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
     const [isEnterTrash, setIsEnterTrash] = useState(false)

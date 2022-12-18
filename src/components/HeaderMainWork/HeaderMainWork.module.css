@@ -6,8 +6,9 @@
     padding-left: 60px;
     display: flex;
     flex-direction: row;
-    border-bottom: solid 1.2px #ccc;
+    border-bottom: solid 0.2px #ccc;
     z-index: 1;
+    background-image: var(--spaceheader);
 }
 
 .logo{
@@ -17,7 +18,7 @@
 }
 
 .logo:hover{
-    background-color: var(--grey-secondary);
+    background-color: var(--spacebtn);
 }
 
 .logoImg{
