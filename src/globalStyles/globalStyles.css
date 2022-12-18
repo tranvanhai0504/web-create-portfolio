@@ -36,6 +36,7 @@ input[type=number] {
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
     --grey-third: #c7c7c7;
+    --exportbtn:#793AFC;
     --primary-background: #fff;
     --primary-btn-gradient: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
     --space:#fff;
@@ -53,6 +54,7 @@ input[type=number] {
     --spacebg: rgb(239, 238, 238);
     --spacebtn:#ccc;
     --text-color-reverse: #000;
+    --exportbtn:#372b85;
     --mini-modal-background: #005bed;
     --liner-tail: #B722FD;
     --grey-secondary: #dadada;
