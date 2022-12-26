@@ -32,6 +32,19 @@ function OptionPage({ data }) {
             switch (func) {
                 case 'Delete': {
                     const id = e.target.getAttribute('id')
+                    if(data.data.length === 2){
+                        data.data.forEach(page => {
+                            page.listItem = page.listItem.filter(item => {
+                                return item.type !== 'button'
+                            })
+                        })
+                    }else{
+                        data.data.forEach(page => {
+                            page.listItem = page.listItem.filter(item => {
+                                return item.direct !== id
+                            })
+                        })
+                    }
 
                     data.setData(prev => {
                         return prev.filter(data => {
@@ -52,7 +65,108 @@ function OptionPage({ data }) {
                         const newData = {
                             id: makeid(10),
                             name: copyData.name + ' (copy)',
-                            listItem: copyData.listItem
+                            listItem: copyData.listItem.map(item => {
+                                return JSON.parse(JSON.stringify({...item, id: makeid(10)}))
+                            }),
+                            style: copyData.style
+                        }
+
+                        const item = {
+                            type: 'button',
+                            id: makeid(10),
+                            style: {
+                              borderRadius: 0,
+                              color: {
+                                type: 'solid',
+                                code: '#ccc'
+                              },
+                              fontColor: 'white',
+                              fontSize: 14,
+                              fontWeight: 500,
+                              fontFamily: '"Times New Roman"',
+                              textItalic: false,
+                              textUnderLine: false,
+                              textAlign: 'left',
+                              display: 'flex',
+                              justifyContent: 'flex-start',
+                              verticalAlign: 'text-bottom',
+                              boxSizing: 'content-box',
+                              border: 'unset',
+                              borderColor: 'black',
+                              borderType: '',
+                              borderSize: 1,
+                              unBorderLeft: false,
+                              unBorderRight: false,
+                              unBorderTop: false,
+                              unBorderBottom: false,
+                              width: 50,
+                              height: 20,
+                              shadow: 'none',
+                              shadowX: 5,
+                              shadowY: 5,
+                              blur: 1,
+                              shadowColor: 'black',
+                              shadowInner: false,
+                              zIndex: 3,
+                              rotate: 0,
+                              opacity: 1
+                            },
+                            position: { x: 0, y: 0 },
+                            direct: newData.id,
+                            name: newData.name
+                          }
+                        if(prev.length === 1){
+                            const item2 = {
+                                type: 'button',
+                                id: makeid(10),
+                                style: {
+                                  borderRadius: 0,
+                                  color: {
+                                    type: 'solid',
+                                    code: '#ccc'
+                                  },
+                                  fontColor: 'white',
+                                  fontSize: 14,
+                                  fontWeight: 500,
+                                  fontFamily: '"Times New Roman"',
+                                  textItalic: false,
+                                  textUnderLine: false,
+                                  textAlign: 'left',
+                                  display: 'flex',
+                                  justifyContent: 'flex-start',
+                                  verticalAlign: 'text-bottom',
+                                  boxSizing: 'content-box',
+                                  border: 'unset',
+                                  borderColor: 'black',
+                                  borderType: '',
+                                  borderSize: 1,
+                                  unBorderLeft: false,
+                                  unBorderRight: false,
+                                  unBorderTop: false,
+                                  unBorderBottom: false,
+                                  width: 50,
+                                  height: 20,
+                                  shadow: 'none',
+                                  shadowX: 5,
+                                  shadowY: 5,
+                                  blur: 1,
+                                  shadowColor: 'black',
+                                  shadowInner: false,
+                                  zIndex: 3,
+                                  rotate: 0,
+                                  opacity: 1
+                                },
+                                position: { x: 0, y: 0 },
+                                direct: prev[0].id,
+                                name: prev[0].name
+                              }
+                            prev[0].listItem.push(JSON.parse(JSON.stringify(item2)),JSON.parse(JSON.stringify( item)))
+                            newData.listItem.push(JSON.parse(JSON.stringify(item2)),JSON.parse(JSON.stringify( item)))
+                        }else{
+                            prev.forEach(page => {
+                                page.listItem.push(JSON.parse(JSON.stringify(item)))
+                            })
+                            newData.listItem.push(JSON.parse(JSON.stringify(item)))
                         }
 
                         return [...prev, newData]

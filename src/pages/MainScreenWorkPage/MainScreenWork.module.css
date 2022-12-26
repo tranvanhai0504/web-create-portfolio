@@ -1,7 +1,12 @@
 .mainSpace{
-    padding-top: 4.2%;
     height: calc(100vh - 9vh);
     width: 100%;
     display: flex;
     /* z-index: -3; */
+}
+
+.mainSpaceWorkContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }

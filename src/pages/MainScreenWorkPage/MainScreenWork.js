@@ -35,14 +35,14 @@ function MainScreenWork() {
     }, [produce, value.ignored])
 
     return (
-        <div>
-            <HeaderMainWork />
-            <div className={styles.mainSpace}>
-                <MSWProvider>
+        <div className={styles.mainSpaceWorkContainer}>
+            <MSWProvider>
+                <HeaderMainWork />
+                <div className={styles.mainSpace}>
                     <SideBar />
                     <SpaceMainWork setProduce={setProduce} listPage={produce.listPage} />
-                </MSWProvider>
-            </div>
+                </div>
+            </MSWProvider>
         </div>
     )
 }

@@ -1,0 +1,67 @@
+.pageObject {
+    padding: 13px 0 0 0;
+    font-size: 13px;
+}
+
+.blockName{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--space-text);
+}
+
+.blockOptionDetail{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 20px;
+}
+
+.blockContain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.inputData{
+    width: 100%;
+    margin-bottom: 5px;
+    cursor: default;
+    text-align: center;
+    border: solid 2px rgba(204, 204, 204, 0);
+    border-radius: 3px;
+}
+
+.inputData:hover{
+    border: solid 2px var(--primary-color);
+}
+
+.fillConfigBlock{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2px;
+    flex-wrap: wrap;
+}
+
+.numPageBlockContainer{
+    width: 44%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blockNum{
+    width:20%;
+    border: unset;
+}
+
+.blockNumBtn{
+    border: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.blockNumBtn:hover{
+    opacity: 0.8;
+}

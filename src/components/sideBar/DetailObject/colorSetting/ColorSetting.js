@@ -13,7 +13,7 @@ function ColorSetting({type = 'fill', data, handleChangeColor, hideControls, pos
         if(type === 'fill') return data.style?.color?.code
         if(type === 'border') return data.style?.borderColor
         if(type === 'shadow') return data.style?.shadowColor
-        if(type === 'page') return data.style?.color.code
+        if(type === 'colorBtn') return data.style?.fontColor
         return 'black'
     })
     const {isGradient, valueToHex} = useColorPicker(color, setColor)
@@ -24,7 +24,7 @@ function ColorSetting({type = 'fill', data, handleChangeColor, hideControls, pos
             if(type === 'fill') return data.style?.color?.code
             if(type === 'border') return data.style?.borderColor
             if(type === 'shadow') return data.style?.shadowColor
-            if(type === 'page') return data.style?.color.code
+            if(type === 'colorBtn') return data.style?.fontColor
         })
     }, [data.style])
 

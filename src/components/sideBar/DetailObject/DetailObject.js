@@ -5,6 +5,7 @@ import StringTooltip from '../../tooltip/StringTooltip/StringTooltip'
 import { FiPlus } from "react-icons/fi";
 import ColorSetting from './colorSetting/ColorSetting'
 import Menu from '../../menuCustom/Menu'
+import DetailPage from '../DetailPage/DetailPage'
 import { FiEye, FiCheck, FiBold, FiItalic, FiUnderline, FiAlignCenter, FiAlignLeft, FiAlignRight } from "react-icons/fi";
 import { MdOutlineRoundedCorner, MdOutlineRotate90DegreesCcw } from "react-icons/md";
 import { RxBorderWidth, RxAlignBottom, RxAlignCenterVertically, RxAlignTop } from "react-icons/rx";
@@ -21,12 +22,12 @@ const blockSetting = [
                     <label className={style.labelCoverInput}><p className={style.icon}>H</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.height} id="h" className={style.inputData} /></label>
                     <StringTooltip content={'rotation'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
                         <MdOutlineRotate90DegreesCcw className={style.icon} />
-                        <input autocomplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
+                        <input autoComplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
                     </StringTooltip>
-                    {dataSelect.type !== 'text' ?
+                    {dataSelect.type !== 'text' && dataSelect.type !== 'link'?
                         (<StringTooltip content={'corner radius'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
                             <MdOutlineRoundedCorner className={style.icon} />
-                            <input autocomplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
+                            <input autoComplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
                         </StringTooltip>)
                         :
                         (<div className={style.fakeInput}></div>)
@@ -66,6 +67,12 @@ const blockSetting = [
                         <p>{dataSelect.style?.color?.type}</p>
                         <ColorSetting hideControls={dataSelect.type === 'text'} data={dataSelect} handleChangeColor={handleChangeColor} />
                     </div>
+                    {dataSelect.type === 'button' && (
+                        <div className={clsx(style.inputData, style.fillConfigBlock)}>
+                            <p>Text color</p>
+                            <ColorSetting hideControls={true} type={'colorBtn'} data={dataSelect} handleChangeColor={handleChangeColor} />
+                        </div>
+                    )}
                 </div>
             )
         }
@@ -95,7 +102,7 @@ const blockSetting = [
                         <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textItalic && style.active)} data-act={'textIta'}><FiItalic /></button>
                         <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textUnderLine && style.active)} data-act={'textUnd'}><FiUnderline /></button>
                     </div>
-                    <input autocomplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.fontSize} id="fz" className={clsx(style.inputData, style.inputFontSize)} />
+                    <input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.fontSize} id="fz" className={clsx(style.inputData, style.inputFontSize)} />
                     <div className={clsx(style.btnListText, style.btnTextAlignList)}>
                         <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'center' && style.active)} data-act={'textACen'}><FiAlignCenter /></button>
                         <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'left' && style.active)} data-act={'textALef'}><FiAlignLeft /></button>
@@ -107,7 +114,7 @@ const blockSetting = [
                         <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'flex-start' && style.active)} data-act={'textATop'}><RxAlignTop /></button>
                     </div>
                     {dataSelect.type === 'link' && (
-                        <label className={clsx(style.labelCoverInput, style.coverLinkInput)}><p className={style.icon}>URL</p><input autocomplete="off" type="url" onChange={handleChange} value={dataSelect.href?.href} id="hr" className={clsx(style.inputData, style.inputLink)} /></label>
+                        <label className={clsx(style.labelCoverInput, style.coverLinkInput)}><p className={style.icon}>URL</p><input autoComplete="off" type="url" onChange={handleChange} value={dataSelect.href?.href} id="hr" className={clsx(style.inputData, style.inputLink)} /></label>
                     )}
                 </div>
             )
@@ -140,7 +147,7 @@ const blockSetting = [
                             </select>
                             <div className={style.changeBorderColor}>
                                 <p>{dataSelect.style?.borderColor}</p>
-                                <ColorSetting hideControls={true} type={'border'} data={dataSelect} handleChangeColor={handleChangeColor} />
+                                <ColorSetting hideControls={true} type={'border'} data={dataSelect} handleChangeColor={handleChangeColor} position={dataSelect.type === 'button'} />
                             </div>
                             <div className={style.sizeSettingContainer}>
                                 <label className={style.labelCoverInput}><input min="1" type="number" id="bs" onChange={handleChange} value={dataSelect.style?.borderSize} className={clsx(style.inputData, style.inputBorderSize)}></input><RxBorderWidth className={style.iconRight} /></label>
@@ -203,8 +210,8 @@ const blockSetting = [
 
                             {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' &&
                                 <div className={style.containerPositionShadow}>
-                                    <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>
-                                    <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.shadowY} id="sy" className={style.inputData} /></label>
+                                    <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>
+                                    <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowY} id="sy" className={style.inputData} /></label>
                                 </div>
                             }
                             <div className={clsx(style.containerPositionShadow, style.coverInputBlur)}>
@@ -230,7 +237,7 @@ function DetailObject({ data }) {
         const pageSelect = data.pageSelect
         const itemTarget = data.itemTarget
         let newData
-        if(itemTarget){
+        if (itemTarget) {
             newData = {
                 position: null,
                 style: null,
@@ -249,17 +256,12 @@ function DetailObject({ data }) {
                     })
                 }
             })
-        }else{
+        } else {
             newData = {
                 style: null,
             }
-            data.data.forEach(page => {
-                if (page.id === pageSelect) {
-                    newData.style = page.style
-                }
-            })
         }
-        
+
         return newData
     }
 
@@ -555,7 +557,7 @@ function DetailObject({ data }) {
                 setDataSelect(prev => {
                     newDataItem = {
                         ...prev,
-                        href: {href : value}
+                        href: { href: value }
                     }
 
                     return newDataItem
@@ -707,7 +709,6 @@ function DetailObject({ data }) {
 
         if (codeColor !== undefined) {
             let typeFill = isGradient ? 'liner' : 'solid'
-            console.log(type)
 
             switch (type) {
                 case 'fill': {
@@ -724,6 +725,9 @@ function DetailObject({ data }) {
                 case 'shadow': {
                     dataSelect.style.shadowColor = valueToHex()
                     break
+                }
+                case 'colorBtn': {
+                    dataSelect.style.fontColor = codeColor
                 }
                 default: { }
             }
@@ -845,79 +849,98 @@ function DetailObject({ data }) {
     }
 
     return (
-        <div className={style.detailObject}>
-            {data.itemTarget && blockSetting.map(block => {
-                if (dataSelect.type === 'block') {
-                    if (block.name !== 'Text') {
-                        return (
-                            <div className={style.blockOptionDetail}>
-                                <p className={style.blockName}>{block.name}</p>
-                                {block.element({
-                                    dataSelect,
-                                    handleChange,
-                                    handleClick,
-                                    handleChangeColor,
-                                    showMenu,
-                                    setShowMenu,
-                                    setBorderSide
-                                })}
-                            </div>
-                        )
+        data.itemTarget ?
+            (<div className={style.detailObject}>
+                {blockSetting.map((block, index) => {
+                    if (dataSelect.type === 'block' || dataSelect.type === 'button') {
+                        if (block.name !== 'Text' && dataSelect.type === 'block') {
+                            return (
+                                <div className={style.blockOptionDetail} key={index}>
+                                    <p className={style.blockName}>{block.name}</p>
+                                    {block.element({
+                                        dataSelect,
+                                        handleChange,
+                                        handleClick,
+                                        handleChangeColor,
+                                        showMenu,
+                                        setShowMenu,
+                                        setBorderSide
+                                    })}
+                                </div>
+                            )
+                        } else {
+                            if (dataSelect.type === 'button') {
+                                return (
+                                    <div className={style.blockOptionDetail} key={index}>
+                                        <p className={style.blockName}>{block.name}</p>
+                                        {block.element({
+                                            dataSelect,
+                                            handleChange,
+                                            handleClick,
+                                            handleChangeColor,
+                                            showMenu,
+                                            setShowMenu,
+                                            setBorderSide
+                                        })}
+                                    </div>
+                                )
+                            }
+                        }
+                    } else if (dataSelect.type === 'text') {
+                        if (block.name !== 'Border') {
+                            return (
+                                <div className={style.blockOptionDetail} key={index}>
+                                    <p className={style.blockName}>{block.name}</p>
+                                    {block.element({
+                                        dataSelect,
+                                        handleChange,
+                                        handleClick,
+                                        handleChangeColor,
+                                        showMenu,
+                                        setShowMenu,
+                                        setBorderSide
+                                    })}
+                                </div>
+                            )
+                        }
+                    } else if (dataSelect.type === 'img') {
+                        if (block.name !== 'Fill' && block.name !== 'Text') {
+                            return (
+                                <div className={style.blockOptionDetail} key={index}>
+                                    <p className={style.blockName}>{block.name}</p>
+                                    {block.element({
+                                        dataSelect,
+                                        handleChange,
+                                        handleClick,
+                                        handleChangeColor,
+                                        showMenu,
+                                        setShowMenu,
+                                        setBorderSide
+                                    })}
+                                </div>
+                            )
+                        }
+                    } else if (dataSelect.type === 'link') {
+                        if (block.name !== 'Border') {
+                            return (
+                                <div className={style.blockOptionDetail} key={index}>
+                                    <p className={style.blockName}>{block.name}</p>
+                                    {block.element({
+                                        dataSelect,
+                                        handleChange,
+                                        handleClick,
+                                        handleChangeColor,
+                                        showMenu,
+                                        setShowMenu,
+                                        setBorderSide
+                                    })}
+                                </div>
+                            )
+                        }
                     }
-                } else if (dataSelect.type === 'text') {
-                    if (block.name !== 'Border') {
-                        return (
-                            <div className={style.blockOptionDetail}>
-                                <p className={style.blockName}>{block.name}</p>
-                                {block.element({
-                                    dataSelect,
-                                    handleChange,
-                                    handleClick,
-                                    handleChangeColor,
-                                    showMenu,
-                                    setShowMenu,
-                                    setBorderSide
-                                })}
-                            </div>
-                        )
-                    }
-                } else if (dataSelect.type === 'img') {
-                    if (block.name !== 'Fill' && block.name !== 'Text') {
-                        return (
-                            <div className={style.blockOptionDetail}>
-                                <p className={style.blockName}>{block.name}</p>
-                                {block.element({
-                                    dataSelect,
-                                    handleChange,
-                                    handleClick,
-                                    handleChangeColor,
-                                    showMenu,
-                                    setShowMenu,
-                                    setBorderSide
-                                })}
-                            </div>
-                        )
-                    }
-                } else if (dataSelect.type === 'link') {
-                    if (block.name !== 'Border') {
-                        return (
-                            <div className={style.blockOptionDetail}>
-                                <p className={style.blockName}>{block.name}</p>
-                                {block.element({
-                                    dataSelect,
-                                    handleChange,
-                                    handleClick,
-                                    handleChangeColor,
-                                    showMenu,
-                                    setShowMenu,
-                                    setBorderSide
-                                })}
-                            </div>
-                        )
-                    }
-                }
-            })}
-        </div>
+                })}
+            </div>) :
+            (<DetailPage data={data} />)
     )
 }
 

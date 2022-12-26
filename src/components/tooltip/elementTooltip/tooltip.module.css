@@ -25,9 +25,8 @@
 
 /* POSITION RIGHT */
 .tooltip_content.right {
-    left: 100%;
-    top: 50%;
-    transform: translate(0, -50%);
+    position: fixed !important;
+    transform: translate(8%, -50%);
     margin-left: 10px;
   }
   
@@ -43,12 +42,12 @@
   .tooltip_content.left {
     right: 100%;
     top: 50%;
-    transform: translate(0, -50%);
+    transform: translate(0, -65%);
     margin-right: 10px;
   }
 
 
   .customRight.tooltip_content.right{
-    left: 100%;
-    top: -600%;
+    position: fixed !important;
+    bottom: -77px;
   }
