@@ -2,7 +2,7 @@
     width: 100%;
     position: relative;
     overflow-y: scroll;
-    background-color: #ccc;
+    background-color: var(--grey-secondary);
     z-index: 0;
     box-shadow: 0px 0px 7px #ccc inset;
     padding: 40px 0;

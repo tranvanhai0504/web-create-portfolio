@@ -7,7 +7,6 @@ import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import Trashcan from './Trashcan/Trashcan'
 import { useTranslation } from 'react-i18next'
-
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 function SideBar() { 
