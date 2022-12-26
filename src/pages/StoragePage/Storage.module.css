@@ -44,19 +44,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 68px;
-    height: 100px;
+    width: 100px;
+    height: 68px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 3px 3px 6px rgb(0 0 0 / 20%);
     border-radius: 10px;
     font-size: 24px;
     cursor: pointer;
+    margin-bottom: 22px;
+    margin-left: 12px;
 }
 
 .template {
-    height: 200px;
-    width: 140px;
+    height: 140px;
+    width: 200px;
     background-color: #ffffff6d;
     box-shadow: 3px 3px 6px rgb(0 0 0 / 20%);
     border-radius: 10px;
@@ -103,9 +105,13 @@
 }
 
 .scale {
-    transform: scale(0.12);
-    margin-right: 12px;
-    margin-bottom: 88px;
+    transform: scale(0.18);
+    margin-right: 3px;
+    margin-bottom: 0px;
+}
+
+.templateName {
+    color: var(--text-color);
 }
 
  @-webkit-keyframes scale-up-center {

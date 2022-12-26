@@ -26,7 +26,7 @@ function Storage(){
                 key={index}
             >
                 <div className={styles.scale}><CreatorSpace 
-                    listItem={produce.listPage[0].listItem} 
+                    listItem={produce.listPage[0]?.listItem ? produce.listPage[0]?.listItem: []} 
                     id={produce.id}
                     forceUpdate={()=>{}}
                 /></div>
@@ -54,7 +54,7 @@ function Storage(){
                     <NavLink onClick={handleClick} data-id={id} to="/work" className={styles.editMessage}>Edit</NavLink>
                     {children}
                 </div>
-                <span onInput={e=> {setName(e.target.textContent)}} contentEditable={true}>{name}</span>
+                <span className={styles.templateName} onInput={e=> {setName(e.target.textContent)}} contentEditable={true}>{name}</span>
             </animated.div>
         )
     }

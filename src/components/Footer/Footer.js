@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/iconFinal.png'
+import style from './Footer.module.css'
 
 export const Footer = () => {
     return (
@@ -13,7 +14,7 @@ export const Footer = () => {
                 fontWeight: "bold",
             }}>
                 <img style={{paddingRight:"2.5%"}} src={logo} alt="ICON Academic Club" width="110" height="65" /> 
-                <span >W4U</span>
+                <span className={style.teamName}>W4U</span>
             </div>
         </footer>   
     );
