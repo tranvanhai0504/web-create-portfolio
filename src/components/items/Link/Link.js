@@ -4,11 +4,13 @@ import clsx from 'clsx'
 import styled from 'styled-components'
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
-const TextComp = styled.p.attrs((props) => ({
+const Linkcomp = styled.a.attrs((props) => ({
   disabled: props.disabled,
   onChange: props.onChange,
   ref: props.ref,
   onClick: props.onClick,
+  href: props.href.href,
+  target: "_blank"
 }))`
   border: solid 2px rgb(42, 42, 255, 0);
   background-color: rgb(42, 42, 255, 0);
@@ -19,6 +21,7 @@ const TextComp = styled.p.attrs((props) => ({
   width: ${props => props.style.width};
   height: ${props => props.style.height};
   display: ${props => props.style.display};
+  pointer-events: ${props => props.isPrevent};
   flex-direction: column;
   ${props => {
     let string = ''
@@ -38,6 +41,7 @@ const TextComp = styled.p.attrs((props) => ({
   text-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
   overflow: hidden;
   word-wrap: break-word;
+  cursor: pointer;
 
   .targetText & {
     border: solid 2px rgb(42, 42, 255)
@@ -48,7 +52,7 @@ const TextComp = styled.p.attrs((props) => ({
   }
 `
 
-function Text({ style, id, position, text }) {
+function Link({ style, id, position, text, href }) {
 
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
@@ -111,10 +115,10 @@ function Text({ style, id, position, text }) {
 
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id) || canEditable} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
       <div className={clsx(nowTarget === id && 'targetText')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content',  zIndex: style.zIndex }}>
-        <TextComp contentEditable={canEditable} disabled={!canEditable} style={style} ref={textInput} onKeyUp={(e) => contentHandle(e)} ></TextComp>
+        <Linkcomp href={href} isPrevent={canEditable ? 'auto' : 'none'} contentEditable={canEditable} disabled={!canEditable} style={style} ref={textInput} onKeyUp={(e) => contentHandle(e)} ></Linkcomp>
       </div>
     </Draggable>
   )
 }
 
-export default Text
+export default Link

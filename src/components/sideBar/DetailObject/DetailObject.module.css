@@ -1,11 +1,15 @@
 .detailObject {
-    padding: 20px 0;
-    font-size: 14px;
+    padding: 13px 0 0 0;
+    font-size: 13px;
 }
+p{
+    color: var(--space-text);
 
+}
 .blockName{
     font-weight: bold;
     margin-bottom: 5px;
+    color: var(--space-text);
 }
 
 .blockOptionDetail{
@@ -72,7 +76,7 @@
     width: 70%;
     display: flex;
     justify-content:space-around;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .btnSettingLayer{
@@ -111,7 +115,6 @@
     justify-content: space-between;
     padding: 2px;
     flex-wrap: wrap;
-    margin-bottom: 10px;
 }
 
 .inputData.fillConfigBlock:hover{
@@ -158,4 +161,86 @@
     text-align: left;
     margin: unset;
     padding-left: 12px;
+}
+
+.btn{
+    background-color: unset;
+    border: solid 2px rgba(204, 204, 204, 0);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 2px;
+}
+
+.btn.active{
+    background-color: #ccc;
+}
+
+.btn:hover{
+    border: solid 2px var(--primary-color);
+}
+
+.btnListText{
+    border-right: 2px solid #000;
+    padding-right: 8px;
+    display: flex;
+}
+
+.offBorder.btnListText{
+    border-right: unset;
+}
+
+.inputData.inputFontSize{
+    margin: unset;
+    position: relative;
+    width: 40%;
+}
+
+.btnTextAlignList{
+    margin-top: 10px;
+}
+
+.containerPositionShadow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.coverInputBlur.containerPositionShadow{
+    padding-left: 12px;
+    justify-content: flex-start;
+}
+
+.coverInputBlur .icon{
+    font-size:10px;
+    top: 6px
+}
+
+.changeShadowColor.changeBorderColor{
+    height: 17px;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.colorShadow{
+    width: 75%;
+    text-align: center;
+}
+
+.inputLink{
+    box-sizing: border-box;
+    margin-top: 10px;
+    padding-left: 50px;
+}
+
+.coverLinkInput.labelCoverInput{
+    width: 100%;
+}
+
+.coverLinkInput .icon{
+    top: 13px;
+    left: 17px;
 }

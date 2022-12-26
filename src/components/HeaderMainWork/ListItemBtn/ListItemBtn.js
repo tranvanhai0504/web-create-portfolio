@@ -3,11 +3,12 @@ import { clsx } from 'clsx'
 import { useState, useContext } from 'react'
 import {GlobalContext} from '../../../globalState/GlobalState'
 import {MSWContext} from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import { FiSquare, FiType, FiImage, FiZoomIn } from "react-icons/fi";
+import { FiSquare, FiType, FiImage, FiZoomIn, FiLink2 } from "react-icons/fi";
 import styles from './ListItemBtn.module.css'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip';
 import ElementTooltip from '../../tooltip/elementTooltip/ElementTooltip'
 import ControlBar from './controlBar/ControlBar'
+import {t, useTranslation } from 'react-i18next'
 import { TbHandStop } from "react-icons/tb";
 
 const listBtn = [
@@ -27,6 +28,11 @@ const listBtn = [
         description: 'image'
     },
     {
+        name: 'link',
+        icon: <FiLink2 className={clsx(styles.hover)} />,
+        description: 'link'
+    },
+    {
         name: 'zoom',
         icon: <FiZoomIn className={styles.hover} />,
         description: 'zoom in/out'
@@ -40,6 +46,36 @@ const listBtn = [
 ]
 
 function ListItemBtn() {
+    const { t, i18n } = useTranslation();
+    const listBtn = [
+        {
+            name: 'block',
+            icon: <FiSquare className={styles.hover} />,
+            description: t('blockbutton')
+        },
+        {
+            name: 'text',
+            icon: <FiType className={styles.hover} />,
+            description: t('txtbutton')
+        },
+        {
+            name: 'imgBlock',
+            icon: <FiImage className={clsx(styles.hover, 'imageBlockIcon')} />,
+            description: t('imgbutton')
+        },
+        {
+            name: 'zoom',
+            icon: <FiZoomIn className={styles.hover} />,
+            description: t('zoombutton')
+        },
+        {
+            name: 'handMove',
+            icon: <TbHandStop className={styles.hover} />,
+            description: t('handbutton')
+        },
+        
+    ]
+
     const MSWValue = useContext(MSWContext)
     const value = useContext(GlobalContext)
     function handleClickResetBtn(e){

@@ -1,29 +1,30 @@
 import { memo } from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect  } from 'react'
 import clsx from 'clsx'
 import styles from './SideBar.module.css'
 import DetailObject from './DetailObject/DetailObject'
 import OptionPage from './OptionPage/OptionPage'
 import TemplateOption from './TempalesOption/TemplateOption'
 import Trashcan from './Trashcan/Trashcan'
-import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
-const btns = [
+import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
+
+function SideBar() { 
+    const { t, i18n } = useTranslation();
+    const btns = [
     {
         id: 1,
-        name: 'Detail'
+        name: t('sideworkdetail')
     },
     {
         id: 2,
-        name: 'Page'
+        name: t('sideworkpage')
     },
     {
         id: 3,
-        name: 'Templates'
+        name: t('sideworktemplate')
     }]
-
-function SideBar() {
 
     const [activedBtn, setActivedBtn] = useState(btns[0].id)
     const [isEnterTrash, setIsEnterTrash] = useState(false)
@@ -32,6 +33,12 @@ function SideBar() {
     function handelActiveBtn(e) {
         setActivedBtn(Number(e.target.getAttribute('data-id')))
     }
+
+    useEffect (() => {
+        if(values.itemTarget){
+            setActivedBtn(btns[0].id)
+        }
+    }, [values.itemTarget])
 
     return (
         <div className={styles.sidebar}>

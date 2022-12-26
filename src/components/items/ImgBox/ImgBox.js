@@ -8,13 +8,31 @@ import styled from 'styled-components'
 const ImgComp = styled.div.attrs(props => {
 
 })`
+  border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize}px ${props.style.borderColor} !important` }};
+  ${props => {
+    let string = ''
+    if (props.style.unBorderLeft) {
+      string += 'border-left: unset !important;'
+    }
+    if (props.style.unBorderRight) {
+      string += 'border-right: unset !important;'
+    }
+    if (props.style.unBorderTop) {
+      string += 'border-top: unset !important;'
+    }
+    if (props.style.unBorderBottom) {
+      string += 'border-bottom: unset !important;'
+    }
+    return string
+  }}
+  box-sizing: ${props => props.style.boxSizing};
+  box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
   width: ${props => props.style.width};
   height: ${props => props.style.height};
   border-radius: ${props => props.style.borderRadius};
   border: ${props => props.style.border};
   background-position: ${props => props.style.backgroundPosition};
   background-size: ${props => props.style.backgroundSize};
-  background-image: ${props => props.style.backgroundImage};
   transform: ${props => props.style.transform};
   background-image: url(${props => props.src});
   transform: rotate(${props => props.style.rotate}deg);
@@ -59,9 +77,9 @@ function ImgBox({ style, id, position, src }) {
     setNowTarget(id)
   }
 
-  return (<Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} style={{ height: 'fit-content' }} onDrag={(e, data) => PositionHandle(data)}>
+  return (<Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
     <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', zIndex: style.zIndex, height: 'fit-content' }}>
-      <ImgComp  style={style} src={src} />
+      <ImgComp style={style} src={src} />
     </div>
   </Draggable>
   )

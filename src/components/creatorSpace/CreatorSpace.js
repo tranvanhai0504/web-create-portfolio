@@ -11,7 +11,7 @@ const useGesture = createUseGesture([dragAction])
 
 function CreatorSpace({ listItem, id, forceUpdate }) {
   const value = useContext(GlobalContext)
-  console.log(value.produceSelect)
+
   const valueData = useContext(MSWContext)
   const page = useRef()
 

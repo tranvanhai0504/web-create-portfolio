@@ -60,8 +60,6 @@ function Trashcan({setIsEnterTrash}) {
         })
 
         value.setData(newData)
-        console.log('trash end')
-
         value.setItemTarget(null)
         value.setIsDragging(false)
     }

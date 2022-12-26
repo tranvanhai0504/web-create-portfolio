@@ -13,18 +13,26 @@ function AddPageBtn({ data, errorMess }) {
   }
 
   function handleBlur(e) {
-    
-      if (e.target.value !== '') {
-        const page = {
-          id: makeid(10),
-          name: e.target.value,
-          listItem: [],
-        }
 
-        data.setData(prev => [...prev, page])
+    if (e.target.value !== '') {
+      const page = {
+        id: makeid(10),
+        name: e.target.value,
+        listItem: [],
+        style: {
+          height: 100,
+          width: 75,
+          color: {
+            type: 'solid',
+            code: 'white'
+          }
+        },
       }
 
-      setIsAddingPage(false)
+      data.setData(prev => [...prev, page])
+    }
+
+    setIsAddingPage(false)
 
   }
 

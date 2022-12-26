@@ -4,6 +4,7 @@ import './style.css'
 import Block from '../items/Block/Block'
 import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
+import Link from '../items/Link/Link'
 import images from '../../assets/defaultAvatar.png'
 function WorkSpace({ listItem, page }) {
     const value = useContext(GlobalContext)
@@ -45,7 +46,7 @@ function WorkSpace({ listItem, page }) {
                         },
                         boxSizing: 'content-box',
                         border: 'unset',
-                        borderColor: '',
+                        borderColor: 'black',
                         borderType: '',
                         borderSize: 1,
                         unBorderLeft: false,
@@ -54,6 +55,12 @@ function WorkSpace({ listItem, page }) {
                         unBorderBottom: false,
                         width: 100,
                         height: 100,
+                        shadow: 'none',
+                        shadowX: 5,
+                        shadowY: 5,
+                        blur: 1,
+                        shadowColor: 'black',
+                        shadowInner: false,
                         zIndex: 3,
                         rotate: 0,
                         opacity: 1
@@ -69,17 +76,30 @@ function WorkSpace({ listItem, page }) {
                     id,
                     style: {
                         fontSize: 24,
-                        color: 'green',
+                        color: {
+                            code: 'green'
+                        },
                         fontWeight: 500,
-                        display: 'inline-block',
+                        fontFamily: '"Times New Roman"',
+                        textItalic: false,
+                        textUnderLine: false,
+                        textAlign: 'left',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        verticalAlign: 'text-bottom',
                         width: 100,
+                        shadow: 'none',
+                        shadowX: 5,
+                        shadowY: 5,
+                        blur: 1,
+                        shadowColor: 'black',
                         height: 60,
                         zIndex: 1,
                         rotate: 0,
                         opacity: 1
                     },
                     position: { x: 0, y: 0 },
-                    text: { text: 'hello' }
+                    text: { text: 'text' }
                 }
                 break
             }
@@ -95,6 +115,20 @@ function WorkSpace({ listItem, page }) {
                         borderRadius: 0,
                         border: 'solid 1px #ccc',
                         zIndex: 1,
+                        boxSizing: 'content-box',
+                        border: 'unset',
+                        borderColor: 'black',
+                        borderType: '',
+                        borderSize: 1,
+                        unBorderLeft: false,
+                        unBorderRight: false,
+                        unBorderTop: false,
+                        unBorderBottom: false,
+                        shadow: 'none',
+                        shadowX: 5,
+                        shadowY: 5,
+                        blur: 1,
+                        shadowColor: 'black',
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         rotate: 0,
@@ -102,6 +136,41 @@ function WorkSpace({ listItem, page }) {
                     },
                     position: { x: 0, y: 0 },
                     source: { src: src }
+                }
+                break
+            }
+            case 'link': {
+                const id = makeid(10)
+                item = {
+                    type: 'link',
+                    id,
+                    style: {
+                        fontSize: 24,
+                        color: {
+                            code: 'blue'
+                        },
+                        fontWeight: 500,
+                        fontFamily: '"Times New Roman"',
+                        textItalic: true,
+                        textUnderLine: true,
+                        textAlign: 'left',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        verticalAlign: 'text-bottom',
+                        width: 100,
+                        shadow: 'none',
+                        shadowX: 5,
+                        shadowY: 5,
+                        blur: 1,
+                        shadowColor: 'black',
+                        height: 60,
+                        zIndex: 1,
+                        rotate: 0,
+                        opacity: 1
+                    },
+                    position: { x: 0, y: 0 },
+                    text: { text: 'link' },
+                    href: {href: 'google.com'}
                 }
                 break
             }
@@ -141,7 +210,9 @@ function WorkSpace({ listItem, page }) {
             } else if (item.type === 'text') {
                 return (<Text text={item.text} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'img') {
-                return (<ImgBox src={item.source.src} text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<ImgBox src={item.source.src} position={item.position} style={item.style} id={item.id} />)
+            }else if (item.type === 'link') {
+                return (<Link href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
             }
         })}
     </>

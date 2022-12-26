@@ -5,13 +5,15 @@ import ColorPicker, { useColorPicker } from 'react-best-gradient-color-picker'
 import ElementTooltip from '../../../tooltip/elementTooltip/ElementTooltip'
 import style from './ColorSetting.module.css'
 
-function ColorSetting({type = 'fill', data, handleChangeColor }) {
+function ColorSetting({type = 'fill', data, handleChangeColor, hideControls, position = null }) {
 
     const [tooltipActive, setToolTipActive] = useState(false)
     const [isEnterMouse, setIsEnterMouse] = useState(false)
     const [color, setColor] = useState(() => {
-        if(type === 'fill') return data.style?.color.code
+        if(type === 'fill') return data.style?.color?.code
         if(type === 'border') return data.style?.borderColor
+        if(type === 'shadow') return data.style?.shadowColor
+        if(type === 'page') return data.style?.color.code
         return 'black'
     })
     const {isGradient, valueToHex} = useColorPicker(color, setColor)
@@ -19,8 +21,10 @@ function ColorSetting({type = 'fill', data, handleChangeColor }) {
 
     useEffect(() => {
         setColor(() => {
-            if(type === 'fill') return data.style?.color.code
+            if(type === 'fill') return data.style?.color?.code
             if(type === 'border') return data.style?.borderColor
+            if(type === 'shadow') return data.style?.shadowColor
+            if(type === 'page') return data.style?.color.code
         })
     }, [data.style])
 
@@ -45,7 +49,7 @@ function ColorSetting({type = 'fill', data, handleChangeColor }) {
     }, [isEnterMouse])
 
     return (
-        <ElementTooltip isActive={tooltipActive} position={'right'} element={
+        <ElementTooltip customPosition={position} isActive={tooltipActive} position={'right'} element={
             <div
                 onMouseEnter={() => {setIsEnterMouse(true)}}
                 onMouseLeave={() => {setIsEnterMouse(false)}}
@@ -56,6 +60,7 @@ function ColorSetting({type = 'fill', data, handleChangeColor }) {
                     value={color}
                     hidePresets={true}
                     hideColorGuide={true}
+                    hideControls={hideControls}
                     onChange={setColor}
                 />
             </div>
