@@ -6,6 +6,8 @@ import Text from '../items/Text/Text'
 import ImgBox from '../items/ImgBox/ImgBox'
 import Link from '../items/Link/Link'
 import images from '../../assets/defaultAvatar.png'
+import Button from '../items/Button/Button'
+
 function WorkSpace({ listItem, page }) {
     const value = useContext(GlobalContext)
     const [listItemCurrent, setListItemCurrent] = useState(listItem)
@@ -199,20 +201,18 @@ function WorkSpace({ listItem, page }) {
         setListItemCurrent(listItem)
     }, [listItem])
 
-    useEffect(() => {
-        
-    }, [listItemCurrent])
-
     return <>
         {listItemCurrent.map(item => {
             if (item.type === 'block') {
-                return (<Block position={item.position} style={item.style} id={item.id} />)
+                return (<Block key={item.id} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'text') {
-                return (<Text text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<Text key={item.id} text={item.text} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'img') {
-                return (<ImgBox src={item.source.src} position={item.position} style={item.style} id={item.id} />)
+                return (<ImgBox key={item.id} src={item.source.src} position={item.position} style={item.style} id={item.id} />)
             }else if (item.type === 'link') {
-                return (<Link href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<Link key={item.id} href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
+            }else if(item.type === 'button'){
+                return (<Button key={item.id} position={item.position} style={item.style} id={item.id} name={item.name}/>)
             }
         })}
     </>

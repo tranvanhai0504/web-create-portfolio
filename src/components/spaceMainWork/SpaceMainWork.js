@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useContext, memo } from 'react'
 import styles from './SpaceMainWork.module.css'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
-import {GlobalContext} from '../../globalState/GlobalState'
+import { GlobalContext } from '../../globalState/GlobalState'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
 function SpaceMainWork({ setProduce, listPage }) {
@@ -26,13 +26,19 @@ function SpaceMainWork({ setProduce, listPage }) {
 
     const space = useRef()
 
+    function handleClickSpace(e) {
+        if (e.target === space.current) {
+            dataValue.setItemTarget(null)
+        }
+    }
+
     //zoom
     let zoom = useRef(value.zoom);
     const ZOOM_SPEED = value.ZOOM_SPEED;
-    zoom.current =  value.zoom
+    zoom.current = value.zoom
 
     useEffect(() => {
-        if(space.current.children[0])
+        if (space.current.children[0])
             space.current.children[0].style.transform = `scale(${zoom.current})`
     }, [zoom.current])
 
@@ -68,10 +74,11 @@ function SpaceMainWork({ setProduce, listPage }) {
         <div
             ref={space}
             className={styles.spaceMainWork}
+            onClick={handleClickSpace}
         >
-            {pages.map( (page, index) => {
-                return(
-                    dataValue.pageSelect === page.id && <CreatorSpace setPages={setPages} id={page.id} listItem={page.listItem} key={index}/>
+            {pages.map((page, index) => {
+                return (
+                    dataValue.pageSelect === page.id && <CreatorSpace style={page.style} id={page.id} listItem={page.listItem} key={page.id} />
                 )
             })}
             {dataValue.showResetBtn && <button onClick={(e) => dataValue.setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}
