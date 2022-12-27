@@ -54,7 +54,7 @@ const blockSetting = [
                         <StringTooltip style={{ marginTop: '7px', marginRight: '7px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} position={'bottom'} content={'Opacity'}>
                             <FiEye />
                         </StringTooltip>
-                        <input autocomplete="off" id="o" onChange={handleChange} value={Math.round(dataSelect.style?.opacity * 100)} className={style.btnSettingOpacity} type="number" min="0" max="100" size="5"></input>
+                        <input autoComplete="off" id="o" onChange={handleChange} value={Math.round(dataSelect.style?.opacity * 100)} className={style.btnSettingOpacity} type="number" min="0" max="100" size="5"></input>
                     </div>
                 </div>
             )

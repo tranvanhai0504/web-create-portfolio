@@ -92,13 +92,13 @@ function Content() {
                 id: makeid(10),
                 style: {
                     height: 1,
+                    width: 1,
                     color: {
                         type: 'solid',
                         code: '#fff'
                     }
                 },
                 listItem: [],
-                listBtn: []
             }]
         }
 
