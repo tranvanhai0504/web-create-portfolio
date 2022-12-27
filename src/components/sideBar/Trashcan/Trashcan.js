@@ -3,9 +3,10 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { useContext } from 'react'
 import { useState } from 'react';
 import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
 import ImgBox from '../../items/ImgBox/ImgBox';
 function Trashcan({setIsEnterTrash}) {
-
+    const { t, i18n } = useTranslation();
     const value = useContext(MSWContext)
     const [pacmanclasses,setpacmanclasses]=useState([Styles.pacman])
     const [pacmanm,setpacmanm]=useState([Styles.pacmanmouth])
@@ -66,7 +67,7 @@ function Trashcan({setIsEnterTrash}) {
 
     return (
             <div className={Styles.Trashcan} onMouseEnter={(e) => {setIsEnterTrash(true);mouseOver(e.clientX,e.clientY)}} onMouseLeave={(e) => {setIsEnterTrash(false);mouseOff()}} onMouseUp={handleMouseUp}>
-                 <p className={clsx(para)}>Drag here to <br></br>delete</p>
+                 <p className={clsx(para)}>{t('Drag here to')}</p>
                  <div className={clsx(pacmanclasses)} style={{transform: `translate(${position.x-230}px,${position.y-400}px)`,transitionDuration:'500ms'}}>
                     <div className={Styles.pacman_eye}></div>
                     <div className={clsx(pacmanm)}></div>

@@ -29,7 +29,9 @@ const resources = {
       "zoombutton":"zoom-in/zoom-out",
       "handbutton":"hand tool",
       "homebtn":"return to home",
-      "exportbtn":"export file"
+      "exportbtn":"export file",
+      "exportbtntooltip":"export to html, css file",
+      "Drag here to":"Drag here to \n delete",
 
 
 
@@ -60,7 +62,9 @@ const resources = {
       "zoombutton":"phóng to/thu nhỏ",
       "handbutton":"di chuyển",
       "homebtn":"Trở về màn hình chính",
-      "exportbtn":"xuất ra file"
+      "exportbtn":"Xuất ra file",
+      "exportbtntooltip":"Xuất ra file html,css",
+      "Drag here to":"Thả vào đây để xóa",
 
 
     }

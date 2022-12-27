@@ -5,10 +5,12 @@ import StringTooltip from '../../tooltip/StringTooltip/StringTooltip'
 import { FiPlus } from "react-icons/fi";
 import ColorSetting from './colorSetting/ColorSetting'
 import Menu from '../../menuCustom/Menu'
+import { useTranslation } from 'react-i18next'
 import DetailPage from '../DetailPage/DetailPage'
 import { FiEye, FiCheck, FiBold, FiItalic, FiUnderline, FiAlignCenter, FiAlignLeft, FiAlignRight } from "react-icons/fi";
 import { MdOutlineRoundedCorner, MdOutlineRotate90DegreesCcw } from "react-icons/md";
 import { RxBorderWidth, RxAlignBottom, RxAlignCenterVertically, RxAlignTop } from "react-icons/rx";
+
 
 const blockSetting = [
     {

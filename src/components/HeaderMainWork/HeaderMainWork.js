@@ -21,7 +21,7 @@ function HeaderMainWork() {
             <div className={styles.btnList}>
                 <ListItemBtn/> 
                 {/* <ShortcutButton/> */}
-                <StringTooltip content={'export to html, css file'} position={'bottom'}>
+                <StringTooltip content={t('exportbtntooltip')} position={'bottom'}>
                     <ExportButton />
                 </StringTooltip>
             </div>

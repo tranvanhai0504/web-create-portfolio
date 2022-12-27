@@ -4,8 +4,12 @@ import ReactDOM from 'react-dom/client';
 import { useContext } from 'react';
 import { MSWContext } from '../../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider';
 import CreatorSpace from '../../../creatorSpace/CreatorSpace';
+import { useTranslation } from 'react-i18next'
+
 
 function ExportButton() {
+    const { t, i18n } = useTranslation();
+
     const data = useContext(MSWContext)
 
     function makeDocument() {
@@ -55,7 +59,7 @@ function ExportButton() {
     }
 
     return (
-        <button onClick={makeDocument} className={clsx(styles.exportButton)}>Export File</button>
+        <button onClick={makeDocument} className={clsx(styles.exportButton)}>{t('exportbtn')}</button>
     )
 }
 
