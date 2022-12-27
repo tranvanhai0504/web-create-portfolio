@@ -1,57 +1,55 @@
 import styles from './ExportButton.module.css'
 import clsx from 'clsx'
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
+import ReactDOMServer from 'react-dom/server'
 import { useContext } from 'react';
 import { MSWContext } from '../../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider';
+import { GlobalContext } from '../../../../globalState/GlobalState';
 import CreatorSpace from '../../../creatorSpace/CreatorSpace';
 
 function ExportButton() {
     const data = useContext(MSWContext)
+    const value = useContext(GlobalContext)
 
     function makeDocument() {
-        // console.log(page.current.outerHTML)
 
-        // const pageStrings = data.data.map(page => {
-        //     return ReactDOMServer.renderToStaticMarkup()
-        // })
+        var zip = new JSZip();
 
-        // console.log(<CreatorSpace style={data.data[0].style} id={data.data[0].id} listItem={data.data[0].listItem} render={true}></CreatorSpace>)
+        data.data.forEach((page, index) => {
+            page.listItem.forEach(item => {
+                if(item.type === 'button' && item.direct === data.data[0].id){
+                    item.direct = 'index'
+                }
+            })
 
-        // const listDoc = pageString.map(page => {
+            let doc = document.implementation.createHTMLDocument("New Document");
+            const content = ReactDOMServer.renderToString(<CreatorSpace style={page.style} id={page.id} listItem={page.listItem} render={true}></CreatorSpace>)
+            const styleTags = document.querySelectorAll('style')
+            styleTags.forEach(tag => {
+                doc.head.appendChild(tag.cloneNode(true))
+            })
+            var newContent = content.replace(/&quot;/g, '')
+            console.log(newContent)
+            doc.body.innerHTML = newContent
 
-        // })
+            //now get it's contents and place into a blob
+            const blob = new Blob([doc.documentElement.innerHTML], {
+                type: 'text/html'
+            });
+            if(index === 0){
+                zip.file('index.html', blob)
+            }else{
+                zip.file(`${page.id}.html`, blob)
+            }
+        })
 
-        
-        let doc = document.implementation.createHTMLDocument("New Document");
-        const root = ReactDOM.createRoot(doc.body)
-        root.render(<CreatorSpace style={data.data[0].style} id={data.data[0].id} listItem={data.data[0].listItem} render={true}></CreatorSpace>)
-        console.log(doc)
-        // let p = doc.createElement("p");
-        // p.textContent = "This is a new paragraph.";
-
-        // try {
-        //     doc.body.appendChild(p);
-        //     console.log(doc)
-        // } catch (e) {
-        //     console.log(e);
-        // }
-
-        // //now get it's contents and place into a blob
-        // const blob = new Blob([doc.documentElement.innerHTML], {
-        //     type: 'text/html'
-        // });
-
-        // //now convert to url
-        // const docUrl = window.URL.createObjectURL(blob);
-
-        // //were done, lets create a href to this and download
-        // const aclick = document.createElement('a');
-        // aclick.href = docUrl;
-        // aclick.download = 'download.html';
-        // aclick.click();
-
-        // //tidy up
-        // window.URL.revokeObjectURL(docUrl);
+        zip.generateAsync({ type: "blob" })
+            .then(function (content) {
+                // Force down of the Zip file
+                saveAs(content, `${value.produceSelect}.zip`);
+            });
     }
 
     return (

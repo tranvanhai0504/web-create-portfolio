@@ -3,7 +3,6 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { useContext } from 'react'
 import { useState } from 'react';
 import clsx from 'clsx'
-import ImgBox from '../../items/ImgBox/ImgBox';
 function Trashcan({setIsEnterTrash}) {
 
     const value = useContext(MSWContext)

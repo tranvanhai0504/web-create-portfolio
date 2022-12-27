@@ -17,13 +17,14 @@ function Storage(){
     const value  = useContext(GlobalContext)
 
     const [listTemplates, setListItemTemplates] =  useState(value.produces.map((produce, index) => {
+        console.log(produce.listPage[0]?.style)
         return (
             <NewProduct 
                 id = {produce.id}
                 key={index}
             >
                 <div className={styles.scale}><CreatorSpace 
-                    style={produce.listPage[0].style}
+                    style={produce.listPage[0]?.style}
                     listItem={produce.listPage[0]?.listItem ? produce.listPage[0]?.listItem : []}
                     id={produce.id}
                     forceUpdate={()=>{}}
@@ -34,7 +35,6 @@ function Storage(){
 
     function handleClick(e) {
         const id = e.target.getAttribute('data-id')
-        console.log('set', id)
         value.setProduceSelect(id)
     }
 
@@ -57,17 +57,17 @@ function Storage(){
 
     function createNewTemplate(e) { 
         const produce = {
-            name: '',
-            id : makeid(10),
+            name: 'new produce',
+            id: makeid(10),
             listPage: [{
                 name: 'mainPage',
                 id: makeid(10),
                 style: {
-                    height: 100,
-                    width: 75,
-                    color:{
+                    height: 1,
+                    width: 1,
+                    color: {
                         type: 'solid',
-                        code: 'white'
+                        code: '#fff'
                     }
                 },
                 listItem: [],
@@ -77,9 +77,8 @@ function Storage(){
         value.setProduces(prev => [...prev, produce])
         setListItemTemplates(prev => [...prev,( 
             <NewProduct id={produce.id}>
-                <div className={styles.scale}><CreatorSpace style={produce.style} listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/></div>
+                <div className={styles.scale}><CreatorSpace style={produce.listPage[0].style} listItem={produce.listPage[0].listItem} id={produce.id} forceUpdate={()=>{}}/></div>
             </NewProduct>)])
-        console.log('edded')
     }
 
     return (

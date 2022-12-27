@@ -8,9 +8,23 @@ import Link from '../items/Link/Link'
 import images from '../../assets/defaultAvatar.png'
 import Button from '../items/Button/Button'
 
-function WorkSpace({ listItem, page }) {
+function WorkSpace({ listItem, page, dev = false }) {
     const value = useContext(GlobalContext)
-    const [listItemCurrent, setListItemCurrent] = useState(listItem)
+    const [listItemCurrent, setListItemCurrent] = useState(() => {
+        console.log(dev)
+        if (dev) return listItem
+        else {
+            return listItem.map(item => {
+                return {
+                    ...item,
+                    position : {
+                        x: Math.round((item.position.x / 75) * 100),
+                        y: Math.round((item.position.y / 75) * 100)
+                    }
+                }
+            })
+        }
+    })
 
     function handleListItem(item) {
         listItem.push(item)
@@ -34,7 +48,7 @@ function WorkSpace({ listItem, page }) {
 
     function handleEvent(e) {
         let item = ''
-        switch (value.selectedBtn) {
+        switch (value?.selectedBtn) {
             case 'block': {
                 const id = makeid(10)
                 item = {
@@ -107,7 +121,8 @@ function WorkSpace({ listItem, page }) {
             }
             case 'imgBlock': {
                 const id = makeid(10)
-                const src = `${value.image.current || images}`
+                const src = `${value?.image.current || images}`
+                console.log(src)
                 item = {
                     type: 'img',
                     id,
@@ -131,8 +146,6 @@ function WorkSpace({ listItem, page }) {
                         shadowY: 5,
                         blur: 1,
                         shadowColor: 'black',
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
                         rotate: 0,
                         opacity: 1
                     },
@@ -172,7 +185,7 @@ function WorkSpace({ listItem, page }) {
                     },
                     position: { x: 0, y: 0 },
                     text: { text: 'link' },
-                    href: {href: 'google.com'}
+                    href: { href: 'google.com' }
                 }
                 break
             }
@@ -180,22 +193,22 @@ function WorkSpace({ listItem, page }) {
 
             }
         }
-        if (item !== '' && value.selectedBtn != null) {
+        if (item !== '' && value?.selectedBtn != null) {
             handleListItem(item)
             page.current.removeEventListener('click', handleEvent)
-            value.handleClick(null)
+            value?.handleClick(null)
         }
     }
 
     useEffect(() => {
-        if (page || value.selectedBtn !== null) {
-            ProduceItems(value.selectedBtn)
+        if (page || value?.selectedBtn !== null) {
+            ProduceItems(value?.selectedBtn)
         }
 
         return () => {
             page.current?.removeEventListener('click', handleEvent)
         }
-    }, [value.selectedBtn])
+    }, [value?.selectedBtn])
 
     useEffect(() => {
         setListItemCurrent(listItem)
@@ -204,15 +217,15 @@ function WorkSpace({ listItem, page }) {
     return <>
         {listItemCurrent.map(item => {
             if (item.type === 'block') {
-                return (<Block key={item.id} position={item.position} style={item.style} id={item.id} />)
+                return (<Block dev={dev} key={item.id} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'text') {
-                return (<Text key={item.id} text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<Text dev={dev} key={item.id} text={item.text} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'img') {
-                return (<ImgBox key={item.id} src={item.source.src} position={item.position} style={item.style} id={item.id} />)
-            }else if (item.type === 'link') {
-                return (<Link key={item.id} href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
-            }else if(item.type === 'button'){
-                return (<Button key={item.id} position={item.position} style={item.style} id={item.id} name={item.name}/>)
+                return (<ImgBox dev={dev} key={item.id} src={item.source.src} position={item.position} style={item.style} id={item.id} />)
+            } else if (item.type === 'link') {
+                return (<Link dev={dev} key={item.id} href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
+            } else if (item.type === 'button') {
+                return (<Button dev={dev} key={item.id} position={item.position} style={item.style} id={item.id} name={item.name} href={item.direct} />)
             }
         })}
     </>

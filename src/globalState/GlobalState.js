@@ -27,10 +27,7 @@ function GlobalProvider({children}){
 
     const [listUsingElement, setListUsingElement] = useState([])
     const handleListItems = (item)=> {
-        console.log.log('add')
-        // setListUsingElement(prev => [...prev, item])
         selectedBtn(null)
-        console.log(listUsingElement)
     }
 
     //handel btn 
