@@ -10,13 +10,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     <GlobalStyles>
-      {/* <DragDropState> */}
         <GlobalProvider>
           <MSWProvider>
             <App />
           </MSWProvider>
         </GlobalProvider>
-      {/* </DragDropState> */}
     </GlobalStyles>
   //</React.StrictMode>
 );

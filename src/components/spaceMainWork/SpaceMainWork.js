@@ -78,7 +78,7 @@ function SpaceMainWork({ setProduce, listPage }) {
         >
             {pages.map((page, index) => {
                 return (
-                    dataValue.pageSelect === page.id && <CreatorSpace style={page.style} id={page.id} listItem={page.listItem} key={page.id} />
+                    dataValue.pageSelect === page.id && <CreatorSpace dev={true} style={page.style} id={page.id} listItem={page.listItem} key={page.id} />
                 )
             })}
             {dataValue.showResetBtn && <button onClick={(e) => dataValue.setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}

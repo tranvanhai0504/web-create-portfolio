@@ -54,10 +54,25 @@ function ListItemBtn() {
     }
 
     function FileHandle(e) {
+
+        function getBase64(file, cb) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                cb(reader.result)
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
+        }
+
         const file = e.target.files[0]
+        getBase64(file, (result) => {
+            // console.log(result)
+            value.image.current = result
+        })
         MSWValue.setImg(file)
-        file.preview = URL.createObjectURL(file)
-        value.image.current = file.preview
+        // value.image.current = file.preview
     }
 
 

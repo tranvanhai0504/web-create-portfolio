@@ -5,8 +5,10 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-const ImgComp = styled.div.attrs(props => {
-
+const ImgComp = styled.img.attrs(props => {
+  return {
+    src: props.src
+  }
 })`
   border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize}px ${props.style.borderColor} !important` }};
   ${props => {
@@ -31,17 +33,23 @@ const ImgComp = styled.div.attrs(props => {
   height: ${props => props.style.height};
   border-radius: ${props => props.style.borderRadius};
   border: ${props => props.style.border};
-  background-position: ${props => props.style.backgroundPosition};
-  background-size: ${props => props.style.backgroundSize};
+  object-fit: cover;
   transform: ${props => props.style.transform};
-  background-image: url(${props => props.src});
   transform: rotate(${props => props.style.rotate}deg);
   opacity: ${props => props.style.opacity}
 `
-function ImgBox({ style, id, position, src }) {
+function ImgBox({ style, id, position, src, dev = false }) {
   const value = useContext(MSWContext)
-  const [nowTarget, setNowTarget] = useState(value.itemTarget)
-  const [nowPosition, setNowPosition] = useState(position)
+  const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+  const [styleNow, setStyleNow] = useState(style)
+  const [nowPosition, setNowPosition] = useState(() => {
+    if(dev){
+      return {
+        x: position.x*100/75,
+        y: position.y*100/75,
+      }
+    }else return position
+  })
 
   const PositionHandle = (data) => {
     position.x = data.x
@@ -50,36 +58,47 @@ function ImgBox({ style, id, position, src }) {
   }
 
   useEffect(() => {
+    setStyleNow(() => {
+      if(dev){
+        return {
+          ...style,
+          height: style.height * 0.75,
+          width: style.width * 0.75,
+          borderRadius: style.borderRadius * 0.75,
+          shadowX: style.shadowX*0.75,
+          shadowY: style.shadowY*0.75,
+        }
+      }else{
+        return style
+      }
+    })
+  }, [style])
+
+  useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
   }, [position])
 
   function draggingStart(e) {
-    value.setIsDragging(true);
+    value?.setIsDragging(true);
   }
 
   function draggingEnd(e) {
-    value.setIsDragging(false);
-    value.forceUpdate()
+    value?.setIsDragging(false);
+    value?.forceUpdate()
   }
 
   useEffect(() => {
-    setNowTarget(value.itemTarget)
-  }, [value.itemTarget])
+    setNowTarget(value?.itemTarget)
+  }, [value?.itemTarget])
 
   function HandleEventItem(e) {
-    const workSpaceWidth = e.target.parentElement.parentElement.clientWidth
-    const workSpaceHeight = e.target.parentElement.parentElement.clientHeight
-    const itemWidth = e.target.clientWidth
-    const itemHeight = e.target.clientHeight
-    style.width = itemWidth
-    style.height = itemHeight
-    value.setItemTarget(id)
+    value?.setItemTarget(id)
     setNowTarget(id)
   }
 
   return (<Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
     <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', zIndex: style.zIndex, height: 'fit-content' }}>
-      <ImgComp style={style} src={src} />
+      <ImgComp style={styleNow} src={src} />
     </div>
   </Draggable>
   )

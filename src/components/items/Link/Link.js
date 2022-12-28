@@ -52,18 +52,43 @@ const Linkcomp = styled.a.attrs((props) => ({
   }
 `
 
-function Link({ style, id, position, text, href }) {
+function Link({ style, id, position, text, href, dev = false }) {
 
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
-  const [nowPosition, setNowPosition] = useState(position)
-  const [nowTarget, setNowTarget] = useState(value.itemTarget)
+  const [nowPosition, setNowPosition] = useState(() => {
+    if(dev){
+      return {
+        x: position.x*100/75,
+        y: position.y*100/75
+      }
+    }else return position
+  })
+  const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+  const [styleNow, setStyleNow] = useState(style)
   const [canEditable, setCanEditable] = useState(false)
   const textInput = useRef()
 
   useEffect(() => {
     textInput.current.innerText = content
   }, [])
+
+  useEffect(() => {
+    setStyleNow(() => {
+      if(dev){
+        return {
+          ...style,
+          height: style.height * 0.75,
+          width: style.width * 0.75,
+          fontSize: style.fontSize * 0.75,
+          shadowX: style.shadowX * 0.75,
+          shadowY: style.shadowY * 0.75,
+        }
+      }else{
+        return style
+      }
+    })
+  }, [style])
 
   function contentHandle(e) {
     const data = e.target.innerText
@@ -77,18 +102,18 @@ function Link({ style, id, position, text, href }) {
   }
 
   function draggingStart(e) {
-    value.setIsDragging(true);
+    value?.setIsDragging(true);
   }
 
   function draggingEnd(e) {
-    value.setIsDragging(false);
-    value.forceUpdate()
+    value?.setIsDragging(false);
+    value?.forceUpdate()
   }
 
   useEffect(() => {
-    setNowTarget(value.itemTarget)
+    setNowTarget(value?.itemTarget)
     setCanEditable(false)
-  }, [value.itemTarget])
+  }, [value?.itemTarget])
 
   useEffect(() => {
     if(canEditable){
@@ -102,12 +127,12 @@ function Link({ style, id, position, text, href }) {
 
   function HandleEventItem(e) {
     if (e.detail === 2) {
-      if (nowTarget === value.itemTarget) {
+      if (nowTarget === value?.itemTarget) {
         setCanEditable(true)
         textInput.current.focus()
       }
     }
-    value.setItemTarget(id)
+    value?.setItemTarget(id)
     setNowTarget(id)
   }
 
@@ -115,7 +140,7 @@ function Link({ style, id, position, text, href }) {
 
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id) || canEditable} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
       <div className={clsx(nowTarget === id && 'targetText')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content',  zIndex: style.zIndex }}>
-        <Linkcomp href={href} isPrevent={canEditable ? 'auto' : 'none'} contentEditable={canEditable} disabled={!canEditable} style={style} ref={textInput} onKeyUp={(e) => contentHandle(e)} ></Linkcomp>
+        <Linkcomp href={href} isPrevent={canEditable ? 'auto' : 'none'} contentEditable={canEditable} disabled={!canEditable} style={styleNow} ref={textInput} onKeyUp={(e) => contentHandle(e)} >{!dev && content}</Linkcomp>
       </div>
     </Draggable>
   )

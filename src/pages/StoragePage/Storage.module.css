@@ -102,6 +102,7 @@
 .rowContainer {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .scale {
@@ -111,6 +112,12 @@
 }
 
 .templateName {
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    text-align: center;
+}
+.templateName::placeholder{
     color: var(--text-color);
 }
 

@@ -4,8 +4,12 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { memo, useState, useEffect, useContext } from 'react'
 import clsx from 'clsx'
 
-const ButtonComp = styled.button.attrs((props) => {
-
+const ButtonComp = styled.a.attrs((props) => {
+    if(props.href){
+        return {
+            href: props.href
+        }
+    }
 })`
     border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize}px ${props.style.borderColor} !important` }};
     ${props => {
@@ -52,14 +56,21 @@ const ButtonComp = styled.button.attrs((props) => {
     transform: rotate(${props => props.style.rotate}deg);
     backdrop-filter: blur(${props => props.style.blur}px);
     opacity: ${props => props.style.opacity};
-    word-wrap: break-word;
   `
 
-function Button({ style, id, position, name }) {
+function Button({ style, id, position, name, dev = false, href }) {
 
     const value = useContext(MSWContext)
-    const [nowPosition, setNowPosition] = useState(position)
-    const [nowTarget, setNowTarget] = useState(value.itemTarget)
+    const [nowPosition, setNowPosition] = useState(() => {
+        if (dev) {
+            return {
+                x: position.x * 100 / 75,
+                y: position.y * 100 / 75
+            }
+        } else return position
+    })
+    const [styleNow, setStyleNow] = useState(style)
+    const [nowTarget, setNowTarget] = useState(value?.itemTarget)
 
     const PositionHandle = (data) => {
         position.x = data.x
@@ -68,30 +79,48 @@ function Button({ style, id, position, name }) {
     }
 
     useEffect(() => {
-        setNowTarget(value.itemTarget)
-    }, [value.itemTarget])
+        setNowTarget(value?.itemTarget)
+    }, [value?.itemTarget])
+
+    useEffect(() => {
+        setStyleNow(() => {
+            if (dev) {
+                return {
+                    ...style,
+                    height: style.height * 0.75,
+                    width: style.width * 0.75,
+                    fontSize: style.fontSize * 0.75,
+                    borderRadius: style.borderRadius * 0.75,
+                    shadowX: style.shadowX * 0.75,
+                    shadowY: style.shadowY * 0.75,
+                }
+            } else {
+                return style
+            }
+        })
+    }, [style, style.color, style.fontColor])
 
     useEffect(() => {
         setNowPosition({ x: position.x, y: position.y })
     }, [position])
 
     function draggingStart(e) {
-        value.setIsDragging(true);
+        value?.setIsDragging(true);
     }
 
     function draggingEnd(e) {
-        value.setIsDragging(false);
-        value.forceUpdate()
+        value?.setIsDragging(false);
+        value?.forceUpdate()
     }
 
     function HandleEventItem(e) {
-        value.setItemTarget(id)
+        value?.setItemTarget(id)
         setNowTarget(id)
     }
     return (
         <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
             <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target')}>
-                <ButtonComp style={style}>{name}</ButtonComp>
+                <ButtonComp style={styleNow} href={!dev && `./${href}.html`}>{name}</ButtonComp>
             </div>
         </Draggable>
     )

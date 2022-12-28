@@ -2,6 +2,7 @@
     background-color: #fff;
     width: 75vw;
     position: relative;
+    touch-action: none;
     /* transform: scale(2) */
 }
 

@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useContext } from 'react';
+import { createContext, useState, useRef, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../../globalState/GlobalState';
 
 const MSWContext = createContext()
