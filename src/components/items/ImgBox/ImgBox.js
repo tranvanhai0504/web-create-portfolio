@@ -43,13 +43,14 @@ function ImgBox({ style, id, position, src, dev = false }) {
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
   const [styleNow, setStyleNow] = useState(style)
   const [nowPosition, setNowPosition] = useState(() => {
-    if(dev){
+    if (dev) {
       return {
-        x: position.x*100/75,
-        y: position.y*100/75,
+        x: position.x * 100 / 75,
+        y: position.y * 100 / 75,
       }
-    }else return position
+    } else return position
   })
+  const [isHover, setIsHover] = useState(false)
 
   const PositionHandle = (data) => {
     position.x = data.x
@@ -59,16 +60,16 @@ function ImgBox({ style, id, position, src, dev = false }) {
 
   useEffect(() => {
     setStyleNow(() => {
-      if(dev){
+      if (dev) {
         return {
           ...style,
           height: style.height * 0.75,
           width: style.width * 0.75,
           borderRadius: style.borderRadius * 0.75,
-          shadowX: style.shadowX*0.75,
-          shadowY: style.shadowY*0.75,
+          shadowX: style.shadowX * 0.75,
+          shadowY: style.shadowY * 0.75,
         }
-      }else{
+      } else {
         return style
       }
     })
@@ -77,6 +78,14 @@ function ImgBox({ style, id, position, src, dev = false }) {
   useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
   }, [position])
+
+  useEffect(() => {
+    if(value?.itemHover === id){
+      setIsHover(true)
+    }else{
+      setIsHover(false)
+    }
+  }, [value?.itemHover])
 
   function draggingStart(e) {
     value?.setIsDragging(true);
@@ -92,12 +101,14 @@ function ImgBox({ style, id, position, src, dev = false }) {
   }, [value?.itemTarget])
 
   function HandleEventItem(e) {
-    value?.setItemTarget(id)
-    setNowTarget(id)
+    if (!value?.listLockedItem.includes(id)) {
+      value?.setItemTarget(id)
+      setNowTarget(id)
+    }
   }
 
   return (<Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
-    <div className={clsx(nowTarget === id && 'target')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', zIndex: style.zIndex, height: 'fit-content' }}>
+    <div className={clsx(nowTarget === id && 'target', isHover && 'hover')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', zIndex: style.zIndex, height: 'fit-content' }}>
       <ImgComp style={styleNow} src={src} />
     </div>
   </Draggable>

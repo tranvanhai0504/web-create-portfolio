@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import style from './Menu.module.css'
 import clsx from 'clsx'
 
-function Menu({children, position, direction = 'down', isAbsolute = false}) {
+function Menu({children, position, direction = 'down', isAbsolute = false, data}) {
   const menu = useRef()
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function Menu({children, position, direction = 'down', isAbsolute = false}) {
         ref={menu}
       >
         {children.map( (child, index) => {
-          return <div className={style.btn} id={position.id} data-func={child.name} key={index} onClick={child.func}>{child.icon}{child.name}</div>
+          return <div className={style.btn} id={position.id} data-func={child.name} key={index} onClick={(e) => {child.func(e, data)}}>{child.icon}{child.name}</div>
         })}
       </div>
   )

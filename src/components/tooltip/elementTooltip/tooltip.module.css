@@ -7,7 +7,7 @@
     position: absolute;
     background-color: rgb(102, 102, 102);
     text-align: center;
-    color: #fff;
+    color: #fff !important;
     transform: translateX(-50%);
     white-space: nowrap;
     border-radius: 4px;

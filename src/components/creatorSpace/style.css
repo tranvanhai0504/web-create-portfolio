@@ -25,6 +25,18 @@
     border: solid 2px rgb(42, 42, 255);
 }
 
+.hover::before{
+    content: "";
+    position: fixed;
+    opacity: revert-layer;
+    z-index: 100;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    top: -4px;
+    left: -4px;
+    border: solid 2px var(--primary-color);
+}
+
 .resizer {
     width: 8px;
     height: 8px;

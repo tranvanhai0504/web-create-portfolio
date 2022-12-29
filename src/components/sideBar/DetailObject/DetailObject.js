@@ -28,7 +28,7 @@ function DetailObject({ data }) {
                             <MdOutlineRotate90DegreesCcw className={style.icon} />
                             <input autoComplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
                         </StringTooltip>
-                        {dataSelect.type !== 'text' && dataSelect.type !== 'link'?
+                        {dataSelect.type !== 'text' && dataSelect.type !== 'link' ?
                             (<StringTooltip content={'corner radius'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
                                 <MdOutlineRoundedCorner className={style.icon} />
                                 <input autoComplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
@@ -211,7 +211,7 @@ function DetailObject({ data }) {
                                     )}
                                     <option value="unset">Unset</option>
                                 </select>
-    
+
                                 {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' &&
                                     <div className={style.containerPositionShadow}>
                                         <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>

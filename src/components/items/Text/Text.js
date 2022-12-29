@@ -22,19 +22,19 @@ const TextComp = styled.p.attrs((props) => ({
   flex-direction: column;
   ${props => {
     let string = ''
-    if(props.style.textUnderLine) {
+    if (props.style.textUnderLine) {
       string += 'text-decoration: underline;'
     }
-    if(props.style.textItalic) {
+    if (props.style.textItalic) {
       string += 'font-style: italic;'
     }
     return string
   }}
   justify-content: ${props => props.style.justifyContent};
-  text-align: ${props=>props.style.textAlign};
+  text-align: ${props => props.style.textAlign};
   z-index: ${props => props.style.zIndex};
   transform: rotate(${props => props.style.rotate}deg);
-  opacity: ${props=>props.style.opacity};
+  opacity: ${props => props.style.opacity};
   text-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
   overflow: hidden;
   word-wrap: break-word;
@@ -52,16 +52,17 @@ function Text({ style, id, position, text, dev = false }) {
   const [content, setContent] = useState(text.text)
   const value = useContext(MSWContext)
   const [nowPosition, setNowPosition] = useState(() => {
-    if(dev){
+    if (dev) {
       return {
-        x: position.x*100/75,
-        y: position.y*100/75
+        x: position.x * 100 / 75,
+        y: position.y * 100 / 75
       }
-    }else return position
+    } else return position
   })
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
   const [styleNow, setStyleNow] = useState(style)
   const [canEditable, setCanEditable] = useState(false)
+  const [isHover, setIsHover] = useState(false)
   const textInput = useRef()
 
   useEffect(() => {
@@ -70,7 +71,7 @@ function Text({ style, id, position, text, dev = false }) {
 
   useEffect(() => {
     setStyleNow(() => {
-      if(dev){
+      if (dev) {
         return {
           ...style,
           fontSize: style.fontSize * 0.75,
@@ -79,7 +80,7 @@ function Text({ style, id, position, text, dev = false }) {
           height: style.height * 0.75,
           width: style.width * 0.75
         }
-      }else{
+      } else {
         return style
       }
     })
@@ -111,7 +112,7 @@ function Text({ style, id, position, text, dev = false }) {
   }, [value?.itemTarget])
 
   useEffect(() => {
-    if(canEditable){
+    if (canEditable) {
       textInput.current.focus()
     }
   }, [canEditable])
@@ -120,21 +121,31 @@ function Text({ style, id, position, text, dev = false }) {
     setNowPosition({ x: position.x, y: position.y })
   }, [position])
 
-  function HandleEventItem(e) {
-    if (e.detail === 2) {
-      if (nowTarget === value?.itemTarget) {
-        setCanEditable(true)
-        textInput.current.focus()
-      }
+  useEffect(() => {
+    if(value?.itemHover === id){
+      setIsHover(true)
+    }else{
+      setIsHover(false)
     }
-    value?.setItemTarget(id)
-    setNowTarget(id)
+  }, [value?.itemHover])
+
+  function HandleEventItem(e) {
+    if (!value?.listLockedItem.includes(id)) {
+      if (e.detail === 2) {
+        if (nowTarget === value?.itemTarget) {
+          setCanEditable(true)
+          textInput.current.focus()
+        }
+      }
+      value?.setItemTarget(id)
+      setNowTarget(id)
+    }
   }
 
   return (
 
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id) || canEditable} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
-      <div className={clsx(nowTarget === id && 'targetText')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content',  zIndex: style.zIndex }}>
+      <div className={clsx(nowTarget === id && 'targetText', isHover && 'hover')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }}>
         <TextComp contentEditable={canEditable} disabled={!canEditable} style={styleNow} ref={textInput} onKeyUp={(e) => contentHandle(e)} >{!dev && content}</TextComp>
       </div>
     </Draggable>

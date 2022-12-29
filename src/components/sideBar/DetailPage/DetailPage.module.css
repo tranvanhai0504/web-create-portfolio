@@ -65,3 +65,33 @@
 .blockNumBtn:hover{
     opacity: 0.8;
 }
+
+.containerText{
+    display: flex;
+    align-items: center;
+}
+
+.item{
+    width: 80%;
+    padding: 0 10px;
+    min-height: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(255,255,255,0);
+    border-radius: 3px;
+    justify-content: space-between;
+}
+
+.item:hover{
+    border: 2px solid var(--primary-color);
+}
+
+.icon{
+    opacity: 0.4;
+    margin-right: 7px;
+}
+
+.iconLock{
+    opacity: 0.7;
+}

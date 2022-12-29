@@ -233,7 +233,7 @@ function OptionPage({ data }) {
     }
 
     function handleClickBtnMenu(e) {
-        console.log(e.target)
+        
     }
 
     let listButtonMenu = useRef([

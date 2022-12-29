@@ -41,6 +41,7 @@ function Block({ style, id, position, dev = false }) {
   const [styleNow, setStyleNow] = useState(style)
   const [nowPosition, setNowPosition] = useState(position)
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+  const [isHover, setIsHover] = useState(false)
 
   const PositionHandle = (data) => {
     position.x = data.x
@@ -50,16 +51,16 @@ function Block({ style, id, position, dev = false }) {
 
   useEffect(() => {
     setStyleNow(() => {
-      if(dev){
+      if (dev) {
         return {
           ...style,
           height: style.height * 0.75,
           width: style.width * 0.75,
-          shadowX: style.shadowX*0.75,
-          shadowY: style.shadowY*0.75,
-          borderRadius: style.borderRadius*0.75
+          shadowX: style.shadowX * 0.75,
+          shadowY: style.shadowY * 0.75,
+          borderRadius: style.borderRadius * 0.75
         }
-      }else{
+      } else {
         return style
       }
     })
@@ -69,9 +70,17 @@ function Block({ style, id, position, dev = false }) {
     setNowTarget(value?.itemTarget)
   }, [value?.itemTarget])
 
-  useEffect(() => { 
+  useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
   }, [position])
+
+  useEffect(() => {
+    if(value?.itemHover === id){
+      setIsHover(true)
+    }else{
+      setIsHover(false)
+    }
+  }, [value?.itemHover])
 
   function draggingStart(e) {
     value?.setIsDragging(true);
@@ -83,13 +92,15 @@ function Block({ style, id, position, dev = false }) {
   }
 
   function HandleEventItem(e) {
-    value?.setItemTarget(id)
-    setNowTarget(id)
+    if (!value?.listLockedItem.includes(id)) {
+      value?.setItemTarget(id)
+      setNowTarget(id)
+    }
   }
 
   return (
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
-      <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target')}>
+      <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target', isHover && 'hover')}>
         <BlockComp style={styleNow}></BlockComp>
       </div>
     </Draggable>

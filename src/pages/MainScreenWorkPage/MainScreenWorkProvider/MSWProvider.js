@@ -13,6 +13,18 @@ function MSWProvider({children}){
     const [img, setImg] = useState(null)
     const [isCancelDelete, setIsCancelDelete] = useState()
     const image = useRef()
+    const [itemHover, setItemHover] = useState()
+    const [listLockedItem, setListLockedItem] = useState(() => {
+        const listLockedItem = JSON.parse(localStorage.getItem('listLockedItem'))
+
+        if(listLockedItem){
+            return listLockedItem
+        }else return []
+    })
+
+    useEffect(() => {
+        localStorage.setItem('listLockedItem', JSON.stringify(listLockedItem))
+    }, [listLockedItem])
 
     const value = {
         data,
@@ -30,7 +42,11 @@ function MSWProvider({children}){
         setShowResetBtn,
         forceUpdate: Globalvalue.forceUpdate,
         isCancelDelete,
-        setIsCancelDelete
+        setIsCancelDelete,
+        listLockedItem,
+        setListLockedItem,
+        itemHover,
+        setItemHover
     }
 
     return (

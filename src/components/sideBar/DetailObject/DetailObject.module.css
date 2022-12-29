@@ -2,7 +2,7 @@
     padding: 13px 0 0 0;
     font-size: 13px;
 }
-p{
+.detailObject p{
     color: var(--space-text);
 
 }

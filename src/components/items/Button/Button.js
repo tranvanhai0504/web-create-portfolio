@@ -5,7 +5,7 @@ import { memo, useState, useEffect, useContext } from 'react'
 import clsx from 'clsx'
 
 const ButtonComp = styled.a.attrs((props) => {
-    if(props.href){
+    if (props.href) {
         return {
             href: props.href
         }
@@ -72,6 +72,7 @@ function Button({ style, id, position, name, dev = false, href }) {
     const [prevPosition, setPrevPosition] = useState(position)
     const [styleNow, setStyleNow] = useState(style)
     const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+    const [isHover, setIsHover] = useState(false)
 
     const PositionHandle = (data) => {
         position.x = data.x
@@ -106,6 +107,14 @@ function Button({ style, id, position, name, dev = false, href }) {
     }, [position])
 
     useEffect(() => {
+        if(value?.itemHover === id){
+          setIsHover(true)
+        }else{
+          setIsHover(false)
+        }
+      }, [value?.itemHover])
+
+    useEffect(() => {
         console.log(prevPosition)
         position.x = prevPosition.x
         position.y = prevPosition.y
@@ -124,12 +133,14 @@ function Button({ style, id, position, name, dev = false, href }) {
     }
 
     function HandleEventItem(e) {
-        value?.setItemTarget(id)
-        setNowTarget(id)
+        if (!value?.listLockedItem.includes(id)) {
+            value?.setItemTarget(id)
+            setNowTarget(id)
+        }
     }
     return (
         <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
-            <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target')}>
+            <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target', isHover && 'hover')}>
                 <ButtonComp style={styleNow} href={!dev && `./${href}.html`}>{name}</ButtonComp>
             </div>
         </Draggable>
