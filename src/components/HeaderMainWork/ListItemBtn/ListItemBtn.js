@@ -116,7 +116,7 @@ function ListItemBtn() {
                                 }}
                             >
                                 {btn.icon}
-                                {btn.name==='imgBlock'&&(<input type='file' onChange={FileHandle} className={clsx('customInputImg', styles.inputImage)}></input>)}
+                                {btn.name==='imgBlock'&&(<input type='file' accept='image/*' onChange={FileHandle} className={clsx('customInputImg', styles.inputImage)}></input>)}
                             </div>
                         </StringTooltip>)
                     }

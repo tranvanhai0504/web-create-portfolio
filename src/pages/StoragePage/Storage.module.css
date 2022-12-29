@@ -44,19 +44,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 68px;
-    height: 100px;
+    width: 100px;
+    height: 68px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 3px 3px 6px rgb(0 0 0 / 20%);
     border-radius: 10px;
     font-size: 24px;
     cursor: pointer;
+    margin-bottom: 22px;
+    margin-left: 12px;
 }
 
 .template {
-    height: 200px;
-    width: 140px;
+    height: 140px;
+    width: 200px;
     background-color: #ffffff6d;
     box-shadow: 3px 3px 6px rgb(0 0 0 / 20%);
     border-radius: 10px;
@@ -84,7 +86,7 @@
     -webkit-user-select: none; 
   -ms-user-select: none; 
   user-select: none;
-  z-index: 999;
+  z-index: 9;
     -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 
@@ -100,12 +102,23 @@
 .rowContainer {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .scale {
-    transform: scale(0.12);
-    margin-right: 12px;
-    margin-bottom: 88px;
+    transform: scale(0.18);
+    margin-right: 3px;
+    margin-bottom: 0px;
+}
+
+.templateName {
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    text-align: center;
+}
+.templateName::placeholder{
+    color: var(--text-color);
 }
 
  @-webkit-keyframes scale-up-center {
