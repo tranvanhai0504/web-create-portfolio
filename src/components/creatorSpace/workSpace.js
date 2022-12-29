@@ -11,15 +11,18 @@ import Button from '../items/Button/Button'
 function WorkSpace({ listItem, page, dev = false }) {
     const value = useContext(GlobalContext)
     const [listItemCurrent, setListItemCurrent] = useState(() => {
-        console.log(dev)
+
+        const scWidth = 100 / window.screen.width
+        const scHeight = 100 / document.documentElement.clientHeight
+
         if (dev) return listItem
         else {
             return listItem.map(item => {
                 return {
                     ...item,
-                    position : {
-                        x: Math.round((item.position.x / 75) * 100),
-                        y: Math.round((item.position.y / 75) * 100)
+                    position: {
+                        x: item.position.x / 75 * 100 * scWidth + 'vw',
+                        y: item.position.y / 75 * 100 * scHeight + 'vh'
                     }
                 }
             })

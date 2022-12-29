@@ -4,6 +4,15 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { memo, useState, useEffect, useContext } from 'react'
 import clsx from 'clsx'
 
+function availableValue(value) {
+    console.log(value, typeof value)
+    if ((typeof value) === 'number') {
+        return value + 'px'
+    } else {
+        return value
+    }
+}
+
 const ButtonComp = styled.a.attrs((props) => {
     if (props.href) {
         return {
@@ -47,12 +56,12 @@ const ButtonComp = styled.a.attrs((props) => {
         return string
     }}
     justify-content: ${props => props.style.justifyContent};
-    box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
+    box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${availableValue(props.style.shadowX)} ${availableValue(props.style.shadowY)} ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
     box-sizing: ${props => props.style.boxSizing};
     border-radius: ${props => props.style.borderRadius}%;
     background: ${props => props.style.color.code};
-    width: ${props => props.style.width}px;
-    height: ${props => props.style.height}px;
+    width: ${props => availableValue(props.style.width)};
+    height: ${props => availableValue(props.style.height)};
     transform: rotate(${props => props.style.rotate}deg);
     backdrop-filter: blur(${props => props.style.blur}px);
     opacity: ${props => props.style.opacity};
@@ -61,16 +70,31 @@ const ButtonComp = styled.a.attrs((props) => {
 function Button({ style, id, position, name, dev = false, href }) {
 
     const value = useContext(MSWContext)
-    const [nowPosition, setNowPosition] = useState(() => {
+    const [nowPosition, setNowPosition] = useState(position)
+    const [prevPosition, setPrevPosition] = useState(position)
+    const [styleNow, setStyleNow] = useState(() => {
+        const scWidth = 100 / window.screen.width
+        const scHeight = 100 / document.documentElement.clientHeight
+
         if (dev) {
             return {
-                x: position.x * 100 / 75,
-                y: position.y * 100 / 75
+                ...style,
+                height: style.height * 0.75,
+                width: style.width * 0.75,
+                shadowX: style.shadowX * 0.75,
+                shadowY: style.shadowY * 0.75,
+                borderRadius: style.borderRadius * 0.75
             }
-        } else return position
+        } else {
+            return {
+                ...style,
+                height: style.height * scHeight + 'vh',
+                width: style.width * scWidth + 'vw',
+                shadowX: style.shadowX * scWidth + 'vw',
+                shadowY: style.shadowY * scHeight + 'vh',
+            }
+        }
     })
-    const [prevPosition, setPrevPosition] = useState(position)
-    const [styleNow, setStyleNow] = useState(style)
     const [nowTarget, setNowTarget] = useState(value?.itemTarget)
     const [isHover, setIsHover] = useState(false)
 
@@ -107,12 +131,12 @@ function Button({ style, id, position, name, dev = false, href }) {
     }, [position])
 
     useEffect(() => {
-        if(value?.itemHover === id){
-          setIsHover(true)
-        }else{
-          setIsHover(false)
+        if (value?.itemHover === id) {
+            setIsHover(true)
+        } else {
+            setIsHover(false)
         }
-      }, [value?.itemHover])
+    }, [value?.itemHover])
 
     useEffect(() => {
         console.log(prevPosition)

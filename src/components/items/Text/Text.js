@@ -4,6 +4,15 @@ import clsx from 'clsx'
 import styled from 'styled-components'
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
+function availableValue(value){
+  console.log(value, typeof value)
+  if ((typeof value) === 'number') {
+    return value + 'px'
+  } else {
+    return value
+  }
+}
+
 const TextComp = styled.p.attrs((props) => ({
   disabled: props.disabled,
   onChange: props.onChange,
@@ -16,8 +25,8 @@ const TextComp = styled.p.attrs((props) => ({
   font-size: ${props => props.style.fontSize};
   font-weight: ${props => props.style.fontWeight};
   font-family: ${props => props.style.fontFamily};
-  width: ${props => props.style.width};
-  height: ${props => props.style.height};
+  width: ${props => availableValue(props.style.width)};
+  height: ${props => availableValue(props.style.height)};
   display: ${props => props.style.display};
   flex-direction: column;
   ${props => {
@@ -35,7 +44,7 @@ const TextComp = styled.p.attrs((props) => ({
   z-index: ${props => props.style.zIndex};
   transform: rotate(${props => props.style.rotate}deg);
   opacity: ${props => props.style.opacity};
-  text-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
+  text-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${availableValue(props.style.shadowX)} ${availableValue(props.style.shadowY)} ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
   overflow: hidden;
   word-wrap: break-word;
   .targetText & {
@@ -60,7 +69,29 @@ function Text({ style, id, position, text, dev = false }) {
     } else return position
   })
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
-  const [styleNow, setStyleNow] = useState(style)
+  const [styleNow, setStyleNow] = useState(() => {
+    const scWidth = 100 / window.screen.width
+    const scHeight = 100 / document.documentElement.clientHeight
+
+    if (dev) {
+      return {
+        ...style,
+        height: style.height * 0.75,
+        width: style.width * 0.75,
+        shadowX: style.shadowX * 0.75,
+        shadowY: style.shadowY * 0.75,
+        borderRadius: style.borderRadius * 0.75
+      }
+    } else {
+      return {
+        ...style,
+        height: style.height * scHeight + 'vh',
+        width: style.width * scWidth + 'vw',
+        shadowX: style.shadowX * scWidth + 'vw',
+        shadowY: style.shadowY * scHeight + 'vh',
+      }
+    }
+  })
   const [canEditable, setCanEditable] = useState(false)
   const [isHover, setIsHover] = useState(false)
   const textInput = useRef()

@@ -5,6 +5,15 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
+function availableValue(value) {
+  console.log(value, typeof value)
+  if ((typeof value) === 'number') {
+    return value + 'px'
+  } else {
+    return value
+  }
+}
+
 const ImgComp = styled.img.attrs(props => {
   return {
     src: props.src
@@ -28,9 +37,9 @@ const ImgComp = styled.img.attrs(props => {
     return string
   }}
   box-sizing: ${props => props.style.boxSizing};
-  box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
-  width: ${props => props.style.width};
-  height: ${props => props.style.height};
+  box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${availableValue(props.style.shadowX)} ${availableValue(props.style.shadowY)} ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
+  width: ${props => availableValue(props.style.width)};
+  height: ${props => availableValue(props.style.height)};
   border-radius: ${props => props.style.borderRadius};
   border: ${props => props.style.border};
   object-fit: cover;
@@ -41,7 +50,29 @@ const ImgComp = styled.img.attrs(props => {
 function ImgBox({ style, id, position, src, dev = false }) {
   const value = useContext(MSWContext)
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
-  const [styleNow, setStyleNow] = useState(style)
+  const [styleNow, setStyleNow] = useState(() => {
+    const scWidth = 100 / window.screen.width
+    const scHeight = 100 / document.documentElement.clientHeight
+
+    if (dev) {
+      return {
+        ...style,
+        height: style.height * 0.75,
+        width: style.width * 0.75,
+        shadowX: style.shadowX * 0.75,
+        shadowY: style.shadowY * 0.75,
+        borderRadius: style.borderRadius * 0.75
+      }
+    } else {
+      return {
+        ...style,
+        height: style.height * scHeight + 'vh',
+        width: style.width * scWidth + 'vw',
+        shadowX: style.shadowX * scWidth + 'vw',
+        shadowY: style.shadowY * scHeight + 'vh',
+      }
+    }
+  })
   const [nowPosition, setNowPosition] = useState(() => {
     if (dev) {
       return {
@@ -80,9 +111,9 @@ function ImgBox({ style, id, position, src, dev = false }) {
   }, [position])
 
   useEffect(() => {
-    if(value?.itemHover === id){
+    if (value?.itemHover === id) {
       setIsHover(true)
-    }else{
+    } else {
       setIsHover(false)
     }
   }, [value?.itemHover])

@@ -42,7 +42,9 @@ function ExportButton() {
                 if(!tag.classList.contains('__web-inspector-hide-shortcut__'))
                     doc.head.appendChild(tag.cloneNode(true))
             })
-            var newContent = content.replace(/&quot;/g, '')
+            var newContent = content.replaceAll(/&quot;/g, '')
+            newContent = newContent.replaceAll('vhpx', 'vh')
+            newContent = newContent.replaceAll('vwpx', 'vw')
             doc.body.innerHTML = newContent
 
             //now get it's contents and place into a blob

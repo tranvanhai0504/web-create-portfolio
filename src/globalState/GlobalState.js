@@ -141,6 +141,7 @@ function GlobalProvider({children}){
     }, [produceSelect])
 
     useEffect(() => {
+        // console.log('change')
         localStorage.setItem('produces', JSON.stringify(produces))
     }, [produces])
 

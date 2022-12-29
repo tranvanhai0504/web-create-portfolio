@@ -5,10 +5,19 @@ import Draggable from 'react-draggable';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import { useContext } from 'react'
 
+function availableValue(value){
+  console.log(value, typeof value)
+  if ((typeof value) === 'number') {
+    return value + 'px'
+  } else {
+    return value
+  }
+}
+
 const BlockComp = styled.div.attrs((props) => {
 
 })`
-    border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize}px ${props.style.borderColor} !important` }};
+    border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize} ${props.style.borderColor} !important` }};
     ${props => {
     let string = ''
     if (props.style.unBorderLeft) {
@@ -25,12 +34,24 @@ const BlockComp = styled.div.attrs((props) => {
     }
     return string
   }}
-    box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
+    box-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${availableValue(props.style.shadowX)} ${availableValue(props.style.shadowY)} ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
     box-sizing: ${props => props.style.boxSizing};
     border-radius: ${props => props.style.borderRadius}%;
     background: ${props => props.style.color.code};
-    width: ${props => props.style.width}px;
-    height: ${props => props.style.height}px;
+    width: ${props => {
+    if ((typeof props.style.width) === 'number') {
+      return props.style.width + 'px'
+    } else {
+      return props.style.width
+    }
+  }};
+    height: ${props => {
+    if ((typeof props.style.height) === 'number') {
+      return props.style.height + 'px'
+    } else {
+      return props.style.height
+    }
+  }};
     transform: rotate(${props => props.style.rotate}deg);
     backdrop-filter: blur(${props => props.style.blur}px);
     opacity: ${props => props.style.opacity}
@@ -38,7 +59,29 @@ const BlockComp = styled.div.attrs((props) => {
 
 function Block({ style, id, position, dev = false }) {
   const value = useContext(MSWContext)
-  const [styleNow, setStyleNow] = useState(style)
+  const [styleNow, setStyleNow] = useState(() => {
+    const scWidth = 100 / window.screen.width
+    const scHeight = 100 / document.documentElement.clientHeight
+
+    if (dev) {
+      return {
+        ...style,
+        height: style.height * 0.75,
+        width: style.width * 0.75,
+        shadowX: style.shadowX * 0.75,
+        shadowY: style.shadowY * 0.75,
+        borderRadius: style.borderRadius * 0.75
+      }
+    } else {
+      return {
+        ...style,
+        height: style.height * scHeight + 'vh',
+        width: style.width * scWidth + 'vw',
+        shadowX: style.shadowX * scWidth + 'vw',
+        shadowY: style.shadowY * scHeight + 'vh',
+      }
+    }
+  })
   const [nowPosition, setNowPosition] = useState(position)
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
   const [isHover, setIsHover] = useState(false)
@@ -50,6 +93,7 @@ function Block({ style, id, position, dev = false }) {
   }
 
   useEffect(() => {
+
     setStyleNow(() => {
       if (dev) {
         return {
@@ -60,9 +104,7 @@ function Block({ style, id, position, dev = false }) {
           shadowY: style.shadowY * 0.75,
           borderRadius: style.borderRadius * 0.75
         }
-      } else {
-        return style
-      }
+      } else return style
     })
   }, [style, style.color])
 
@@ -75,9 +117,9 @@ function Block({ style, id, position, dev = false }) {
   }, [position])
 
   useEffect(() => {
-    if(value?.itemHover === id){
+    if (value?.itemHover === id) {
       setIsHover(true)
-    }else{
+    } else {
       setIsHover(false)
     }
   }, [value?.itemHover])
