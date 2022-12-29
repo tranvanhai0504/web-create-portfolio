@@ -18,7 +18,7 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: #b9a8da;
+    background: var(--primary-color);
     position: relative;
     margin-top:25%;
 }

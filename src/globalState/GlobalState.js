@@ -78,7 +78,6 @@ function GlobalProvider({children}){
     
     //select element handle variables
     const [active, setActive] = useState(false)
-    const [selected, setSelected] = useState()
     const  activeHandle = (e) =>{
         if(e=='false')
             setActive(false)
@@ -127,7 +126,19 @@ function GlobalProvider({children}){
             return []
         }
     })
-    const [produceSelect, setProduceSelect] = useState()
+    const [produceSelect, setProduceSelect] = useState(() => {
+        const produceSelect = JSON.parse(localStorage.getItem('productSelect'))
+
+        if(produceSelect) {
+            return produceSelect
+        }else{
+            return undefined
+        }
+    })
+
+    useEffect(() => {
+        localStorage.setItem('productSelect', JSON.stringify(produceSelect))
+    }, [produceSelect])
 
     useEffect(() => {
         localStorage.setItem('produces', JSON.stringify(produces))

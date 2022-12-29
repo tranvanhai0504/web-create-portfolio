@@ -68,11 +68,9 @@ function ListItemBtn() {
 
         const file = e.target.files[0]
         getBase64(file, (result) => {
-            // console.log(result)
             value.image.current = result
         })
         MSWValue.setImg(file)
-        // value.image.current = file.preview
     }
 
 

@@ -132,6 +132,9 @@ function DetailPage({ data }) {
                     )
                 })
             }
+            <div className={style.blockOptionDetail}>
+                
+            </div>
         </div>
     )
 }

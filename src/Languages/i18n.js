@@ -11,25 +11,25 @@ const resources = {
       "Storage": "Storage",
       "About": "About",
       "getstarted": "Get Started",
-      "fth":"First time here?",
-      "try" : "Try with us!",
+      "fth": "First time here?",
+      "try": "Try with us!",
       "th": "The",
       "eas": "easiest",
       "wtm": "way to make",
       "yp": " your portfolio",
       "iad": "impressive and different!",
-      "Sigdes1":"Store and download your porfolio with our diversity templates",
-      "Sigdes2":"Impress recruiters and make your portfolio stand out from the crown",
-      "sideworkdetail":"Detail",
-      "sideworkpage":"Page",
-      "sideworktemplate":"Templates",
-      "blockbutton":"create block",
-      "txtbutton":"create text block",
-      "imgbutton":"create image block",
-      "zoombutton":"zoom-in/zoom-out",
-      "handbutton":"hand tool",
-      "homebtn":"return to home",
-      "exportbtn":"export file"
+      "Sigdes1": "Store and download your porfolio with our diversity templates",
+      "Sigdes2": "Impress recruiters and make your portfolio stand out from the crown",
+      "sideworkdetail": "Detail",
+      "sideworkpage": "Page",
+      "sideworktemplate": "Templates",
+      "blockbutton": "create block",
+      "txtbutton": "create text block",
+      "imgbutton": "create image block",
+      "zoombutton": "zoom-in/zoom-out",
+      "handbutton": "hand tool",
+      "homebtn": "return to home",
+      "exportbtn": "export file"
 
 
 
@@ -42,25 +42,25 @@ const resources = {
       "Storage": "Kho lưu trữ",
       "About": "Về chúng tôi",
       "getstarted": "Bắt đầu",
-      "fth":"Lần đầu đến đây?",
+      "fth": "Lần đầu đến đây?",
       "try": "Thử ngay!",
       "th": "Cách",
       "eas": "dễ dàng nhất",
       "wtm": " để tạo",
-      "yp" : "một chiếc portfolio",
+      "yp": "một chiếc portfolio",
       "iad": "ấn tượng và khác bọt!",
-      "Sigdes1":"Lưu trữ và tải về các mẫu portfolio đa dạng của chúng tôi.",
-      "Sigdes2":"Khiến các nhà tuyển dụng ấn tượng và nổi bật hơn trong đám đông",
-      "sideworkdetail":"Chi tiết",
-      "sideworkpage":"Trang",
-      "sideworktemplate":"Mẫu",
-      "blockbutton":"tạo block",
-      "txtbutton":"tạo chữ",
-      "imgbutton":"tạo ảnh",
-      "zoombutton":"phóng to/thu nhỏ",
-      "handbutton":"di chuyển",
-      "homebtn":"Trở về màn hình chính",
-      "exportbtn":"xuất ra file"
+      "Sigdes1": "Lưu trữ và tải về các mẫu portfolio đa dạng của chúng tôi.",
+      "Sigdes2": "Khiến các nhà tuyển dụng ấn tượng và nổi bật hơn trong đám đông",
+      "sideworkdetail": "Chi tiết",
+      "sideworkpage": "Trang",
+      "sideworktemplate": "Mẫu",
+      "blockbutton": "tạo block",
+      "txtbutton": "tạo chữ",
+      "imgbutton": "tạo ảnh",
+      "zoombutton": "phóng to/thu nhỏ",
+      "handbutton": "di chuyển",
+      "homebtn": "Trở về màn hình chính",
+      "exportbtn": "xuất ra file"
 
 
     }
@@ -80,4 +80,4 @@ i18n
     }
   });
 
-  export default i18n;
+export default i18n;

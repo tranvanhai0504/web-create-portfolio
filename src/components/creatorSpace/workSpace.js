@@ -185,7 +185,7 @@ function WorkSpace({ listItem, page, dev = false }) {
                     },
                     position: { x: 0, y: 0 },
                     text: { text: 'link' },
-                    href: { href: 'google.com' }
+                    href: { href: 'http://www.google.com' }
                 }
                 break
             }

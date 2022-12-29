@@ -11,6 +11,7 @@ function MSWProvider({children}){
     const [isDragging, setIsDragging] = useState(false)
     const [showResetBtn, setShowResetBtn] = useState(false)
     const [img, setImg] = useState(null)
+    const [isCancelDelete, setIsCancelDelete] = useState()
     const image = useRef()
 
     const value = {
@@ -27,8 +28,9 @@ function MSWProvider({children}){
         setImg,
         showResetBtn,
         setShowResetBtn,
-        forceUpdate: Globalvalue.forceUpdate
-
+        forceUpdate: Globalvalue.forceUpdate,
+        isCancelDelete,
+        setIsCancelDelete
     }
 
     return (

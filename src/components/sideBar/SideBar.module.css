@@ -12,6 +12,7 @@
     /* IE 10 and IE 11 */
     user-select: none;
     /* Standard syntax */
+    border-right: 1px solid #ccc;
 }
 
 .headerSideBar {
@@ -32,14 +33,16 @@
     justify-content: center;
     padding: 5px 15px;
     cursor: pointer;
-    }
+}
 
 .btnHeaderSideBar:hover {
     background-color: var(--grey-secondary);
 }
 
 .btnHeaderSideBar.actived {
-    color: red;
+    background: -webkit-linear-gradient(45deg, #112a00, #00542e, #009f88, #008690, #0099b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .sideBarContent {

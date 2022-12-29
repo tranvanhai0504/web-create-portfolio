@@ -69,6 +69,7 @@ function Button({ style, id, position, name, dev = false, href }) {
             }
         } else return position
     })
+    const [prevPosition, setPrevPosition] = useState(position)
     const [styleNow, setStyleNow] = useState(style)
     const [nowTarget, setNowTarget] = useState(value?.itemTarget)
 
@@ -104,7 +105,16 @@ function Button({ style, id, position, name, dev = false, href }) {
         setNowPosition({ x: position.x, y: position.y })
     }, [position])
 
+    useEffect(() => {
+        console.log(prevPosition)
+        position.x = prevPosition.x
+        position.y = prevPosition.y
+        setNowPosition(JSON.parse(JSON.stringify(prevPosition)))
+    }, [value?.isCancelDelete])
+
     function draggingStart(e) {
+        console.log(nowPosition)
+        setPrevPosition(nowPosition)
         value?.setIsDragging(true);
     }
 

@@ -2,7 +2,6 @@
     height: calc(100vh - 9vh);
     width: 100%;
     display: flex;
-    /* z-index: -3; */
 }
 
 .mainSpaceWorkContainer{

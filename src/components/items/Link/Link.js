@@ -140,7 +140,7 @@ function Link({ style, id, position, text, href, dev = false }) {
 
     <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id) || canEditable} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
       <div className={clsx(nowTarget === id && 'targetText')} type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content',  zIndex: style.zIndex }}>
-        <Linkcomp href={href} isPrevent={canEditable ? 'auto' : 'none'} contentEditable={canEditable} disabled={!canEditable} style={styleNow} ref={textInput} onKeyUp={(e) => contentHandle(e)} >{!dev && content}</Linkcomp>
+        <Linkcomp href={href} isPrevent={dev ? 'none' : 'auto'} contentEditable={canEditable} disabled={!canEditable} style={styleNow} ref={textInput} onKeyUp={(e) => contentHandle(e)} >{!dev && content}</Linkcomp>
       </div>
     </Draggable>
   )

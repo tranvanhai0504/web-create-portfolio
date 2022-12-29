@@ -16,6 +16,7 @@ function ExportButton() {
     function makeDocument() {
 
         var zip = new JSZip();
+        let nameProduct
 
         data.data.forEach((page, index) => {
             page.listItem.forEach(item => {
@@ -24,14 +25,20 @@ function ExportButton() {
                 }
             })
 
-            let doc = document.implementation.createHTMLDocument("New Document");
+            value.produces.forEach(product => {
+                if(product.id === value.produceSelect){
+                    nameProduct = product.name
+                }
+            })
+
+            let doc = document.implementation.createHTMLDocument(`${nameProduct}`);
             const content = ReactDOMServer.renderToString(<CreatorSpace style={page.style} id={page.id} listItem={page.listItem} render={true}></CreatorSpace>)
             const styleTags = document.querySelectorAll('style')
-            styleTags.forEach(tag => {
-                doc.head.appendChild(tag.cloneNode(true))
+            styleTags.forEach((tag, index) => {
+                if(!tag.classList.contains('__web-inspector-hide-shortcut__'))
+                    doc.head.appendChild(tag.cloneNode(true))
             })
             var newContent = content.replace(/&quot;/g, '')
-            console.log(newContent)
             doc.body.innerHTML = newContent
 
             //now get it's contents and place into a blob
@@ -48,7 +55,7 @@ function ExportButton() {
         zip.generateAsync({ type: "blob" })
             .then(function (content) {
                 // Force down of the Zip file
-                saveAs(content, `${value.produceSelect}.zip`);
+                saveAs(content, `${nameProduct}.zip`);
             });
     }
 

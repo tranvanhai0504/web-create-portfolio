@@ -9,7 +9,7 @@ import Trashcan from './Trashcan/Trashcan'
 import { useTranslation } from 'react-i18next'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
-function SideBar() { 
+function SideBar({setModalOn}) { 
     const { t, i18n } = useTranslation();
     const btns = [
     {
@@ -59,7 +59,7 @@ function SideBar() {
                 {activedBtn === 1 && <DetailObject data={values} />}
                 {activedBtn === 2 && <OptionPage data={values} />}
                 {activedBtn === 3 && <TemplateOption data={values} />}
-                {(values.isDragging || isEnterTrash) && <Trashcan setIsEnterTrash={setIsEnterTrash}></Trashcan>}
+                {(values.isDragging || isEnterTrash) && <Trashcan setModalOn={setModalOn} setIsEnterTrash={setIsEnterTrash}></Trashcan>}
             </div>
         </div>
     )

@@ -3,7 +3,6 @@ import { useState, useEffect, memo } from 'react';
 import styled from 'styled-components'
 import Draggable from 'react-draggable';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
-import { GlobalContext } from '../../../globalState/GlobalState';
 import { useContext } from 'react'
 
 const BlockComp = styled.div.attrs((props) => {

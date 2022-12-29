@@ -38,7 +38,6 @@ const TextComp = styled.p.attrs((props) => ({
   text-shadow: ${props => { return (props.style.shadow === 'none' || props.style.shadow === 'blurBG') ? props.style.shadow : `${props.style.shadowX}px ${props.style.shadowY}px ${props.style.blur}px ${props.style.shadowColor} ${props.style.shadowInner ? 'inset' : ''}  !important` }};
   overflow: hidden;
   word-wrap: break-word;
-
   .targetText & {
     border: solid 2px rgb(42, 42, 255)
   }
