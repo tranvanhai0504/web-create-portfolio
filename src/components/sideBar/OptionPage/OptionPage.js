@@ -5,6 +5,7 @@ import makeid from '../../../utils/makeid'
 import { FiMoreVertical } from "react-icons/fi";
 import Menu from '../../menuCustom/Menu'
 import clsx from 'clsx'
+import { t } from 'i18next';
 
 function OptionPage({ data }) {
 
@@ -238,11 +239,11 @@ function OptionPage({ data }) {
 
     let listButtonMenu = useRef([
         {
-            name: 'Delete',
+            name: t('Delete'),
             func: handleClickBtnMenu
         },
         {
-            name: 'Copy',
+            name: t('Copy'),
             func: handleClickBtnMenu
         }
     ])

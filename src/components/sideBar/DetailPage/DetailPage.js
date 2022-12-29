@@ -1,36 +1,38 @@
 import style from './DetailPage.module.css'
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
 import StringTooltip from '../../tooltip/StringTooltip/StringTooltip'
 import ColorSetting from '../DetailObject/colorSetting/ColorSetting'
 
-const blockSetting = [
-    {
-        name: 'Page option',
-        element: ({ detailData = {}, handleClick, handleChangeColor }) => {
-            return (
-                <div className={style.blockContain}>
-                    <div className={clsx(style.inputData, style.fillConfigBlock)}>
-                        <p>{detailData.style?.color?.type}</p>
-                        <ColorSetting hideControls={detailData.type === 'text'} data={detailData} handleChangeColor={handleChangeColor} />
-                    </div>
-                    <div className={clsx(style.fillConfigBlock)}>
-                        <StringTooltip position={'bottom'} content={'A page block equal to <br> your screen size'}>
-                            <p>Page Block</p>
-                        </StringTooltip>
-                        <div className={clsx(style.numPageBlockContainer)}>
-                            <button className={style.blockNumBtn} id="add" onClick={handleClick}>+</button>
-                            <input className={style.blockNum} value={detailData.style?.height} type="number" disabled={true}></input>
-                            <button className={style.blockNumBtn} id="sub" onClick={handleClick}>-</button>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-    },
-]
 
 function DetailPage({ data }) {
+    const {t,i18n}=useTranslation()
+    const blockSetting = [
+        {
+            name: t('Page option'),
+            element: ({ detailData = {}, handleClick, handleChangeColor }) => {
+                return (
+                    <div className={style.blockContain}>
+                        <div className={clsx(style.inputData, style.fillConfigBlock)}>
+                            <p>{detailData.style?.color?.type}</p>
+                            <ColorSetting hideControls={detailData.type === 'text'} data={detailData} handleChangeColor={handleChangeColor} />
+                        </div>
+                        <div className={clsx(style.fillConfigBlock)}>
+                            <StringTooltip position={'bottom'} content={t('Page option desc')}>
+                                <p>{t('Page block')}</p>
+                            </StringTooltip>
+                            <div className={clsx(style.numPageBlockContainer)}>
+                                <button className={style.blockNumBtn} id="add" onClick={handleClick}>+</button>
+                                <input className={style.blockNum} value={detailData.style?.height} type="number" disabled={true}></input>
+                                <button className={style.blockNumBtn} id="sub" onClick={handleClick}>-</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        },
+    ]
     const selectStyle = () => {
         const pageSelect = data.pageSelect
 

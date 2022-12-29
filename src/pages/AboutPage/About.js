@@ -1,5 +1,6 @@
 import styles from './AboutPage.module.css'
 import images from '../../assets/images.png'
+import { useTranslation } from 'react-i18next'
 
 const cards = [
     {
@@ -26,6 +27,7 @@ const cards = [
 ]
 
 function Card({ card }) {
+    const {t,i18n} = useTranslation()
     return (
         <div className={styles.card}>
             <div className={styles.profilecontainer}>
@@ -36,13 +38,13 @@ function Card({ card }) {
             <div className={styles.name}>
                 {card.name}
             </div>
-            <div className={styles.content}>Developer</div>
-            <div className={styles.about}>About me</div>
+            <div className={styles.content}>{t('Student')}</div>
+            <div className={styles.about}>{t('About me')}</div>
             <div className={styles.Aboutcontent}>
                 {card.describe}
             </div>
             <a target="_blank" rel="noopener noreferrer" href={card.linkcontact} className={styles.contactBtn}>
-                Contact me
+                 {t('Contact me')}
             </a>
         </div>
     )

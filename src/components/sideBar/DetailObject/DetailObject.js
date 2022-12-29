@@ -12,226 +12,227 @@ import { MdOutlineRoundedCorner, MdOutlineRotate90DegreesCcw } from "react-icons
 import { RxBorderWidth, RxAlignBottom, RxAlignCenterVertically, RxAlignTop } from "react-icons/rx";
 
 
-const blockSetting = [
-    {
-        name: 'Position',
-        element: ({ dataSelect = {}, handleChange }) => {
-            return (
-                <div className={style.blockContain}>
-                    <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.position?.x} id="x" className={style.inputData} /></label>
-                    <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.position?.y} id="y" className={style.inputData} /></label>
-                    <label className={style.labelCoverInput}><p className={style.icon}>W</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.width} id="w" className={style.inputData} /></label>
-                    <label className={style.labelCoverInput}><p className={style.icon}>H</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.height} id="h" className={style.inputData} /></label>
-                    <StringTooltip content={'rotation'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
-                        <MdOutlineRotate90DegreesCcw className={style.icon} />
-                        <input autoComplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
-                    </StringTooltip>
-                    {dataSelect.type !== 'text' && dataSelect.type !== 'link'?
-                        (<StringTooltip content={'corner radius'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
-                            <MdOutlineRoundedCorner className={style.icon} />
-                            <input autoComplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
-                        </StringTooltip>)
-                        :
-                        (<div className={style.fakeInput}></div>)
-                    }
-                </div>
-            )
-        }
-    },
-    {
-        name: 'Layer',
-        element: ({ dataSelect = {}, handleChange, handleClick }) => {
-            return (
-                <div className={style.blockContain}>
-                    <StringTooltip position={'bottom'} content={'Element with higher stats<br/> can be on top of element with lower stats'}>
-                        <p className={style.contain_p}>layer number: {dataSelect.style?.zIndex}</p>
-                    </StringTooltip>
-                    <div className={style.layerButtonContainer}>
-                        <button data-act={'increase'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>increase</button>
-                        <button data-act={'decrease'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>decrease</button>
-                    </div>
-                    <div className={style.opacityButtonContainer}>
-                        <StringTooltip style={{ marginTop: '7px', marginRight: '7px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} position={'bottom'} content={'Opacity'}>
-                            <FiEye />
-                        </StringTooltip>
-                        <input autoComplete="off" id="o" onChange={handleChange} value={Math.round(dataSelect.style?.opacity * 100)} className={style.btnSettingOpacity} type="number" min="0" max="100" size="5"></input>
-                    </div>
-                </div>
-            )
-        }
-    },
-    {
-        name: 'Fill',
-        element: ({ dataSelect = {}, handleChangeColor }) => {
-            return (
-                <div className={style.blockContain}>
-                    <div className={clsx(style.inputData, style.fillConfigBlock)}>
-                        <p>{dataSelect.style?.color?.type}</p>
-                        <ColorSetting hideControls={dataSelect.type === 'text'} data={dataSelect} handleChangeColor={handleChangeColor} />
-                    </div>
-                    {dataSelect.type === 'button' && (
-                        <div className={clsx(style.inputData, style.fillConfigBlock)}>
-                            <p>Text color</p>
-                            <ColorSetting hideControls={true} type={'colorBtn'} data={dataSelect} handleChangeColor={handleChangeColor} />
-                        </div>
-                    )}
-                </div>
-            )
-        }
-    },
-    {
-        name: 'Text',
-        element: ({ dataSelect = {}, handleChange, handleClick }) => {
-            return (
-                <div className={style.blockContain}>
-                    <select value={dataSelect.style?.fontFamily} onChange={handleChange} id="fm" className={clsx(style.inputData)}>
-                        <option value='"Times New Roman"'>Times New Roman</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Garamond">Garamond</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Helvetica">Helvetica</option>
-                        <option value='"Courier New"'>Courier New</option>
-                        <option value="Lucida Console">Lucida Console</option>
-                        <option value="Monaco">Monaco</option>
-                        <option value='"Brush Script MT"'>Brush Script MT</option>
-                        <option value='"Lucida Handwriting"'>Lucida Handwriting</option>
-                        <option value="Copperplate">Copperplate</option>
-                        <option value="Papyrus">Papyrus</option>
-                    </select>
-                    <div className={style.btnListText}>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.fontWeight > 500 && style.active)} data-act={'textBold'}><FiBold /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textItalic && style.active)} data-act={'textIta'}><FiItalic /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textUnderLine && style.active)} data-act={'textUnd'}><FiUnderline /></button>
-                    </div>
-                    <input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.fontSize} id="fz" className={clsx(style.inputData, style.inputFontSize)} />
-                    <div className={clsx(style.btnListText, style.btnTextAlignList)}>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'center' && style.active)} data-act={'textACen'}><FiAlignCenter /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'left' && style.active)} data-act={'textALef'}><FiAlignLeft /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'right' && style.active)} data-act={'textArig'}><FiAlignRight /></button>
-                    </div>
-                    <div className={clsx(style.btnListText, style.btnTextAlignList, style.offBorder)}>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'flex-end' && style.active)} data-act={'textABott'}><RxAlignBottom /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'center' && style.active)} data-act={'textACenVer'}><RxAlignCenterVertically /></button>
-                        <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'flex-start' && style.active)} data-act={'textATop'}><RxAlignTop /></button>
-                    </div>
-                    {dataSelect.type === 'link' && (
-                        <label className={clsx(style.labelCoverInput, style.coverLinkInput)}><p className={style.icon}>URL</p><input autoComplete="off" type="url" onChange={handleChange} value={dataSelect.href?.href} id="hr" className={clsx(style.inputData, style.inputLink)} /></label>
-                    )}
-                </div>
-            )
-        }
-    },
-    {
-        name: 'Border',
-        element: ({ dataSelect = {}, handleClick, handleChange, handleChangeColor, setBorderSide, showMenu, setShowMenu }) => {
-            return (
-                <div className={style.blockContain}>
-                    {dataSelect.style?.border === 'unset' ? (
-                        <div onClick={handleClick} data-act="addborder" className={clsx(style.inputData, style.btnAddBorder)}><FiPlus /></div>
-                    ) : (
-                        <div className={clsx(style.fillConfigBlock)}>
-                            <div className={clsx(style.fillConfigBlock)}>
-                                <select onChange={handleChange} value={dataSelect.style?.boxSizing} id="sb" className={clsx(style.selectTypeBox, style.inputData)}>
-                                    <option value="content-box">outside</option>
-                                    <option value="border-box">inside</option>
-                                    <option value="unset">unset</option>
-                                </select>
-                            </div>
-                            <select value={dataSelect.style?.borderType} onChange={handleChange} id="bt" className={clsx(style.selectTypeBoder, style.inputData)}>
-                                <option value="solid">solid</option>
-                                <option value="dashed">dashed</option>
-                                <option value="dotted">dotted</option>
-                                <option value="double">double</option>
-                                <option value="groove">groove</option>
-                                <option value="ridge">ridge</option>
-                                <option value="inset">inset</option>
-                            </select>
-                            <div className={style.changeBorderColor}>
-                                <p>{dataSelect.style?.borderColor}</p>
-                                <ColorSetting hideControls={true} type={'border'} data={dataSelect} handleChangeColor={handleChangeColor} position={dataSelect.type === 'button'} />
-                            </div>
-                            <div className={style.sizeSettingContainer}>
-                                <label className={style.labelCoverInput}><input min="1" type="number" id="bs" onChange={handleChange} value={dataSelect.style?.borderSize} className={clsx(style.inputData, style.inputBorderSize)}></input><RxBorderWidth className={style.iconRight} /></label>
-                                <button onClick={() => { setShowMenu(!showMenu) }} className={clsx(style.selectTypeBoder, style.inputData)}>
-                                    {showMenu && <Menu
-                                        direction={"down"}
-                                        isAbsolute={true}
-                                        position={{ x: 0, y: 15, id: 'a' }}
-                                        children={[
-                                            {
-                                                name: 'top',
-                                                icon: !dataSelect.style?.unBorderTop && <FiCheck />,
-                                                func: setBorderSide
-                                            },
-                                            {
-                                                name: 'bottom',
-                                                icon: !dataSelect.style?.unBorderBottom && <FiCheck />,
-                                                func: setBorderSide
-                                            },
-                                            {
-                                                name: 'left',
-                                                icon: !dataSelect.style?.unBorderLeft && <FiCheck />,
-                                                func: setBorderSide
-                                            },
-                                            {
-                                                name: 'right',
-                                                icon: !dataSelect.style?.unBorderRight && <FiCheck />,
-                                                func: setBorderSide
-                                            }
-                                        ]}
-                                    />}
-                                    set side
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            )
-        }
-    },
-    {
-        name: 'Effect',
-        element: ({ dataSelect = {}, handleChangeColor, handleChange, handleClick }) => {
-            return (
-                <div className={style.blockContain}>
-                    {(dataSelect.style?.shadow === 'none') ? (
-                        <div onClick={handleClick} data-act="addEffect" className={clsx(style.inputData, style.btnAddBorder)}><FiPlus /></div>
-                    ) : (
-                        <>
-                            <select onChange={handleChange} id="st" className={clsx(style.inputData)}>
-                                <option value="shadowO">Shadow outer</option>
-                                {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
-                                    <option value='shadowI'>Shadow inner</option>
-                                )}
-                                {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
-                                    <option value="blurBG">Blur Background</option>
-                                )}
-                                <option value="unset">Unset</option>
-                            </select>
-
-                            {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' &&
-                                <div className={style.containerPositionShadow}>
-                                    <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>
-                                    <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowY} id="sy" className={style.inputData} /></label>
-                                </div>
-                            }
-                            <div className={clsx(style.containerPositionShadow, style.coverInputBlur)}>
-                                <label className={clsx(style.labelCoverInput)}><p className={style.icon}>Blur</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.blur} id="bl" className={style.inputData} /></label>
-                                {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' && (<div className={clsx(style.changeBorderColor, style.changeShadowColor)}>
-                                    <p className={style.colorShadow}>{dataSelect.style?.shadowColor}</p>
-                                    <ColorSetting hideControls={true} type={'shadow'} data={dataSelect} handleChangeColor={handleChangeColor} position={true} />
-                                </div>)}
-                            </div>
-                        </>
-                    )}
-                </div>
-            )
-        }
-    },
-]
 
 function DetailObject({ data }) {
+    const {t,i18n}=useTranslation()
+    const blockSetting = [
+        {
+            name: t('Position'),
+            element: ({ dataSelect = {}, handleChange }) => {
+                return (
+                    <div className={style.blockContain}>
+                        <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.position?.x} id="x" className={style.inputData} /></label>
+                        <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.position?.y} id="y" className={style.inputData} /></label>
+                        <label className={style.labelCoverInput}><p className={style.icon}>W</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.width} id="w" className={style.inputData} /></label>
+                        <label className={style.labelCoverInput}><p className={style.icon}>H</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.height} id="h" className={style.inputData} /></label>
+                        <StringTooltip content={t('rotation')} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
+                            <MdOutlineRotate90DegreesCcw className={style.icon} />
+                            <input autoComplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
+                        </StringTooltip>
+                        {dataSelect.type !== 'text' && dataSelect.type !== 'link'?
+                            (<StringTooltip content={t('corner radius')} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
+                                <MdOutlineRoundedCorner className={style.icon} />
+                                <input autoComplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
+                            </StringTooltip>)
+                            :
+                            (<div className={style.fakeInput}></div>)
+                        }
+                    </div>
+                )
+            }
+        },
+        {
+            name: t('Layer'),
+            element: ({ dataSelect = {}, handleChange, handleClick }) => {
+                return (
+                    <div className={style.blockContain}>
+                        <StringTooltip position={'bottom'} content={t('layer desc')}>
+                            <p className={style.contain_p}>{t('layer number')} {dataSelect.style?.zIndex}</p>
+                        </StringTooltip>
+                        <div className={style.layerButtonContainer}>
+                            <button data-act={'increase'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>{t('increase')}</button>
+                            <button data-act={'decrease'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>{t('decrease')}</button>
+                        </div>
+                        <div className={style.opacityButtonContainer}>
+                            <StringTooltip style={{ marginTop: '7px', marginRight: '7px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} position={'bottom'} content={t('opacity')}>
+                                <FiEye />
+                            </StringTooltip>
+                            <input autoComplete="off" id="o" onChange={handleChange} value={Math.round(dataSelect.style?.opacity * 100)} className={style.btnSettingOpacity} type="number" min="0" max="100" size="5"></input>
+                        </div>
+                    </div>
+                )
+            }
+        },
+        {
+            name: t('Fill'),
+            element: ({ dataSelect = {}, handleChangeColor }) => {
+                return (
+                    <div className={style.blockContain}>
+                        <div className={clsx(style.inputData, style.fillConfigBlock)}>
+                            <p>{dataSelect.style?.color?.type}</p>
+                            <ColorSetting hideControls={dataSelect.type === 'text'} data={dataSelect} handleChangeColor={handleChangeColor} />
+                        </div>
+                        {dataSelect.type === 'button' && (
+                            <div className={clsx(style.inputData, style.fillConfigBlock)}>
+                                <p>Text color</p>
+                                <ColorSetting hideControls={true} type={'colorBtn'} data={dataSelect} handleChangeColor={handleChangeColor} />
+                            </div>
+                        )}
+                    </div>
+                )
+            }
+        },
+        {
+            name: t('Text'),
+            element: ({ dataSelect = {}, handleChange, handleClick }) => {
+                return (
+                    <div className={style.blockContain}>
+                        <select value={dataSelect.style?.fontFamily} onChange={handleChange} id="fm" className={clsx(style.inputData)}>
+                            <option value='"Times New Roman"'>Times New Roman</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Garamond">Garamond</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value='"Courier New"'>Courier New</option>
+                            <option value="Lucida Console">Lucida Console</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value='"Brush Script MT"'>Brush Script MT</option>
+                            <option value='"Lucida Handwriting"'>Lucida Handwriting</option>
+                            <option value="Copperplate">Copperplate</option>
+                            <option value="Papyrus">Papyrus</option>
+                        </select>
+                        <div className={style.btnListText}>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.fontWeight > 500 && style.active)} data-act={'textBold'}><FiBold /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textItalic && style.active)} data-act={'textIta'}><FiItalic /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textUnderLine && style.active)} data-act={'textUnd'}><FiUnderline /></button>
+                        </div>
+                        <input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.fontSize} id="fz" className={clsx(style.inputData, style.inputFontSize)} />
+                        <div className={clsx(style.btnListText, style.btnTextAlignList)}>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'center' && style.active)} data-act={'textACen'}><FiAlignCenter /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'left' && style.active)} data-act={'textALef'}><FiAlignLeft /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.textAlign === 'right' && style.active)} data-act={'textArig'}><FiAlignRight /></button>
+                        </div>
+                        <div className={clsx(style.btnListText, style.btnTextAlignList, style.offBorder)}>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'flex-end' && style.active)} data-act={'textABott'}><RxAlignBottom /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'center' && style.active)} data-act={'textACenVer'}><RxAlignCenterVertically /></button>
+                            <button onClick={handleClick} className={clsx(style.btn, dataSelect.style.justifyContent === 'flex-start' && style.active)} data-act={'textATop'}><RxAlignTop /></button>
+                        </div>
+                        {dataSelect.type === 'link' && (
+                            <label className={clsx(style.labelCoverInput, style.coverLinkInput)}><p className={style.icon}>URL</p><input autoComplete="off" type="url" onChange={handleChange} value={dataSelect.href?.href} id="hr" className={clsx(style.inputData, style.inputLink)} /></label>
+                        )}
+                    </div>
+                )
+            }
+        },
+        {
+            name: t('Border'),
+            element: ({ dataSelect = {}, handleClick, handleChange, handleChangeColor, setBorderSide, showMenu, setShowMenu }) => {
+                return (
+                    <div className={style.blockContain}>
+                        {dataSelect.style?.border === 'unset' ? (
+                            <div onClick={handleClick} data-act="addborder" className={clsx(style.inputData, style.btnAddBorder)}><FiPlus /></div>
+                        ) : (
+                            <div className={clsx(style.fillConfigBlock)}>
+                                <div className={clsx(style.fillConfigBlock)}>
+                                    <select onChange={handleChange} value={dataSelect.style?.boxSizing} id="sb" className={clsx(style.selectTypeBox, style.inputData)}>
+                                        <option value="content-box">{t('border outside')}</option>
+                                        <option value="border-box">{t('border inside')}</option>
+                                        <option value="unset">{t('unset')}</option>
+                                    </select>
+                                </div>
+                                <select value={dataSelect.style?.borderType} onChange={handleChange} id="bt" className={clsx(style.selectTypeBoder, style.inputData)}>
+                                    <option value="solid">solid</option>
+                                    <option value="dashed">dashed</option>
+                                    <option value="dotted">dotted</option>
+                                    <option value="double">double</option>
+                                    <option value="groove">groove</option>
+                                    <option value="ridge">ridge</option>
+                                    <option value="inset">inset</option>
+                                </select>
+                                <div className={style.changeBorderColor}>
+                                    <p>{dataSelect.style?.borderColor}</p>
+                                    <ColorSetting hideControls={true} type={'border'} data={dataSelect} handleChangeColor={handleChangeColor} position={dataSelect.type === 'button'} />
+                                </div>
+                                <div className={style.sizeSettingContainer}>
+                                    <label className={style.labelCoverInput}><input min="1" type="number" id="bs" onChange={handleChange} value={dataSelect.style?.borderSize} className={clsx(style.inputData, style.inputBorderSize)}></input><RxBorderWidth className={style.iconRight} /></label>
+                                    <button onClick={() => { setShowMenu(!showMenu) }} className={clsx(style.selectTypeBoder, style.inputData)}>
+                                        {showMenu && <Menu
+                                            direction={"down"}
+                                            isAbsolute={true}
+                                            position={{ x: 0, y: 15, id: 'a' }}
+                                            children={[
+                                                {
+                                                    name: t('top'),
+                                                    icon: !dataSelect.style?.unBorderTop && <FiCheck />,
+                                                    func: setBorderSide
+                                                },
+                                                {
+                                                    name: t('bottom'),
+                                                    icon: !dataSelect.style?.unBorderBottom && <FiCheck />,
+                                                    func: setBorderSide
+                                                },
+                                                {
+                                                    name: t('left'),
+                                                    icon: !dataSelect.style?.unBorderLeft && <FiCheck />,
+                                                    func: setBorderSide
+                                                },
+                                                {
+                                                    name: t('right'),
+                                                    icon: !dataSelect.style?.unBorderRight && <FiCheck />,
+                                                    func: setBorderSide
+                                                }
+                                            ]}
+                                        />}
+                                        {t('set side')}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )
+            }
+        },
+        {
+            name: t('Effect'),
+            element: ({ dataSelect = {}, handleChangeColor, handleChange, handleClick }) => {
+                return (
+                    <div className={style.blockContain}>
+                        {(dataSelect.style?.shadow === 'none') ? (
+                            <div onClick={handleClick} data-act="addEffect" className={clsx(style.inputData, style.btnAddBorder)}><FiPlus /></div>
+                        ) : (
+                            <>
+                                <select onChange={handleChange} id="st" className={clsx(style.inputData)}>
+                                    <option value="shadowO">{t('Shadow outer')}</option>
+                                    {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
+                                        <option value='shadowI'>{t('Shadow inner')}</option>
+                                    )}
+                                    {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
+                                        <option value="blurBG">{t('Blur background')}</option>
+                                    )}
+                                    <option value="unset">{t('unset')}</option>
+                                </select>
+    
+                                {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' &&
+                                    <div className={style.containerPositionShadow}>
+                                        <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>
+                                        <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowY} id="sy" className={style.inputData} /></label>
+                                    </div>
+                                }
+                                <div className={clsx(style.containerPositionShadow, style.coverInputBlur)}>
+                                    <label className={clsx(style.labelCoverInput)}><p className={style.icon}>{t('Blur')}</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.blur} id="bl" className={style.inputData} /></label>
+                                    {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' && (<div className={clsx(style.changeBorderColor, style.changeShadowColor)}>
+                                        <p className={style.colorShadow}>{dataSelect.style?.shadowColor}</p>
+                                        <ColorSetting hideControls={true} type={'shadow'} data={dataSelect} handleChangeColor={handleChangeColor} position={true} />
+                                    </div>)}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                )
+            }
+        },
+    ]
     const [dataSelect, setDataSelect] = useState(selectStyle())
     const [showMenu, setShowMenu] = useState(false)
 
