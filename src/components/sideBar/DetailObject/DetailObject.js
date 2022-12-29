@@ -5,18 +5,19 @@ import StringTooltip from '../../tooltip/StringTooltip/StringTooltip'
 import { FiPlus } from "react-icons/fi";
 import ColorSetting from './colorSetting/ColorSetting'
 import Menu from '../../menuCustom/Menu'
+import { useTranslation } from 'react-i18next'
 import DetailPage from '../DetailPage/DetailPage'
 import { FiEye, FiCheck, FiBold, FiItalic, FiUnderline, FiAlignCenter, FiAlignLeft, FiAlignRight } from "react-icons/fi";
 import { MdOutlineRoundedCorner, MdOutlineRotate90DegreesCcw } from "react-icons/md";
 import { RxBorderWidth, RxAlignBottom, RxAlignCenterVertically, RxAlignTop } from "react-icons/rx";
 
-function DetailObject({ data }) {
-    const [dataSelect, setDataSelect] = useState(selectStyle())
-    const [showMenu, setShowMenu] = useState(false)
 
+
+function DetailObject({ data }) {
+    const {t,i18n}=useTranslation()
     const blockSetting = [
         {
-            name: 'Position',
+            name: t('Position'),
             element: ({ dataSelect = {}, handleChange }) => {
                 return (
                     <div className={style.blockContain}>
@@ -24,12 +25,12 @@ function DetailObject({ data }) {
                         <label className={style.labelCoverInput}><p className={style.icon}>Y</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.position?.y} id="y" className={style.inputData} /></label>
                         <label className={style.labelCoverInput}><p className={style.icon}>W</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.width} id="w" className={style.inputData} /></label>
                         <label className={style.labelCoverInput}><p className={style.icon}>H</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style?.height} id="h" className={style.inputData} /></label>
-                        <StringTooltip content={'rotation'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
+                        <StringTooltip content={t('rotation')} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
                             <MdOutlineRotate90DegreesCcw className={style.icon} />
                             <input autoComplete="off" type="number" min="-360" max="360" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.rotate} id="r" />
                         </StringTooltip>
-                        {dataSelect.type !== 'text' && dataSelect.type !== 'link' ?
-                            (<StringTooltip content={'corner radius'} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
+                        {dataSelect.type !== 'text' && dataSelect.type !== 'link'?
+                            (<StringTooltip content={t('corner radius')} style={{ width: '41%' }} position={"bottom"} className={style.inputData}>
                                 <MdOutlineRoundedCorner className={style.icon} />
                                 <input autoComplete="off" disabled={dataSelect.type === 'text'} type="number" min="0" onChange={handleChange} style={{ cursor: 'default', width: '96%', border: 'unset', textAlign: 'center' }} value={dataSelect.style?.borderRadius} id="b" />
                             </StringTooltip>)
@@ -41,19 +42,19 @@ function DetailObject({ data }) {
             }
         },
         {
-            name: 'Layer',
+            name: t('Layer'),
             element: ({ dataSelect = {}, handleChange, handleClick }) => {
                 return (
                     <div className={style.blockContain}>
-                        <StringTooltip position={'bottom'} content={'Element with higher stats<br/> can be on top of element with lower stats'}>
-                            <p className={style.contain_p}>layer number: {dataSelect.style?.zIndex}</p>
+                        <StringTooltip position={'bottom'} content={t('layer desc')}>
+                            <p className={style.contain_p}>{t('layer number')} {dataSelect.style?.zIndex}</p>
                         </StringTooltip>
                         <div className={style.layerButtonContainer}>
-                            <button data-act={'increase'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>increase</button>
-                            <button data-act={'decrease'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>decrease</button>
+                            <button data-act={'increase'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>{t('increase')}</button>
+                            <button data-act={'decrease'} value={dataSelect.style?.zIndex} onClick={handleClick} className={style.btnSettingLayer}>{t('decrease')}</button>
                         </div>
                         <div className={style.opacityButtonContainer}>
-                            <StringTooltip style={{ marginTop: '7px', marginRight: '7px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} position={'bottom'} content={'Opacity'}>
+                            <StringTooltip style={{ marginTop: '7px', marginRight: '7px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} position={'bottom'} content={t('opacity')}>
                                 <FiEye />
                             </StringTooltip>
                             <input autoComplete="off" id="o" onChange={handleChange} value={Math.round(dataSelect.style?.opacity * 100)} className={style.btnSettingOpacity} type="number" min="0" max="100" size="5"></input>
@@ -63,7 +64,7 @@ function DetailObject({ data }) {
             }
         },
         {
-            name: 'Fill',
+            name: t('Fill'),
             element: ({ dataSelect = {}, handleChangeColor }) => {
                 return (
                     <div className={style.blockContain}>
@@ -82,7 +83,7 @@ function DetailObject({ data }) {
             }
         },
         {
-            name: 'Text',
+            name: t('Text'),
             element: ({ dataSelect = {}, handleChange, handleClick }) => {
                 return (
                     <div className={style.blockContain}>
@@ -125,7 +126,7 @@ function DetailObject({ data }) {
             }
         },
         {
-            name: 'Border',
+            name: t('Border'),
             element: ({ dataSelect = {}, handleClick, handleChange, handleChangeColor, setBorderSide, showMenu, setShowMenu }) => {
                 return (
                     <div className={style.blockContain}>
@@ -135,9 +136,9 @@ function DetailObject({ data }) {
                             <div className={clsx(style.fillConfigBlock)}>
                                 <div className={clsx(style.fillConfigBlock)}>
                                     <select onChange={handleChange} value={dataSelect.style?.boxSizing} id="sb" className={clsx(style.selectTypeBox, style.inputData)}>
-                                        <option value="content-box">outside</option>
-                                        <option value="border-box">inside</option>
-                                        <option value="unset">unset</option>
+                                        <option value="content-box">{t('border outside')}</option>
+                                        <option value="border-box">{t('border inside')}</option>
+                                        <option value="unset">{t('unset')}</option>
                                     </select>
                                 </div>
                                 <select value={dataSelect.style?.borderType} onChange={handleChange} id="bt" className={clsx(style.selectTypeBoder, style.inputData)}>
@@ -162,28 +163,28 @@ function DetailObject({ data }) {
                                             position={{ x: 0, y: 15, id: 'a' }}
                                             children={[
                                                 {
-                                                    name: 'top',
+                                                    name: t('top'),
                                                     icon: !dataSelect.style?.unBorderTop && <FiCheck />,
                                                     func: setBorderSide
                                                 },
                                                 {
-                                                    name: 'bottom',
+                                                    name: t('bottom'),
                                                     icon: !dataSelect.style?.unBorderBottom && <FiCheck />,
                                                     func: setBorderSide
                                                 },
                                                 {
-                                                    name: 'left',
+                                                    name: t('left'),
                                                     icon: !dataSelect.style?.unBorderLeft && <FiCheck />,
                                                     func: setBorderSide
                                                 },
                                                 {
-                                                    name: 'right',
+                                                    name: t('right'),
                                                     icon: !dataSelect.style?.unBorderRight && <FiCheck />,
                                                     func: setBorderSide
                                                 }
                                             ]}
                                         />}
-                                        set side
+                                        {t('set side')}
                                     </button>
                                 </div>
                             </div>
@@ -193,7 +194,7 @@ function DetailObject({ data }) {
             }
         },
         {
-            name: 'Effect',
+            name: t('Effect'),
             element: ({ dataSelect = {}, handleChangeColor, handleChange, handleClick }) => {
                 return (
                     <div className={style.blockContain}>
@@ -202,16 +203,16 @@ function DetailObject({ data }) {
                         ) : (
                             <>
                                 <select onChange={handleChange} id="st" className={clsx(style.inputData)}>
-                                    <option value="shadowO">Shadow outer</option>
+                                    <option value="shadowO">{t('Shadow outer')}</option>
                                     {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
-                                        <option value='shadowI'>Shadow inner</option>
+                                        <option value='shadowI'>{t('Shadow inner')}</option>
                                     )}
                                     {dataSelect.type !== 'text' && dataSelect.type !== 'img' && dataSelect.type !== 'link' && (
-                                        <option value="blurBG">Blur Background</option>
+                                        <option value="blurBG">{t('Blur background')}</option>
                                     )}
-                                    <option value="unset">Unset</option>
+                                    <option value="unset">{t('unset')}</option>
                                 </select>
-
+    
                                 {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' &&
                                     <div className={style.containerPositionShadow}>
                                         <label className={style.labelCoverInput}><p className={style.icon}>X</p><input autoComplete="off" type="number" onChange={handleChange} value={dataSelect.style.shadowX} id="sx" className={style.inputData} /></label>
@@ -219,7 +220,7 @@ function DetailObject({ data }) {
                                     </div>
                                 }
                                 <div className={clsx(style.containerPositionShadow, style.coverInputBlur)}>
-                                    <label className={clsx(style.labelCoverInput)}><p className={style.icon}>Blur</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.blur} id="bl" className={style.inputData} /></label>
+                                    <label className={clsx(style.labelCoverInput)}><p className={style.icon}>{t('Blur')}</p><input autoComplete="off" type="number" min="0" onChange={handleChange} value={dataSelect.style.blur} id="bl" className={style.inputData} /></label>
                                     {dataSelect.style.shadow !== 'none' && dataSelect.style.shadow !== 'blurBG' && (<div className={clsx(style.changeBorderColor, style.changeShadowColor)}>
                                         <p className={style.colorShadow}>{dataSelect.style?.shadowColor}</p>
                                         <ColorSetting hideControls={true} type={'shadow'} data={dataSelect} handleChangeColor={handleChangeColor} position={true} />
@@ -232,6 +233,8 @@ function DetailObject({ data }) {
             }
         },
     ]
+    const [dataSelect, setDataSelect] = useState(selectStyle())
+    const [showMenu, setShowMenu] = useState(false)
 
     function selectStyle() {
         const pageSelect = data.pageSelect

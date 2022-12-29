@@ -8,8 +8,12 @@ import { useContext } from 'react';
 import { MSWContext } from '../../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider';
 import { GlobalContext } from '../../../../globalState/GlobalState';
 import CreatorSpace from '../../../creatorSpace/CreatorSpace';
+import { useTranslation } from 'react-i18next'
+
 
 function ExportButton() {
+    const { t, i18n } = useTranslation();
+
     const data = useContext(MSWContext)
     const value = useContext(GlobalContext)
 
@@ -60,7 +64,7 @@ function ExportButton() {
     }
 
     return (
-        <button onClick={makeDocument} className={clsx(styles.exportButton)}>Export File</button>
+        <button onClick={makeDocument} className={clsx(styles.exportButton)}>{t('exportbtn')}</button>
     )
 }
 

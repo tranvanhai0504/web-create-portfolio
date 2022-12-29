@@ -1,31 +1,30 @@
 import styles from './AboutPage.module.css'
 import images from '../../assets/images.png'
+import { useTranslation } from 'react-i18next'
 
 const cards = [
     {
         id: styles.profileimg,
         img: images,
         name: "Võ Nguyên Phú Quí",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/profile.php?id=100022928704167"
     },
     {
         id: styles.profileimg2,
         img: images,
         name: "Trần Văn Hải",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/high.2.n"
     },
     {
         id: styles.profileimg3,
         img: images,
         name: "Nguyễn Trọng Phúc",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/profile.php?id=100027308418139"
     }
 ]
 
 function Card({ card }) {
+    const {t,i18n} = useTranslation()
     return (
         <div className={styles.card}>
             <div className={styles.profilecontainer}>
@@ -36,13 +35,13 @@ function Card({ card }) {
             <div className={styles.name}>
                 {card.name}
             </div>
-            <div className={styles.content}>Developer</div>
-            <div className={styles.about}>About me</div>
+            <div className={styles.content}>{t('Student')}</div>
+            <div className={styles.about}>{t('About me')}</div>
             <div className={styles.Aboutcontent}>
-                {card.describe}
+                {t('card describe')}
             </div>
             <a target="_blank" rel="noopener noreferrer" href={card.linkcontact} className={styles.contactBtn}>
-                Contact me
+                 {t('Contact me')}
             </a>
         </div>
     )
