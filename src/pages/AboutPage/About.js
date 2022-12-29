@@ -7,21 +7,18 @@ const cards = [
         id: styles.profileimg,
         img: images,
         name: "Võ Nguyên Phú Quí",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/profile.php?id=100022928704167"
     },
     {
         id: styles.profileimg2,
         img: images,
         name: "Trần Văn Hải",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/high.2.n"
     },
     {
         id: styles.profileimg3,
         img: images,
         name: "Nguyễn Trọng Phúc",
-        describe: "I like music and bacon.Learning new thing is my passion",
         linkcontact: "https://www.facebook.com/profile.php?id=100027308418139"
     }
 ]
@@ -41,7 +38,7 @@ function Card({ card }) {
             <div className={styles.content}>{t('Student')}</div>
             <div className={styles.about}>{t('About me')}</div>
             <div className={styles.Aboutcontent}>
-                {card.describe}
+                {t('card describe')}
             </div>
             <a target="_blank" rel="noopener noreferrer" href={card.linkcontact} className={styles.contactBtn}>
                  {t('Contact me')}
