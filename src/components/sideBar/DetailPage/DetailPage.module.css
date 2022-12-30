@@ -3,25 +3,25 @@
     font-size: 13px;
 }
 
-.blockName{
+.blockName {
     font-weight: bold;
     margin-bottom: 5px;
     color: var(--space-text);
 }
 
-.blockOptionDetail{
+.blockOptionDetail {
     border-bottom: 1px solid #ccc;
     padding: 10px 20px;
 }
 
-.blockContain{
+.blockContain {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.inputData{
+.inputData {
     width: 100%;
     margin-bottom: 5px;
     cursor: default;
@@ -30,11 +30,11 @@
     border-radius: 3px;
 }
 
-.inputData:hover{
+.inputData:hover {
     border: solid 2px var(--primary-color);
 }
 
-.fillConfigBlock{
+.fillConfigBlock {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -43,18 +43,18 @@
     flex-wrap: wrap;
 }
 
-.numPageBlockContainer{
+.numPageBlockContainer {
     width: 44%;
     display: flex;
     justify-content: space-between;
 }
 
-.blockNum{
-    width:20%;
+.blockNum {
+    width: 20%;
     border: unset;
 }
 
-.blockNumBtn{
+.blockNumBtn {
     border: unset;
     display: flex;
     flex-direction: column;
@@ -62,36 +62,90 @@
     cursor: pointer;
 }
 
-.blockNumBtn:hover{
+.blockNumBtn:hover {
     opacity: 0.8;
 }
 
-.containerText{
+.containerText {
     display: flex;
     align-items: center;
 }
 
-.item{
+.item {
     width: 80%;
     padding: 0 10px;
     min-height: 20px;
     font-size: 13px;
     display: flex;
     align-items: center;
-    border: 2px solid rgba(255,255,255,0);
+    border: 2px solid rgba(255, 255, 255, 0);
     border-radius: 3px;
     justify-content: space-between;
 }
 
-.item:hover{
+.item:hover {
     border: 2px solid var(--primary-color);
 }
 
-.icon{
+.icon {
     opacity: 0.4;
     margin-right: 7px;
 }
 
-.iconLock{
+.iconLock {
     opacity: 0.7;
+}
+
+.newItem {
+    -webkit-animation: slide-in-blurred-left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+    animation: slide-in-blurred-left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+
+@-webkit-keyframes slide-in-blurred-left {
+    0% {
+        -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+        transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+        -webkit-transform-origin: 100% 50%;
+        transform-origin: 100% 50%;
+        -webkit-filter: blur(40px);
+        filter: blur(40px);
+        opacity: 0;
+        border: 2px solid rgb(158, 158, 158);
+        background-color: rgb(184, 184, 184);
+    }
+
+    100% {
+        -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+        transform: translateX(0) scaleY(1) scaleX(1);
+        -webkit-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+        border: 2px solid rgba(158, 158, 158, 0);
+        background-color: rgba(184, 184, 184, 0);
+    }
+}
+
+@keyframes slide-in-blurred-left {
+    0% {
+        -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+        transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+        -webkit-transform-origin: 100% 50%;
+        transform-origin: 100% 50%;
+        -webkit-filter: blur(40px);
+        filter: blur(40px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+        transform: translateX(0) scaleY(1) scaleX(1);
+        -webkit-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+    }
 }

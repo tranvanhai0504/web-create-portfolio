@@ -1,0 +1,7 @@
+.containerPButton{
+    font-size:25px;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    color: var(--primary-color);
+}

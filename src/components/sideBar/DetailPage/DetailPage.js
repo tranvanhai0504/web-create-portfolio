@@ -84,6 +84,7 @@ function DetailPage({ data }) {
     const [listItem, setListItem] = useState(selectListItem(data))
     const [isActiveMenu, setIsActiveMenu] = useState(false)
     const [positionMenu, setPositionMenu] = useState({ x: 0, y: 0 })
+    const [isAddNewItem, setIsAddNewItem] = useState(false)
 
     useEffect(() => {
         setListItem(selectListItem(data))
@@ -101,6 +102,7 @@ function DetailPage({ data }) {
 
         return () => {
             document.removeEventListener('click', turnOffMenu)
+            setIsAddNewItem(false)
         }
     }, [])
 
@@ -229,6 +231,7 @@ function DetailPage({ data }) {
                     }
                     return page
                 })
+                setIsAddNewItem(false)
                 data.setData(newData)
                 data.setItemTarget(null)
                 data.setIsDragging(false)
@@ -256,6 +259,7 @@ function DetailPage({ data }) {
                     }
                     return page
                 })
+                setIsAddNewItem(true)
                 data.setData(newData)
                 data.setItemTarget(null)
                 data.setIsDragging(false)
@@ -295,9 +299,9 @@ function DetailPage({ data }) {
             <div className={style.blockOptionDetail}>
                 <p className={style.blockName}>List item</p>
                 <div className={style.blockContain}>
-                    {listItem.map(item => {
+                    {listItem.map((item, index) => {
                         return (
-                            <div data-type={item.type} key={item.id} data-id={item.id} onMouseDown={handleMouseDown} onClick={(e) => { handleClickItem(e, item.id) }} onMouseLeave={() => { data.setItemHover(undefined) }} onMouseEnter={(e) => { handleMouseEnter(item.id) }} className={clsx(style.item)}>
+                            <div data-type={item.type} key={item.id} data-id={item.id} onMouseDown={handleMouseDown} onClick={(e) => { handleClickItem(e, item.id) }} onMouseLeave={() => { data.setItemHover(undefined) }} onMouseEnter={(e) => { handleMouseEnter(item.id) }} className={clsx(style.item, isAddNewItem && (index === (listItem.length - 1)) && style.newItem)}>
                                 <div className={style.containerText}>
                                     {item.type === 'block' && <FiSquare className={style.icon} />}
                                     {item.type === 'text' && <FiType className={style.icon} />}

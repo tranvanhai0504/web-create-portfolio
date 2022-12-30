@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect, useContext, memo } from 'react'
 import styles from './SpaceMainWork.module.css'
+import clsx from 'clsx'
 import CreatorSpace from '../creatorSpace/CreatorSpace'
 import { GlobalContext } from '../../globalState/GlobalState'
 import { MSWContext } from '../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
-function SpaceMainWork({ setProduce, listPage }) {
+function SpaceMainWork({ setProduce, listPage, isPreview }) {
     const value = useContext(GlobalContext)
     const dataValue = useContext(MSWContext)
     const [pages, setPages] = useState(listPage)
@@ -34,7 +35,6 @@ function SpaceMainWork({ setProduce, listPage }) {
 
     //zoom
     let zoom = useRef(value.zoom);
-    const ZOOM_SPEED = value.ZOOM_SPEED;
     zoom.current = value.zoom
 
     useEffect(() => {
@@ -73,12 +73,12 @@ function SpaceMainWork({ setProduce, listPage }) {
     return (
         <div
             ref={space}
-            className={styles.spaceMainWork}
+            className={clsx(styles.spaceMainWork, isPreview ? styles.isPreview : styles.noPreview)}
             onClick={handleClickSpace}
         >
             {pages.map((page, index) => {
                 return (
-                    dataValue.pageSelect === page.id && <CreatorSpace dev={true} style={page.style} id={page.id} listItem={page.listItem} key={page.id} />
+                    dataValue.pageSelect === page.id && <CreatorSpace isPreview={isPreview} dev={true} style={page.style} id={page.id} listItem={page.listItem} key={page.id} />
                 )
             })}
             {dataValue.showResetBtn && <button onClick={(e) => dataValue.setShowResetBtn(false)} className={styles.resetPositionBtn}>reset</button>}

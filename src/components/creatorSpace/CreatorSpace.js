@@ -9,9 +9,10 @@ import clsx from 'clsx'
 
 const useGesture = createUseGesture([dragAction])
 
-function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev }) {
+function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev, isPreview }) {
   const value = useContext(GlobalContext)
   const valueData = useContext(MSWContext)
+  const [isPreviewNow, setIsPreviewNow] = useState(isPreview)
   const page = useRef()
   // useEffect(()=> {
   //   document.addEventListener('keydown', handleKeyDown)
@@ -54,21 +55,33 @@ function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev })
     }
   }, [])
 
+  useEffect(() => {
+    setIsPreviewNow(isPreview)
+  }, [isPreview])
+
   const [styleComponent, api] = useSpring(() => ({
     x: 0,
     y: 0,
     scale: render ? 1 : value.zoom,
-    height: dev ? style.height * 75 + 'vh' : style.height * 100 + 'vh',
-    width: dev ? style.width * 75 + 'vw' : style.width * 100 + 'vw',
-    background: style.color.code
+    width: (dev && !isPreviewNow) ? style.width * 75 + 'vw' : style.width * 100 + 'vw',
+    height: (dev && !isPreviewNow) ? style.height * 75 + 'vh' : style.height * 100 + 'vh',
+    background: style.color.code,
+    overflow: (dev && !isPreviewNow) ? 'visible' : 'hidden',
+    position: isPreviewNow ? 'fixed' : 'block',
+    zIndex: isPreviewNow ? 100 : 0
   }))
 
   useEffect(() => {
     api.start({
-      height: style.height * 75 + 'vh',
-      background: style.color.code
+      scale: render ? 1 : value.zoom,
+      width: (dev && !isPreviewNow) ? style.width * 75 + 'vw' : style.width * 100 + 'vw',
+      height: (dev && !isPreviewNow) ? style.height * 75 + 'vh' : style.height * 100 + 'vh',
+      background: style.color.code,
+      overflow: (dev && !isPreviewNow) ? 'visible' : 'hidden',
+      position: isPreviewNow ? 'fixed' : 'block',
+      zIndex: isPreviewNow ? 100 : 0
     })
-  }, [style])
+  }, [style, isPreviewNow])
 
   useEffect(() => {
     api.start({ scale: value?.zoom })
@@ -110,7 +123,7 @@ function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev })
       style={styleComponent}
       data-id={id}
     >
-      <WorkSpace dev={dev} forceUpdate={forceUpdate} listItem={listItem} page={page} />
+      <WorkSpace isPreviewNow={isPreviewNow} dev={isPreviewNow ? !isPreviewNow : dev} forceUpdate={forceUpdate} listItem={listItem} page={page} />
     </animated.div>
   )
 }

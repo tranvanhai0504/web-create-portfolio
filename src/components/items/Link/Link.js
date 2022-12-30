@@ -4,8 +4,7 @@ import clsx from 'clsx'
 import styled from 'styled-components'
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 
-function availableValue(value){
-  console.log(value, typeof value)
+function availableValue(value) {
   if ((typeof value) === 'number') {
     return value + 'px'
   } else {
@@ -63,18 +62,7 @@ const Linkcomp = styled.a.attrs((props) => ({
 
 function Link({ style, id, position, text, href, dev = false }) {
 
-  const [content, setContent] = useState(text.text)
-  const value = useContext(MSWContext)
-  const [nowPosition, setNowPosition] = useState(() => {
-    if (dev) {
-      return {
-        x: position.x * 100 / 75,
-        y: position.y * 100 / 75
-      }
-    } else return position
-  })
-  const [nowTarget, setNowTarget] = useState(value?.itemTarget)
-  const [styleNow, setStyleNow] = useState(() => {
+  function getStyle() {
     const scWidth = 100 / document.documentElement.clientWidth
     const scHeight = 100 / document.documentElement.clientHeight
 
@@ -83,7 +71,10 @@ function Link({ style, id, position, text, href, dev = false }) {
         ...style,
         height: style.height * 0.75,
         width: style.width * 0.75,
+        fontSize: style.fontSize * 0.75,
         shadowX: style.shadowX * 0.75,
+        blur: style.blur * 0.75,
+        borderSize: style.borderSize * 0.75,
         shadowY: style.shadowY * 0.75,
         borderRadius: style.borderRadius * 0.75
       }
@@ -96,14 +87,28 @@ function Link({ style, id, position, text, href, dev = false }) {
         shadowY: style.shadowY * scHeight + 'vh',
       }
     }
+  }
+
+  const [content, setContent] = useState(text.text)
+  const [isDev, setIsDev] = useState(dev)
+  const value = useContext(MSWContext)
+  const [nowPosition, setNowPosition] = useState(() => {
+    if (dev) {
+      return {
+        x: position.x * 100 / 75,
+        y: position.y * 100 / 75
+      }
+    } else return position
   })
+  const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+  const [styleNow, setStyleNow] = useState(getStyle())
   const [canEditable, setCanEditable] = useState(false)
   const [isHover, setIsHover] = useState(false)
   const textInput = useRef()
 
   useEffect(() => {
     textInput.current.innerText = content
-  }, [])
+  })
 
   useEffect(() => {
     setStyleNow(() => {
@@ -113,8 +118,10 @@ function Link({ style, id, position, text, href, dev = false }) {
           height: style.height * 0.75,
           width: style.width * 0.75,
           fontSize: style.fontSize * 0.75,
+          borderSize: style.borderSize * 0.75,
           shadowX: style.shadowX * 0.75,
           shadowY: style.shadowY * 0.75,
+          blur: style.blur * 0.75,
         }
       } else {
         return style
@@ -148,9 +155,9 @@ function Link({ style, id, position, text, href, dev = false }) {
   }, [value?.itemTarget])
 
   useEffect(() => {
-    if(value?.itemHover === id){
+    if (value?.itemHover === id) {
       setIsHover(true)
-    }else{
+    } else {
       setIsHover(false)
     }
   }, [value?.itemHover])
@@ -163,10 +170,22 @@ function Link({ style, id, position, text, href, dev = false }) {
 
   useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
-  }, [position])
+  }, [position, isDev])
+
+  useEffect(() => {
+    if (!dev) {
+      setIsDev(false)
+    } else {
+      setIsDev(true)
+    }
+  }, [dev])
+
+  useEffect(() => {
+    setStyleNow(getStyle())
+}, [isDev])
 
   function HandleEventItem(e) {
-    if (!value?.listLockedItem.includes(id)) {
+    if (!value?.listLockedItem.includes(id) && dev) {
       if (e.detail === 2) {
         if (nowTarget === value?.itemTarget) {
           setCanEditable(true)
