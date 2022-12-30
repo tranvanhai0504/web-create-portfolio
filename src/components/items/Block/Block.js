@@ -60,7 +60,7 @@ const BlockComp = styled.div.attrs((props) => {
 function Block({ style, id, position, dev = false }) {
   const value = useContext(MSWContext)
   const [styleNow, setStyleNow] = useState(() => {
-    const scWidth = 100 / window.screen.width
+    const scWidth = 100 / document.documentElement.clientWidth
     const scHeight = 100 / document.documentElement.clientHeight
 
     if (dev) {

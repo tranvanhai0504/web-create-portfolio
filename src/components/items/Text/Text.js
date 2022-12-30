@@ -70,7 +70,7 @@ function Text({ style, id, position, text, dev = false }) {
   })
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
   const [styleNow, setStyleNow] = useState(() => {
-    const scWidth = 100 / window.screen.width
+    const scWidth = 100 / document.documentElement.clientWidth
     const scHeight = 100 / document.documentElement.clientHeight
 
     if (dev) {

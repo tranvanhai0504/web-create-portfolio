@@ -69,6 +69,16 @@ function GlobalProvider({children}){
     const dataToggle = JSON.parse(localStorage.getItem('checked'))|| false
     const [theme, setTheme] = useState(data)
     const [checked, setChecked] = useState(dataToggle)
+    // const [listUndo, setListUndo] = useState(() => {
+    //     const produces = JSON.parse(localStorage.getItem('produces'))
+
+    //     if(produces) {
+    //         return [produces]
+    //     }else{
+    //         return []
+    //     }
+    // })
+    // const listUndo = useRef([])
     
     const image = useRef()
     
@@ -141,9 +151,33 @@ function GlobalProvider({children}){
     }, [produceSelect])
 
     useEffect(() => {
-        // console.log('change')
+        // if(localStorage.getItem('produces')){
+        //     let length = listUndo.current.length
+        //     console.log('enter')
+        //     if(!length)
+        //         listUndo.current.push(JSON.parse(localStorage.getItem('produces')))
+        //    else if(JSON.stringify(produces)!==JSON.stringify(listUndo.current[length-1])) {
+        //         let list = ()=>{
+        //             if(listUndo.current.length>=20) 
+        //                 listUndo.current.shift()
+        //             listUndo.current.push(JSON.parse(localStorage.getItem('produces')))
+        //         }
+        //         list()
+        //     }else{
+        //         if(Array.isArray(listUndo.current)){
+        //             console.log('pop')
+        //             listUndo.current.pop()
+        //         }
+        //     }
+        // }
+        // console.log('add undo:', listUndo.current)
+
         localStorage.setItem('produces', JSON.stringify(produces))
     }, [produces])
+
+    //storage undo
+    
+
 
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);    
     const value = {
@@ -177,7 +211,9 @@ function GlobalProvider({children}){
         produceSelect,
         setProduceSelect,
         ignored,
-        forceUpdate
+        forceUpdate,
+        // listUndo,
+        // setListUndo
     }
 
     return (

@@ -73,7 +73,7 @@ function Button({ style, id, position, name, dev = false, href }) {
     const [nowPosition, setNowPosition] = useState(position)
     const [prevPosition, setPrevPosition] = useState(position)
     const [styleNow, setStyleNow] = useState(() => {
-        const scWidth = 100 / window.screen.width
+        const scWidth = 100 / document.documentElement.clientWidth
         const scHeight = 100 / document.documentElement.clientHeight
 
         if (dev) {

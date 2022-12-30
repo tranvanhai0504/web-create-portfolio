@@ -5,7 +5,6 @@ import SideBar from '../../components/sideBar/SideBar'
 import styles from './MainScreenWork.module.css'
 import { MSWProvider } from './MainScreenWorkProvider/MSWProvider'
 import { GlobalContext } from '../../globalState/GlobalState'
-import { ConfigResolverMap } from '@use-gesture/react'
 import Modal from '../../components/modal/Modal'
 
 function MainScreenWork() {
@@ -35,6 +34,7 @@ function MainScreenWork() {
             })
         })
     }, [produce, value.ignored])
+
 
     return (
         <div className={styles.mainSpaceWorkContainer}>

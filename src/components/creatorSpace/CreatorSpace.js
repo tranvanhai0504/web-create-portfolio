@@ -13,12 +13,32 @@ function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev })
   const value = useContext(GlobalContext)
   const valueData = useContext(MSWContext)
   const page = useRef()
+  // useEffect(()=> {
+  //   document.addEventListener('keydown', handleKeyDown)
+  //   function handleKeyDown({ repeat, ctrlKey, key }) {
+  //     if (repeat) return
+  //     if ((ctrlKey) && key === 'z') {
+  //       let length = value.listUndo.current.length
+  //       let data 
+  //       if(length){
+  //         data = value.listUndo.current[length-1]
+  //         console.log('undo: ', data)
+  //         value.setProduces(data) 
+  //       }
+  //     }
+  //     console.log(value.listUndo.current)
+  //   }
+  //   return ()=> {
+  //     document.removeEventListener('keydown', handleKeyDown)
+  //   }
+  // },[])
 
   function handleClickPage(e) {
     if (e.target === page.current) {
       valueData?.setItemTarget(null)
     }
   }
+
   useEffect(() => {
     const handler = e => e.preventDefault()
     document.addEventListener('gesturestart', handler)
