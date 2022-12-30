@@ -74,6 +74,7 @@ function Link({ style, id, position, text, href, dev = false }) {
         fontSize: style.fontSize * 0.75,
         shadowX: style.shadowX * 0.75,
         blur: style.blur * 0.75,
+        borderSize: style.borderSize * 0.75,
         shadowY: style.shadowY * 0.75,
         borderRadius: style.borderRadius * 0.75
       }
@@ -117,6 +118,7 @@ function Link({ style, id, position, text, href, dev = false }) {
           height: style.height * 0.75,
           width: style.width * 0.75,
           fontSize: style.fontSize * 0.75,
+          borderSize: style.borderSize * 0.75,
           shadowX: style.shadowX * 0.75,
           shadowY: style.shadowY * 0.75,
           blur: style.blur * 0.75,

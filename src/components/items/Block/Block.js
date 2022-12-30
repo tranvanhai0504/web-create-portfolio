@@ -6,7 +6,6 @@ import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProv
 import { useContext } from 'react'
 
 function availableValue(value) {
-  console.log(value, typeof value)
   if ((typeof value) === 'number') {
     return value + 'px'
   } else {
@@ -17,7 +16,7 @@ function availableValue(value) {
 const BlockComp = styled.div.attrs((props) => {
 
 })`
-    border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${props.style.borderSize} ${props.style.borderColor} !important` }};
+    border: ${props => { return props.style.border === 'unset' ? props.style.border : `${props.style.borderType} ${availableValue(props.style.borderSize)} ${props.style.borderColor} !important` }};
     ${props => {
     let string = ''
     if (props.style.unBorderLeft) {
@@ -68,6 +67,7 @@ function Block({ style, id, position, dev = false }) {
         height: style.height * 0.75,
         width: style.width * 0.75,
         shadowX: style.shadowX * 0.75,
+        borderSize: style.borderSize * 0.75,
         shadowY: style.shadowY * 0.75,
         blur: style.blur * 0.75,
         borderRadius: style.borderRadius * 0.75
@@ -106,6 +106,7 @@ function Block({ style, id, position, dev = false }) {
           shadowX: style.shadowX * 0.75,
           shadowY: style.shadowY * 0.75,
           blur: style.blur * 0.75,
+          borderSize: style.borderSize * 0.75,
           borderRadius: style.borderRadius * 0.75
         }
       } else return style

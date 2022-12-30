@@ -53,6 +53,9 @@ function OptionPage({ data }) {
                         })
                     })
                     setIsActiveMenu(false)
+                    if(data.pageSelect === id){
+                        data.setPageSelect(data.data[0]?.id)
+                    }
                     break
                 }
                 case 'Copy': {
@@ -105,10 +108,10 @@ function OptionPage({ data }) {
                               shadow: 'none',
                               shadowX: 5,
                               shadowY: 5,
-                              blur: 1,
+                              blur: 0,
                               shadowColor: 'black',
                               shadowInner: false,
-                              zIndex: 3,
+                              zIndex: 10,
                               rotate: 0,
                               opacity: 1
                             },
@@ -150,10 +153,10 @@ function OptionPage({ data }) {
                                   shadow: 'none',
                                   shadowX: 5,
                                   shadowY: 5,
-                                  blur: 1,
+                                  blur: 0,
                                   shadowColor: 'black',
                                   shadowInner: false,
-                                  zIndex: 3,
+                                  zIndex: 10,
                                   rotate: 0,
                                   opacity: 1
                                 },
@@ -216,10 +219,19 @@ function OptionPage({ data }) {
     }
 
     function handleOnChange(e) {
-        data.data.forEach(d => {
-            if (d.id === e.target.getAttribute('data-id')) {
-                d.name = e.target.value
+        const id = e.target.getAttribute('data-id')
+        data.data.forEach((page, index) => {
+            if (page.id === id) {
+                page.name = e.target.value
             }
+            page.listItem.forEach(item => {
+                if(item.direct === 'index' && id === data.data[0].id){
+                    item.name = e.target.value
+                }
+                if(item.type === 'button' && item.direct === id){
+                    item.name = e.target.value
+                }
+            })
         })
         setPageSelectedRename((prev) => {
             return {

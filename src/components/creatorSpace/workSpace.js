@@ -107,7 +107,7 @@ function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
                         shadow: 'none',
                         shadowX: 5,
                         shadowY: 5,
-                        blur: 1,
+                        blur: 0,
                         shadowColor: 'black',
                         shadowInner: false,
                         zIndex: zIndex,
@@ -140,7 +140,7 @@ function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
                         shadow: 'none',
                         shadowX: 5,
                         shadowY: 5,
-                        blur: 1,
+                        blur: 0,
                         shadowColor: 'black',
                         height: 60,
                         zIndex: zIndex,
@@ -177,7 +177,7 @@ function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
                         shadow: 'none',
                         shadowX: 5,
                         shadowY: 5,
-                        blur: 1,
+                        blur: 0,
                         shadowColor: 'black',
                         rotate: 0,
                         opacity: 1
@@ -209,7 +209,7 @@ function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
                         shadow: 'none',
                         shadowX: 5,
                         shadowY: 5,
-                        blur: 1,
+                        blur: 0,
                         shadowColor: 'black',
                         height: 60,
                         zIndex: zIndex,
@@ -244,7 +244,7 @@ function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
     }, [value?.selectedBtn])
 
     useEffect(() => {
-        setListItemCurrent(listItem)
+        setListItemCurrent(getListItem())
     }, [listItem])
 
     return <>
