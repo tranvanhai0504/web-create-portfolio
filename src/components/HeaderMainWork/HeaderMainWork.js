@@ -6,11 +6,12 @@ import { NavLink } from 'react-router-dom'
 import StringTooltip from '../tooltip/StringTooltip/StringTooltip'
 import ExportButton from '../button/headerWorkSpace/ExportButton/ExportButton'
 import ShortcutButton from '../button/ShortcutButton/ShortcutButton'
+import PresentationButton from '../button/headerWorkSpace/presentationButton/PresentationButton'
 import ListItemBtn from './ListItemBtn/ListItemBtn'
 import { useTranslation } from 'react-i18next'
 
 
-function HeaderMainWork() {
+function HeaderMainWork({setIsPreview}) {
     const { t, i18n } = useTranslation();
 
     return (
@@ -21,6 +22,7 @@ function HeaderMainWork() {
             <div className={styles.btnList}>
                 <ListItemBtn/> 
                 {/* <ShortcutButton/> */}
+                <PresentationButton setIsPreview={setIsPreview}/>
                 <StringTooltip content={t('exportbtntooltip')} position={'bottom'}>
                     <ExportButton />
                 </StringTooltip>

@@ -8,14 +8,23 @@ import Link from '../items/Link/Link'
 import images from '../../assets/defaultAvatar.png'
 import Button from '../items/Button/Button'
 
-function WorkSpace({ listItem, page, dev = false }) {
-    const value = useContext(GlobalContext)
-    const [listItemCurrent, setListItemCurrent] = useState(() => {
-
-        const scWidth = 100 / window.screen.width
+function WorkSpace({ listItem, page, dev = false, isPreviewNow = false }) {
+    function getListItem() {
+        const scWidth = 100 / document.documentElement.clientWidth
         const scHeight = 100 / document.documentElement.clientHeight
 
-        if (dev) return listItem
+        if (isPreviewNow) {
+            return listItem.map(item => {
+                return {
+                    ...item,
+                    position: {
+                        x: item.position.x / 75 * 100,
+                        y: item.position.y / 75 * 100
+                    }
+                }
+            })
+        }
+        if (isDev) return listItem
         else {
             return listItem.map(item => {
                 return {
@@ -27,7 +36,22 @@ function WorkSpace({ listItem, page, dev = false }) {
                 }
             })
         }
-    })
+    }
+    const value = useContext(GlobalContext)
+    const [isDev, setIsDev] = useState(dev)
+    const [listItemCurrent, setListItemCurrent] = useState(getListItem())
+
+    useEffect(() => {
+        if (!dev) {
+            setIsDev(false)
+        } else {
+            setIsDev(true)
+        }
+    }, [dev])
+
+    useEffect(() => {
+        setListItemCurrent(getListItem())
+    }, [isDev])
 
     function handleListItem(item) {
         listItem.push(item)
@@ -50,6 +74,12 @@ function WorkSpace({ listItem, page, dev = false }) {
     }
 
     function handleEvent(e) {
+        let zIndex = 0
+        listItemCurrent.forEach(item => {
+            if (item.style.zIndex > zIndex) {
+                zIndex = item.style.zIndex + 1
+            }
+        })
         let item = ''
         switch (value?.selectedBtn) {
             case 'block': {
@@ -80,7 +110,7 @@ function WorkSpace({ listItem, page, dev = false }) {
                         blur: 1,
                         shadowColor: 'black',
                         shadowInner: false,
-                        zIndex: 3,
+                        zIndex: zIndex,
                         rotate: 0,
                         opacity: 1
                     },
@@ -113,7 +143,7 @@ function WorkSpace({ listItem, page, dev = false }) {
                         blur: 1,
                         shadowColor: 'black',
                         height: 60,
-                        zIndex: 1,
+                        zIndex: zIndex,
                         rotate: 0,
                         opacity: 1
                     },
@@ -134,7 +164,7 @@ function WorkSpace({ listItem, page, dev = false }) {
                         height: 60,
                         borderRadius: 0,
                         border: 'solid 1px #ccc',
-                        zIndex: 1,
+                        zIndex: zIndex,
                         boxSizing: 'content-box',
                         border: 'unset',
                         borderColor: 'black',
@@ -182,7 +212,7 @@ function WorkSpace({ listItem, page, dev = false }) {
                         blur: 1,
                         shadowColor: 'black',
                         height: 60,
-                        zIndex: 1,
+                        zIndex: zIndex,
                         rotate: 0,
                         opacity: 1
                     },
@@ -220,15 +250,15 @@ function WorkSpace({ listItem, page, dev = false }) {
     return <>
         {listItemCurrent.map(item => {
             if (item.type === 'block') {
-                return (<Block dev={dev} key={item.id} position={item.position} style={item.style} id={item.id} />)
+                return (<Block dev={isDev} key={item.id} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'text') {
-                return (<Text dev={dev} key={item.id} text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<Text dev={isDev} key={item.id} text={item.text} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'img') {
-                return (<ImgBox dev={dev} key={item.id} src={item.source.src} position={item.position} style={item.style} id={item.id} />)
+                return (<ImgBox dev={isDev} key={item.id} src={item.source.src} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'link') {
-                return (<Link dev={dev} key={item.id} href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
+                return (<Link dev={isDev} key={item.id} href={item.href} text={item.text} position={item.position} style={item.style} id={item.id} />)
             } else if (item.type === 'button') {
-                return (<Button dev={dev} key={item.id} position={item.position} style={item.style} id={item.id} name={item.name} href={item.direct} />)
+                return (<Button dev={isDev} key={item.id} position={item.position} style={item.style} id={item.id} name={item.name} href={item.direct} />)
             }
         })}
     </>

@@ -5,7 +5,6 @@ import { memo, useState, useEffect, useContext } from 'react'
 import clsx from 'clsx'
 
 function availableValue(value) {
-    console.log(value, typeof value)
     if ((typeof value) === 'number') {
         return value + 'px'
     } else {
@@ -69,11 +68,8 @@ const ButtonComp = styled.a.attrs((props) => {
 
 function Button({ style, id, position, name, dev = false, href }) {
 
-    const value = useContext(MSWContext)
-    const [nowPosition, setNowPosition] = useState(position)
-    const [prevPosition, setPrevPosition] = useState(position)
-    const [styleNow, setStyleNow] = useState(() => {
-        const scWidth = 100 / window.screen.width
+    function getStyle() {
+        const scWidth = 100 / document.documentElement.clientWidth
         const scHeight = 100 / document.documentElement.clientHeight
 
         if (dev) {
@@ -82,6 +78,8 @@ function Button({ style, id, position, name, dev = false, href }) {
                 height: style.height * 0.75,
                 width: style.width * 0.75,
                 shadowX: style.shadowX * 0.75,
+                fontSize: style.fontSize * 0.75,
+                blur: style.blur * 0.75,
                 shadowY: style.shadowY * 0.75,
                 borderRadius: style.borderRadius * 0.75
             }
@@ -94,7 +92,13 @@ function Button({ style, id, position, name, dev = false, href }) {
                 shadowY: style.shadowY * scHeight + 'vh',
             }
         }
-    })
+    }
+
+    const value = useContext(MSWContext)
+    const [nowPosition, setNowPosition] = useState(position)
+    const [isDev, setIsDev] = useState(dev)
+    const [prevPosition, setPrevPosition] = useState(position)
+    const [styleNow, setStyleNow] = useState(getStyle())
     const [nowTarget, setNowTarget] = useState(value?.itemTarget)
     const [isHover, setIsHover] = useState(false)
 
@@ -116,6 +120,7 @@ function Button({ style, id, position, name, dev = false, href }) {
                     height: style.height * 0.75,
                     width: style.width * 0.75,
                     fontSize: style.fontSize * 0.75,
+                    blur: style.blur * 0.75,
                     borderRadius: style.borderRadius * 0.75,
                     shadowX: style.shadowX * 0.75,
                     shadowY: style.shadowY * 0.75,
@@ -128,7 +133,19 @@ function Button({ style, id, position, name, dev = false, href }) {
 
     useEffect(() => {
         setNowPosition({ x: position.x, y: position.y })
-    }, [position])
+    }, [position, isDev])
+
+    useEffect(() => {
+        if (!dev) {
+            setIsDev(false)
+        } else {
+            setIsDev(true)
+        }
+    }, [dev])
+
+    useEffect(() => {
+        setStyleNow(getStyle())
+    }, [isDev])
 
     useEffect(() => {
         if (value?.itemHover === id) {
@@ -146,7 +163,6 @@ function Button({ style, id, position, name, dev = false, href }) {
     }, [value?.isCancelDelete])
 
     function draggingStart(e) {
-        console.log(nowPosition)
         setPrevPosition(nowPosition)
         value?.setIsDragging(true);
     }
@@ -157,7 +173,7 @@ function Button({ style, id, position, name, dev = false, href }) {
     }
 
     function HandleEventItem(e) {
-        if (!value?.listLockedItem.includes(id)) {
+        if (!value?.listLockedItem.includes(id) && dev) {
             value?.setItemTarget(id)
             setNowTarget(id)
         }

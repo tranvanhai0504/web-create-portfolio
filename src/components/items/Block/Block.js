@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import { MSWContext } from '../../../pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider'
 import { useContext } from 'react'
 
-function availableValue(value){
+function availableValue(value) {
   console.log(value, typeof value)
   if ((typeof value) === 'number') {
     return value + 'px'
@@ -58,9 +58,8 @@ const BlockComp = styled.div.attrs((props) => {
   `
 
 function Block({ style, id, position, dev = false }) {
-  const value = useContext(MSWContext)
-  const [styleNow, setStyleNow] = useState(() => {
-    const scWidth = 100 / window.screen.width
+  function getStyle() {
+    const scWidth = 100 / document.documentElement.clientWidth
     const scHeight = 100 / document.documentElement.clientHeight
 
     if (dev) {
@@ -70,6 +69,7 @@ function Block({ style, id, position, dev = false }) {
         width: style.width * 0.75,
         shadowX: style.shadowX * 0.75,
         shadowY: style.shadowY * 0.75,
+        blur: style.blur * 0.75,
         borderRadius: style.borderRadius * 0.75
       }
     } else {
@@ -81,7 +81,11 @@ function Block({ style, id, position, dev = false }) {
         shadowY: style.shadowY * scHeight + 'vh',
       }
     }
-  })
+  }
+
+  const [isDev, setIsDev] = useState(dev)
+  const [styleNow, setStyleNow] = useState(getStyle())
+  const value = useContext(MSWContext)
   const [nowPosition, setNowPosition] = useState(position)
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
   const [isHover, setIsHover] = useState(false)
@@ -93,7 +97,6 @@ function Block({ style, id, position, dev = false }) {
   }
 
   useEffect(() => {
-
     setStyleNow(() => {
       if (dev) {
         return {
@@ -102,6 +105,7 @@ function Block({ style, id, position, dev = false }) {
           width: style.width * 0.75,
           shadowX: style.shadowX * 0.75,
           shadowY: style.shadowY * 0.75,
+          blur: style.blur * 0.75,
           borderRadius: style.borderRadius * 0.75
         }
       } else return style
@@ -114,7 +118,19 @@ function Block({ style, id, position, dev = false }) {
 
   useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
-  }, [position])
+  }, [position, isDev])
+
+  useEffect(() => {
+    if (!dev) {
+      setIsDev(false)
+    } else {
+      setIsDev(true)
+    }
+  }, [dev])
+
+  useEffect(() => {
+    setStyleNow(getStyle())
+  }, [isDev])
 
   useEffect(() => {
     if (value?.itemHover === id) {
@@ -134,14 +150,14 @@ function Block({ style, id, position, dev = false }) {
   }
 
   function HandleEventItem(e) {
-    if (!value?.listLockedItem.includes(id)) {
+    if (!value?.listLockedItem.includes(id) && dev) {
       value?.setItemTarget(id)
       setNowTarget(id)
     }
   }
 
   return (
-    <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} defaultPosition={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
+    <Draggable onStop={draggingEnd} onStart={draggingStart} disabled={!(nowTarget === id)} positionOffset={{ x: 0, y: 0 }} position={{ x: nowPosition.x, y: nowPosition.y }} onDrag={(e, data) => PositionHandle(data)}>
       <div type={id} key={id} onClick={HandleEventItem} style={{ position: 'absolute', height: 'fit-content', zIndex: style.zIndex }} className={clsx(nowTarget === id && 'target', isHover && 'hover')}>
         <BlockComp style={styleNow}></BlockComp>
       </div>

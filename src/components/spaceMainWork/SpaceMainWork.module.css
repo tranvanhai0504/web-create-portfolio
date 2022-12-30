@@ -5,9 +5,18 @@
     background-color: var(--grey-secondary);
     z-index: 0;
     box-shadow: 0px 0px 7px #ccc inset;
-    padding: 40px 0;
+    padding: 40px 0;    
     display: flex;
     justify-content: space-around;
+}
+
+.isPreview{
+    padding: unset;
+    height: 100vh;
+}
+
+.nonePreview{
+    padding: 40px 0;
 }
 
 .resetPositionBtn{

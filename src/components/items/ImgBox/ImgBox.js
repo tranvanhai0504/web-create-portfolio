@@ -6,7 +6,6 @@ import { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 function availableValue(value) {
-  console.log(value, typeof value)
   if ((typeof value) === 'number') {
     return value + 'px'
   } else {
@@ -48,8 +47,35 @@ const ImgComp = styled.img.attrs(props => {
   opacity: ${props => props.style.opacity}
 `
 function ImgBox({ style, id, position, src, dev = false }) {
+
+  function getStyle() {
+    const scWidth = 100 / document.documentElement.clientWidth
+    const scHeight = 100 / document.documentElement.clientHeight
+
+    if (dev) {
+      return {
+        ...style,
+        height: style.height * 0.75,
+        width: style.width * 0.75,
+        shadowX: style.shadowX * 0.75,
+        fontSize: style.fontSize * 0.75,
+        shadowY: style.shadowY * 0.75,
+        borderRadius: style.borderRadius * 0.75
+      }
+    } else {
+      return {
+        ...style,
+        height: style.height * scHeight + 'vh',
+        width: style.width * scWidth + 'vw',
+        shadowX: style.shadowX * scWidth + 'vw',
+        shadowY: style.shadowY * scHeight + 'vh',
+      }
+    }
+  }
+
   const value = useContext(MSWContext)
   const [nowTarget, setNowTarget] = useState(value?.itemTarget)
+  const [isDev, setIsDev] = useState(dev)
   const [styleNow, setStyleNow] = useState(() => {
     const scWidth = 100 / window.screen.width
     const scHeight = 100 / document.documentElement.clientHeight
@@ -60,6 +86,7 @@ function ImgBox({ style, id, position, src, dev = false }) {
         height: style.height * 0.75,
         width: style.width * 0.75,
         shadowX: style.shadowX * 0.75,
+        blur: style.blur * 0.75,
         shadowY: style.shadowY * 0.75,
         borderRadius: style.borderRadius * 0.75
       }
@@ -99,6 +126,7 @@ function ImgBox({ style, id, position, src, dev = false }) {
           borderRadius: style.borderRadius * 0.75,
           shadowX: style.shadowX * 0.75,
           shadowY: style.shadowY * 0.75,
+          blur: style.blur * 0.75,
         }
       } else {
         return style
@@ -108,7 +136,19 @@ function ImgBox({ style, id, position, src, dev = false }) {
 
   useEffect(() => {
     setNowPosition({ x: position.x, y: position.y })
-  }, [position])
+  }, [position, isDev])
+
+  useEffect(() => {
+    if (!dev) {
+      setIsDev(false)
+    }else {
+      setIsDev(true)
+    }
+  }, [dev])
+
+  useEffect(() => {
+    setStyleNow(getStyle())
+}, [isDev])
 
   useEffect(() => {
     if (value?.itemHover === id) {
@@ -132,7 +172,7 @@ function ImgBox({ style, id, position, src, dev = false }) {
   }, [value?.itemTarget])
 
   function HandleEventItem(e) {
-    if (!value?.listLockedItem.includes(id)) {
+    if (!value?.listLockedItem.includes(id) && dev) {
       value?.setItemTarget(id)
       setNowTarget(id)
     }
