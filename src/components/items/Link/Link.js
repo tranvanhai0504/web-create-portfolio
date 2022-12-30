@@ -108,7 +108,7 @@ function Link({ style, id, position, text, href, dev = false }) {
 
   useEffect(() => {
     textInput.current.innerText = content
-  })
+  }, [isDev])
 
   useEffect(() => {
     setStyleNow(() => {

@@ -172,6 +172,7 @@ function GlobalProvider({children}){
         // }
         // console.log('add undo:', listUndo.current)
 
+        console.log('change')
         localStorage.setItem('produces', JSON.stringify(produces))
     }, [produces])
 

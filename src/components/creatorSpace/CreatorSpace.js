@@ -67,7 +67,6 @@ function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev, i
     height: (dev && !isPreviewNow) ? style.height * 75 + 'vh' : style.height * 100 + 'vh',
     background: style.color.code,
     overflow: (dev && !isPreviewNow) ? 'visible' : 'hidden',
-    position: isPreviewNow ? 'fixed' : 'block',
     zIndex: isPreviewNow ? 100 : 0
   }))
 
@@ -78,7 +77,7 @@ function CreatorSpace({ listItem, id, forceUpdate, style, render = false, dev, i
       height: (dev && !isPreviewNow) ? style.height * 75 + 'vh' : style.height * 100 + 'vh',
       background: style.color.code,
       overflow: (dev && !isPreviewNow) ? 'visible' : 'hidden',
-      position: isPreviewNow ? 'fixed' : 'block',
+
       zIndex: isPreviewNow ? 100 : 0
     })
   }, [style, isPreviewNow])

@@ -62,7 +62,6 @@ const ButtonComp = styled.a.attrs((props) => {
     width: ${props => availableValue(props.style.width)};
     height: ${props => availableValue(props.style.height)};
     transform: rotate(${props => props.style.rotate}deg);
-    backdrop-filter: blur(${props => props.style.blur}px);
     opacity: ${props => props.style.opacity};
     overflow: visible;
     flex-wrap: nowrap;
