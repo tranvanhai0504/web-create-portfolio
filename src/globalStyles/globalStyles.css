@@ -40,6 +40,7 @@ input[type=number] {
     --primary-background: #fff;
     --primary-btn-gradient: linear-gradient(90.58deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
     --space:#fff;
+    --slogan:rgba(0, 0, 0, 0.712);
     --spaceheader:#fff;
     --gradient-x: linear-gradient(0, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
     --gradient-y: linear-gradient(90deg, #793AFC 2.21%, rgba(183, 34, 253, 0.73) 113.64%);
@@ -50,6 +51,7 @@ input[type=number] {
     --primary-color: #2A0c67;
     --background-btn: #fff;
     --text-color: #fff;
+    --slogan:#fff;
     --space-text:rgb(173, 173, 173);
     --spacebg: rgb(239, 238, 238);
     --spacebtn:#ccc;

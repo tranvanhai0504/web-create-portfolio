@@ -65,7 +65,8 @@ const resources = {
       "Copy":"Copy",
       "Student":"Student",
       "About me":"About me",
-      "Contact me":"Contact me"
+      "Contact me":"Contact me",
+      "List Page":"List Page"
 
 
 
@@ -74,6 +75,7 @@ const resources = {
   vi: {
     translation: {
       "Home": "Trang chủ",
+      "List Page":"Danh sách thẻ",
       "Fill":"Màu nền",
       "Contact me":"Liên hệ",
       "About me":"Đặc điểm",

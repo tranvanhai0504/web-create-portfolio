@@ -120,16 +120,17 @@ function Content() {
                 <p>{t('fth')}</p>
                 <NavLink onClick={handleClick} to="/work" className={Styles.trybtn}>{t('try')}</NavLink>
             </div>
-            <Footer></Footer>
         </div>
     )
 }
 function Home() {
     const { t, i18n } = useTranslation();
     return (
-        <div className={Styles.homePage}>
-            <Content></Content>
-            <HomePageCard></HomePageCard>
+        <div>
+            <div className={Styles.homePage}>
+              <Content></Content>
+              <HomePageCard></HomePageCard>
+            </div>
         </div>
     )
 }

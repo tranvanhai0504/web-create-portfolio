@@ -1,5 +1,4 @@
 .header {
-    position: fixed;
     /* height: 7%; */
     width: 100%;
     padding: 20px 100px;
@@ -8,9 +7,12 @@
     box-sizing: border-box;
     -webkit-user-select: none;
     /* Safari */
+    z-index: 10;
     -ms-user-select: none;
+    position:fixed;
     /* IE 10 and IE 11 */
     user-select: none;
+    backdrop-filter: invert(1%);
     /* Standard syntax */
 }
 

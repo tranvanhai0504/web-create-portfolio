@@ -297,7 +297,7 @@ function DetailPage({ data }) {
                 })
             }
             <div className={style.blockOptionDetail}>
-                <p className={style.blockName}>List item</p>
+                <p className={style.blockName}>{t('List Page')}</p>
                 <div className={style.blockContain}>
                     {listItem.map((item, index) => {
                         return (
