@@ -189,6 +189,8 @@ function Text({ style, id, position, text, dev = false }) {
       }
       value?.setItemTarget(id)
       setNowTarget(id)
+    }else{
+      value?.setItemTarget(null)
     }
   }
 

@@ -177,6 +177,8 @@ function ImgBox({ style, id, position, src, dev = false }) {
     if (!value?.listLockedItem.includes(id) && dev) {
       value?.setItemTarget(id)
       setNowTarget(id)
+    }else{
+      value?.setItemTarget(null)
     }
   }
 

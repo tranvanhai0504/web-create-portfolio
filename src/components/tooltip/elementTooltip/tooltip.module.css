@@ -26,7 +26,7 @@
 /* POSITION RIGHT */
 .tooltip_content.right {
     position: fixed !important;
-    transform: translate(8%, -50%);
+    transform: translate(8%, -41%);
     margin-left: 10px;
   }
   

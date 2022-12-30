@@ -194,6 +194,8 @@ function Link({ style, id, position, text, href, dev = false }) {
       }
       value?.setItemTarget(id)
       setNowTarget(id)
+    }else{
+      value?.setItemTarget(null)
     }
   }
 

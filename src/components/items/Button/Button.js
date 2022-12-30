@@ -181,12 +181,14 @@ function Button({ style, id, position, name, dev = false, href }) {
         if (!value?.listLockedItem.includes(id) && dev) {
             value?.setItemTarget(id)
             setNowTarget(id)
+        } else {
+            value?.setItemTarget(null)
         }
-        if(!dev){
+        if (!dev) {
             e.preventDefault()
-            if(href === 'index'){
+            if (href === 'index') {
                 value?.data.forEach((page, index) => {
-                    if(index === 0){
+                    if (index === 0) {
                         href = page.id
                     }
                 })

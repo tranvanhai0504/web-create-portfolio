@@ -154,6 +154,8 @@ function Block({ style, id, position, dev = false }) {
     if (!value?.listLockedItem.includes(id) && dev) {
       value?.setItemTarget(id)
       setNowTarget(id)
+    }else{
+      value?.setItemTarget(null)
     }
   }
 

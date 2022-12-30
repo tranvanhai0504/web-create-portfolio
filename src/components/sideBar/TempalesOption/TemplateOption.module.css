@@ -1,0 +1,40 @@
+.templateOption{
+    width: 100%;
+    padding: 20px 20px;
+    overflow: hidden;
+}
+
+.templateContainer{
+    width: 80%;
+    height: 20%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(246, 246, 246);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid rgb(169, 169, 169);
+}
+
+.templateContainer:hover{
+    border: 2px solid var(--primary-color);
+}
+
+.templateContainer.target{
+    border: 2px solid var(--primary-color);
+}
+
+.img{
+    width: 200px;
+    height: 89px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    object-fit: contain;
+    border: 2px solid rgb(169, 169, 169);
+}
+
+.title{
+    margin: unset;
+}
