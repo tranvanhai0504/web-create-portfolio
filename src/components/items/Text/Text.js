@@ -103,7 +103,7 @@ function Text({ style, id, position, text, dev = false }) {
 
   useEffect(() => {
     textInput.current.innerText = content
-  })
+  }, [isDev])
 
   useEffect(() => {
     setStyleNow(() => {

@@ -4,7 +4,6 @@ import HomePage from "../HomePage/Home";
 import AboutPage from "../AboutPage/About";
 import StoragePage from "../StoragePage/Storage";
 import Styles from './MainPage.module.css'
-import TemplatesPage from "../TemplatesPage/Templates";
 import { Footer } from '../../components/Footer/Footer';
 
 function MainPage(){
