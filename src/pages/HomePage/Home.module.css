@@ -56,7 +56,7 @@
 .sm1{
     position: absolute;
     height: 84%;
-    width: 85%;
+    width: 77%;
     top: 10%;
     left: 12%;
     background-color: rgba(220, 220, 220, 0.15);
@@ -79,7 +79,7 @@
     margin-left: -16%;
     margin-bottom: -10%;
     height: 48%;
-    width: 49%;
+    width: 45%;
     background-color: rgba(220, 220, 220, 0.25);
     bottom: 0;
     align-items: center;
@@ -118,7 +118,6 @@
     color: var(--text-color);
     padding-top: 4%;
     font-size: 54px;
-    font-family:'Roboto';
    
     font-weight:600;
     line-height:58px;
@@ -128,13 +127,11 @@
     padding-top: 6%;
     font-size: 24px;
     line-height: 32px;
-    font-family:'Roboto';
 }
 #section3>p{
     padding-top: 1%;
     font-size:  20px;
     color: var(--text-color);
-    font-family: 'Roboto';
     font-style: italic;
     font-weight: 400;
 }

@@ -148,7 +148,6 @@ function GlobalProvider({children}){
     const temp=produces.filter(produce=>{
         return produce.id===produceSelect
     })[0]
-    console.log(JSON.stringify(temp))
     useEffect(() => {
         localStorage.setItem('productSelect', JSON.stringify(produceSelect))
     }, [produceSelect])
@@ -175,7 +174,6 @@ function GlobalProvider({children}){
         // }
         // console.log('add undo:', listUndo.current)
 
-        console.log('change')
         localStorage.setItem('produces', JSON.stringify(produces))
     }, [produces])
 

@@ -135,7 +135,6 @@ function Button({ style, id, position, name, dev = false, href }) {
     }, [style, style.color, style.fontColor])
 
     useEffect(() => {
-        console.log(position)
         setNowPosition({ x: position.x, y: position.y })
     }, [position, isDev])
 
