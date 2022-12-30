@@ -135,7 +135,10 @@ function GlobalProvider({children}){
             return undefined
         }
     })
-
+    const temp=produces.filter(produce=>{
+        return produce.id===produceSelect
+    })[0]
+    console.log(JSON.stringify(temp))
     useEffect(() => {
         localStorage.setItem('productSelect', JSON.stringify(produceSelect))
     }, [produceSelect])

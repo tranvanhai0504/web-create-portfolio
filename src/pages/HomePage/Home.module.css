@@ -1,4 +1,5 @@
 .homePage{
+    margin-top: 5%;
     height: 100%;
     display: flex;
     flex-direction: row;
