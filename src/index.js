@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import "typeface-pacifico";
 import GlobalStyles from './globalStyles'
 import { GlobalProvider } from './globalState/GlobalState';
 import { MSWContext, MSWProvider } from './pages/MainScreenWorkPage/MainScreenWorkProvider/MSWProvider';

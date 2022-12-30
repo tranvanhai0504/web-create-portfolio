@@ -17,6 +17,8 @@ function MainPage(){
             <Route path="/pages/about" element={<AboutPage />}></Route>
             <Route path="/" element={<HomePage />}></Route>
           </Routes>
+          <Footer></Footer>
+
         </div>
       </div>
     )
