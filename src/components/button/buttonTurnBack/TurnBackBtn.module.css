@@ -1,0 +1,20 @@
+.turnBackBtn{
+    position: fixed;
+    z-index: 120;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background-color: var(--primary-color);
+    color: #fff;
+    bottom: 60px;
+    right: 80px;
+    cursor: pointer;
+}
+
+.turnBackBtn:hover{
+    opacity: 0.9;
+}

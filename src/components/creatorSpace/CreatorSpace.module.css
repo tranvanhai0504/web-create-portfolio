@@ -1,0 +1,24 @@
+.creatorSpace {
+    background-color: #fff;
+    width: 75vw;
+    position: relative;
+    touch-action: none;
+    /* transform: scale(2) */
+}
+
+.targeted {
+    border: solid 2px blue;
+}
+
+.box{
+     width: calc(100% / 40); 
+     height: calc(100% / 40);
+}
+
+.isMove{
+    cursor: grab;
+}
+
+.addItem{
+    cursor:crosshair;
+}

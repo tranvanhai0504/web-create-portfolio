@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Lilita+One);
+
+.Trashcan{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+    background-color: #fff;
+}
+.pacman {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    position: relative;
+    margin-top:25%;
+}
+.pacmanA{
+}
+.para {
+  color: rgb(190, 190, 190); font-family: 'Raleway',sans-serif; font-size: 28px; font-weight: 700; line-height: 32px; margin: 30% 0 24px; text-align: center; 
+
+  }
+
+.pA {
+}
+
+.pacman_eye {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 40px;
+    right: 80px;
+    background: #333333;
+}
+.pacmanmouth {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+
+
+}
+.pacmanmouthA{
+    animation-name: eat;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+}
+@keyframes eat {
+    0% {
+      clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+    }
+    25% {
+      clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+    }
+    50% {
+      clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+    }
+    75% {
+      clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+    }
+    100% {
+      clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+    }
+}
+@keyframes scale-up-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(15%);
+    }
+}
+

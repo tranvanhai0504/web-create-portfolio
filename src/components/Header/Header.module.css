@@ -1,35 +1,47 @@
-.header{
-    position: fixed;
-    height: 7%;
-    width: 100vw;
-    padding: 20px 0;    
-    display:flex;
+.header {
+    /* height: 7%; */
+    width: 98%;
+    /* background-color: #fff; */
+    padding: 20px 100px;
+    display: flex;
     flex-direction: row;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    /* Safari */
+    z-index: 10;
+    -ms-user-select: none;
+    position:fixed;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    backdrop-filter: blur(50px);
+    /* Standard syntax */
 }
 
-.logo{
-    margin-left: 120px;
-    width: 5% !important;
+.logo {
+    /* margin-left: 120px; */
+    width: 40% !important;
 }
 
-.logoImg{
+.logoImg {
     width: 100% !important;
 }
 
-.directBtns{
+.directBtns {
     display: flex;
     flex-direction: row;
-    font-size: 25px;
-    padding-left:60px;
+    font-size: 23px;
+    /* padding-left:60px; */
+    width: 66%;
 }
 
 
-.btnNavBar{
+.btnNavBar {
+    white-space: nowrap;
     color: var(--text-color);
     font-weight: 600;
 }
 
-.btnNavBar:hover{
+.btnNavBar:hover {
     background-image: var(--primary-btn-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -37,30 +49,35 @@
     animation: textSlide infinite 0.7s;
 }
 
-.btnHeader{
-    margin-left: 60px;
+.btnHeader {
+    margin-right: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
 }
 
-.actived{
+.actived {
     background-image: var(--primary-btn-gradient);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.btnFuncList{
-    width: 100%;
+.btnFuncList {
+    width: 24%;
     display: flex;
-    padding-right: 120px;
-    justify-content: flex-end;
+    /* padding-right: 120px; */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.btnStart{
-    padding: 0 35px;
+.btnFunc {
+    margin-left: 20px;
+}
+
+.btnStart {
+    padding: 16px 35px;
     background-color: var(--primary-color);
     color: #fff;
     border-radius: 25px;
@@ -70,13 +87,26 @@
     font-weight: 500;
 }
 
-@keyframes textSlide{
-    from{
+.logoShell {
+    width: 10%;
+}
+
+.functionshell {
+    display: flex;
+}
+
+.globalIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+@keyframes textSlide {
+    from {
         background-image: var(--gradient-x);
     }
 
-    to{
+    to {
         background-image: var(--gradient-y);
     }
 }
-

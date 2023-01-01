@@ -1,6 +1,6 @@
 .AboutContainer{
-    margin: 5vh 5vh 0vh 5vh;
-    height: 76vh;
+    margin: 36px 40px 0px 40px;
+    height: 94.5%;
     border-radius: 20px;
     background-image: linear-gradient(10deg,rgba(0,194,255),rgba(82,112,215,84.07%),rgba(190,3,161,0.63));
     display: flex;
@@ -66,20 +66,25 @@
     font-size: 18px;
     font-weight: bold;
 }
-.content{
-    padding: 0px 30px 12px 30px;
+.content,.Aboutcontent{
+    padding: 16px 26px 0px 26px;
+    text-align: center;
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
 }
+.Aboutcontent{
+    padding: 20px 26px 0px 26px;
+    height: 22%;
+    line-height: 23px;
+}
 .about{
-    padding: 34px 0px 20px 0px;
+    padding: 25px 0px 0px 0px;
     color: white;
     font-size: 18px;
     font-weight: bold;
 
 }
 .contactBtn{
-    margin-top: 32px;
     background: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 3em;

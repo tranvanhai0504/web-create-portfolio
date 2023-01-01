@@ -1,0 +1,12 @@
+.coverColorPicker{
+    background-color:#fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.blockColorBtn{
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}

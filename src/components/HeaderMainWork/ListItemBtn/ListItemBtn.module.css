@@ -1,0 +1,47 @@
+.listItemBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: #793AFC
+}
+
+.cover{
+    cursor: pointer;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hover{
+    border-radius: 5px;
+}
+
+.hover:hover{
+    background-color: var(--spacebtn);
+}
+
+.selected .hover:first-child{
+    background-color: var(--spacebtn) !important;
+    border: 3px solid var(--primary-color)
+    /* color: #fff; */
+}
+
+.inputImage:hover .hover{
+    background-color: var(--spacebtn);
+}
+
+.resetSizeBtn{
+    margin-top: 10px;
+    border: unset;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: #fff;
+    opacity: 0.8;
+    border-radius: 20%;
+}
+
+.resetSizeBtn:hover{
+    opacity: 1
+}

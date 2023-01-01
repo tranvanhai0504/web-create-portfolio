@@ -1,0 +1,48 @@
+.customInputImg {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    /* color: transparent; */
+    width: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    cursor: pointer;
+}
+.customInputImg::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+.target::before {
+    content: "";
+    position: fixed;
+    opacity: revert-layer;
+    z-index: 100;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    top: -4px;
+    left: -4px;
+    border: solid 2px rgb(42, 42, 255);
+}
+
+.hover::before{
+    content: "";
+    position: fixed;
+    opacity: revert-layer;
+    z-index: 100;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    top: -4px;
+    left: -4px;
+    border: solid 2px var(--primary-color);
+}
+
+.resizer {
+    width: 8px;
+    height: 8px;
+    background-color: blue;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}

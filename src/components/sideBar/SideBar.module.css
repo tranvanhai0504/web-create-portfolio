@@ -1,8 +1,75 @@
-.sidebar{
-    position: fixed;
-    right: 0;
-    top: 9%;
-    height:91%;
-    width: 20%;
-    background-color: #ccc; 
+.sidebar {
+    height: 100%;
+    width: 22%;
+    background-color: #fff;
+    position: relative;
+    background-color: var(--space);
+    overflow: hidden;
+    /* overflow-y: scroll; */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+    border-right: 1px solid #ccc;
+}
+
+.headerSideBar {
+    display: flex;
+    background-color: var(--space);
+    width: 100%;
+    height: 7%;
+    font-size: 15px;
+    border-bottom: solid 1.2px #ccc;
+
+}
+
+.btnHeaderSideBar {
+    text-align: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.btnHeaderSideBar:hover {
+    background-color: var(--grey-secondary);
+}
+
+.btnHeaderSideBar.actived {
+    background: -webkit-linear-gradient(45deg, #112a00, #00542e, #009f88, #008690, #0099b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sideBarContent {
+    width: 100%;
+    height: 91.5%;
+    overflow-y: scroll;
+    overflow-x: visible;
+    padding-right: 17px;
+    box-sizing: content-box;
+}
+
+/* width */
+.sideBarContent::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.sideBarContent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.sideBarContent::-webkit-scrollbar-thumb {
+    background: rgb(198, 198, 198);
+}
+
+/* Handle on hover */
+.sideBarContent::-webkit-scrollbar-thumb:hover {
+    background: rgb(177, 177, 177);
 }

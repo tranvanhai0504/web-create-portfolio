@@ -1,0 +1,11 @@
+.mainSpace{
+    height: calc(100vh - 9vh);
+    width: 100%;
+    display: flex;
+}
+
+.mainSpaceWorkContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

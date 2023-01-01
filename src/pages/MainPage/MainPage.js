@@ -4,22 +4,23 @@ import HomePage from "../HomePage/Home";
 import AboutPage from "../AboutPage/About";
 import StoragePage from "../StoragePage/Storage";
 import Styles from './MainPage.module.css'
-import TemplatesPage from "../TemplatesPage/Templates";
+import { Footer } from '../../components/Footer/Footer';
 
-function MainPage(){
-    return (
-        <div className={Styles.mainPage}>
-        <Header></Header>
-        <div className={Styles.content}>
-          <Routes>
-            <Route path="/pages/home" element={<HomePage />}></Route>
-            <Route path="/pages/storage" element={<StoragePage />}></Route>
-            <Route path="/pages/about" element={<AboutPage />}></Route>
-            <Route path="/" element={<HomePage />}></Route>
-          </Routes>
-        </div>
+function MainPage() {
+  return (
+    <div className={Styles.mainPage}>
+      <Header></Header>
+      <div className={Styles.content}>
+        <Routes>
+          <Route path="/pages/home" element={<HomePage />}></Route>
+          <Route path="/pages/storage" element={<StoragePage />}></Route>
+          <Route path="/pages/about" element={<AboutPage />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
+        </Routes>
       </div>
-    )
+      <Footer></Footer>
+    </div>
+  )
 }
 
 export default MainPage

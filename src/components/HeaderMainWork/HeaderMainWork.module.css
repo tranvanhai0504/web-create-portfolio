@@ -1,22 +1,22 @@
 .headerWorkSpace{
-    position:fixed;
     height: 7.5%;
-    width: 100vw;
     padding: 5px 0;
+    padding-left: 60px;
     display: flex;
     flex-direction: row;
-    box-shadow: 2px 1px 5px rgb(201, 201, 201);
+    border-bottom: solid 0.2px #ccc;
+    z-index: 1;
+    background-image: var(--spaceheader);
 }
 
 .logo{
-    margin: 0 60px;
     width: 45px !important;
     padding: 5px;
     border-radius: 5px;
 }
 
 .logo:hover{
-    background-color: var(--grey-secondary);
+    background-color: var(--spacebtn);
 }
 
 .logoImg{

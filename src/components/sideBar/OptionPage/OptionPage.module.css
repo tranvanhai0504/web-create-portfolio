@@ -1,0 +1,52 @@
+.optionPage {
+    /* height: 100%; */
+    padding: 20px 44px;
+}
+
+.listPage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page{
+    border: unset;
+    background-color: #fff;
+}
+
+.disableText {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.pageOver{
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.isTargetMouseEnterPage::after{
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -2px;
+    left: -2px;
+    border-radius: 5px;
+    border: solid 2px rgb(42, 42, 255);
+}
+
+.pageSelect{
+    color: var(--primary-color)
+}
+
+.coverOptionBtn:hover{
+    background-color: red
+}

@@ -1,0 +1,24 @@
+.AddPageBtn{
+    /* width: 100%; */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border: dashed 2px #ccc;
+    border-radius: 6%;
+}
+
+.AddPageBtn:hover{
+    background-color: rgb(250, 250, 250)
+}
+
+.AddPageInput{
+    border: dashed 2px #ccc;
+    border-radius: 6%;
+}
+
+.errorMessage{
+    color: var(--warning-color);
+    margin-top: 10px;
+    font-size: 10px;
+    text-align: center;
+}
